@@ -10,7 +10,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Segoe UI',
+    fontFamily: 'Roboto',
     fontSize: 14,
     htmlFontSize: 16,
   },
