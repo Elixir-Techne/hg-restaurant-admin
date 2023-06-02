@@ -1,35 +1,30 @@
-import {
-  AppBar,
-  Avatar,
-  Button,
-  Divider,
-  IconButton,
-  Toolbar,
-  Typography,
-  styled,
-  useMediaQuery,
-} from '@mui/material'
-import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import Image from 'next/image'
-import { useState } from 'react'
+import { AppBar, Avatar, Button, Divider, IconButton, Toolbar, Typography, styled, useMediaQuery } from '@mui/material';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Image from 'next/image';
+import { useState } from 'react';
 
-import ContactSvg from '@/assets/icons/contcatSvg'
-import DashBoardSvg from '@/assets/icons/dasboardSvg'
-import MenuSvg from '@/assets/icons/menuSvg'
-import OrderSvg from '@/assets/icons/orderSvg'
-import TableMangSvg from '@/assets/icons/tableManSvg'
-import WaiterSvg from '@/assets/icons/waiterSvg'
-import { theme } from '@/theme'
 
-import companyPng from '../assets/icons/company.png'
-import MobileMenuSvg from '../assets/icons/feather-menu.svg'
-import LogoutSvg from '../assets/icons/logout.svg'
+
+import ContactSvg from '@/assets/icons/contcatSvg';
+import DashBoardSvg from '@/assets/icons/dasboardSvg';
+import MenuSvg from '@/assets/icons/menuSvg';
+import OrderSvg from '@/assets/icons/orderSvg';
+import TableMangSvg from '@/assets/icons/tableManSvg';
+import WaiterSvg from '@/assets/icons/waiterSvg';
+import { theme } from '@/theme';
+
+
+
+import companyPng from '../../assets/icons/company.png'
+import MobileMenuSvg from '../../assets/icons/feather-menu.svg'
+import LogoutSvg from '../../assets/icons/logout.svg'
+
 
 const StyledDrawer = styled(Drawer)({
   position: 'absolute',
