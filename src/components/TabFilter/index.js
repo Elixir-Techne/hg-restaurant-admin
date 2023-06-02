@@ -7,20 +7,18 @@ import { theme } from '@/theme'
 
 import '../../styles/tabfilter.css'
 
-const TopTabs = styled(Tabs)({
-  position: 'absolute',
+const TabGroup = styled(Tabs)({
   width: '658.7px',
   height: '55.5px',
-  margin:'0 auto',
+  margin: '0 auto',
   marginTop: '47px',
-
 })
 
-const TitleTab = styled(Tab)({
+const StyledTab = styled(Tab)({
   color: 'black',
   fontFamily: 'roboto',
   fontSize: '26px',
-//   fontWeight: 'bold',
+  //   fontWeight: 'bold',
   fontStyle: 'normal',
   textAlign: 'left',
   padding: '6px 16px',
@@ -35,39 +33,21 @@ const TitleTab = styled(Tab)({
   },
 })
 
-export default function DisabledTabs({tabs, onTabSelect}) {
+export default function TabFilter({ tabs, onTabSelect }) {
   const [activeTab, setActiveTab] = useState(0)
 
-  const FilterData = [
-    {
-      id: 1,
-      name: 'Today',
-    },
-    {
-      id: 2,
-      name: 'This week',
-    },
-    {
-      id: 3,
-      name: 'This month',
-    },
-    {
-      id: 4,
-      name: 'All time',
-    },
-  ]
   const handleChange = (event, newValue) => {
     setActiveTab(newValue)
     onTabSelect()
   }
   return (
     <>
-      <TopTabs value={activeTab} onChange={handleChange}>
-        {FilterData &&
-          FilterData.map((item, index) => {
-            return <TitleTab key={item.id} label={item.name} />
+      <TabGroup value={activeTab} onChange={handleChange}>
+        {tabs &&
+          tabs.map((item, index) => {
+            return <StyledTab key={item.id} label={item.name} />
           })}
-      </TopTabs>
+      </TabGroup>
     </>
   )
 }
