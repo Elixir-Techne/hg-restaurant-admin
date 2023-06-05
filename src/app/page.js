@@ -1,11 +1,7 @@
 'use client';
 
-import Sidebar from '@/components/sidebar'
-
-
-import OrderCard from '../components/OrderCard/index'
+import Sidebar from '@/components/Sidebar';
 
 export default function Home() {
   return <Sidebar />
 }
-

@@ -1,12 +1,16 @@
 'use client'
 
-import Sidebar from '@/components/sidebar'
+import { Box } from '@mui/material'
+
+import Sidebar from '@/components/Sidebar'
 
 export default function ProtectedLayout({ children }) {
   return (
-    <>
+    <Box sx={{ display: 'flex' }}>
       <Sidebar />
-      <div>{children}</div>
-    </>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        {children}
+      </Box>
+    </Box>
   )
 }

@@ -1,4 +1,7 @@
-import { Avatar, Box, Divider, Typography } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import styled from 'styled-components'
 
@@ -98,6 +101,7 @@ function orderCard() {
         <Image
           src={cancelIcon}
           style={{ position: 'absolute', top: '-4%', left: '88%', zIndex: 1 }}
+          alt=""
         />
         <StyledSubContainer
           sx={{ border: NewOrder ? '1px solid #5d6d30' : null }}
@@ -173,15 +177,17 @@ function orderCard() {
                 )
               })}
           </Box>
-          {orderServed ? <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ marginTop: '1.5rem' }}
-          >
-            <StyledServedTitle>Served</StyledServedTitle>
-            <StyledBoldTitle>$190</StyledBoldTitle>
-          </Box> : null}
+          {orderServed ? (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ marginTop: '1.5rem' }}
+            >
+              <StyledServedTitle>Served</StyledServedTitle>
+              <StyledBoldTitle>$190</StyledBoldTitle>
+            </Box>
+          ) : null}
         </StyledSubContainer>
       </StyledMainContainer>
     </Box>

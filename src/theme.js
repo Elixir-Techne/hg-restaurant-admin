@@ -2,6 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 
 export const theme = createTheme({
+  spacing: (factor) => `${0.25 * factor}rem`,
   palette: {
     primary: {
       main: '#067153',
