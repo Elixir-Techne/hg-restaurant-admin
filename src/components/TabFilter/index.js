@@ -18,6 +18,7 @@ const StyledTab = styled(Tab)({
   color: 'black',
   fontFamily: 'roboto',
   fontSize: '26px',
+  textTransform:'inherit',
   //   fontWeight: 'bold',
   fontStyle: 'normal',
   textAlign: 'left',
@@ -34,18 +35,18 @@ const StyledTab = styled(Tab)({
 })
 
 export default function TabFilter({ tabs, onTabSelect }) {
-  const [activeTab, setActiveTab] = useState(0)
-
+  const [activeTab, setActiveTab] = useState(1)
+  
   const handleChange = (event, newValue) => {
     setActiveTab(newValue)
-    onTabSelect()
+    onTabSelect(newValue)
   }
   return (
     <>
       <TabGroup value={activeTab} onChange={handleChange}>
         {tabs &&
           tabs.map((item, index) => {
-            return <StyledTab key={item.id} label={item.name} />
+            return <StyledTab key={item.id} value={item.id} label={item.name} />
           })}
       </TabGroup>
     </>
