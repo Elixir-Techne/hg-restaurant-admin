@@ -1,0 +1,788 @@
+"data":{}
+
+// GET /restaurant/{restaurant_id}
+"Response": {
+    "id": 1234,
+    "name": "La Belle Vue",
+    "city": "Paris",
+    "code_postal": "75001",
+    "country": "France",
+    "phone_number": "+33 1 23 45 67 89",
+    "email": "info@labellevue.com",
+    "speciality": "French cuisine",
+    "opening_time": "10:00",
+    "closing_time": "22:00",
+    "status": "open",
+    "code_wifi": "labellevue123",
+    "created_at": "2022-02-18T15:12:30Z",
+    "updated_at": "2022-02-19T11:25:10Z",
+    "updated_by": "12",
+}
+
+// GET /restaurant/{restaurant_id}/categories
+
+"Response": {
+    "categories": [
+        {
+            "id": 1,
+            "name": "Appetizers",
+            "sub_categories": [
+                {
+                    "id": 101,
+                    "name": "Cold Appetizers",
+                    "parent_id": 1,
+                    "menu_id": 1
+                },
+                {
+                    "id": 102,
+                    "name": "Hot Appetizers",
+                    "parent_id": 1,
+                    "menu_id": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Main Courses",
+            "sub_categories": [
+                {
+                    "id": 201,
+                    "name": "Meat",
+                    "parent_id": 2,
+                    "menu_id": 1
+                },
+                {
+                    "id": 202,
+                    "name": "Fish",
+                    "parent_id": 2,
+                    "menu_id": 1
+                }
+            ]
+        }
+    ]
+}
+
+// GET /restaurant/{restaurant_id}/categories/{category_id}/menus
+
+"Response": {
+    "restaurant_id": 1234,
+    "category_id": 5678,
+    "menus": [
+        {
+            "menu_id": 1,
+            "picture_address": "https://example.com/menu/1",
+            "name": "Pasta",
+            "price": 10.99,
+            "available": true,
+            "highlight": false,
+            "rating": 4.5,
+            "options": [
+                {
+                    "name": "Spicy",
+                    "availability": true,
+                    "price": 1.99
+                },
+                {
+                    "name": "Extra Cheese",
+                    "availability": false,
+                    "price": 2.99
+                }
+            ],
+            "created_at": "2022-02-17T10:45:15Z",
+            "updated_at": "2022-02-18T12:20:30Z",
+            "updated_by": "John Doe"
+        },
+        {
+            "menu_id": 2,
+            "picture_address": "https://example.com/menu/2",
+            "name": "Pizza",
+            "price": 15.99,
+            "available": true,
+            "highlight": true,
+            "rating": 4.8,
+            "options": [
+                {
+                    "name": "Pepperoni",
+                    "availability": true,
+                    "price": 1.5
+                },
+                {
+                    "name": "Extra Cheese",
+                    "availability": true,
+                    "price": 2.99
+                },
+                {
+                    "name": "Mushrooms",
+                    "availability": false,
+                    "price": 1.0
+                }
+            ],
+            "created_at": "2022-02-15T08:30:00Z",
+            "updated_at": "2022-02-19T09:40:00Z",
+            "updated_by": "14"
+        }
+    ]
+}
+
+
+// GET /restaurant/{restaurant_id}/menus
+
+"Response": {
+    "menus": [
+        {
+            "id": 1,
+            "category": {
+                "id": 1,
+                "name": "Appetizers"
+            },
+            "picture_address": "https://example.com/images/appetizers.jpg",
+            "name": "Garlic Bread",
+            "price": 4.99,
+            "available": true,
+            "highlight": false,
+            "rating": 4.5,
+            "option": [
+                {
+                    "name": "Extra cheese",
+                    "availability": true,
+                    "price": 1.50
+                },
+                {
+                    "name": "Add bacon",
+                    "availability": false,
+                    "price": 2.00
+                }
+            ],
+            "created_at": "2022-02-18T10:30:00Z",
+            "updated_at": "2022-02-18T12:00:00Z",
+            "updated_by": 2
+        },
+        {
+            "id": 2,
+            "category": {
+                "id": 1,
+                "name": "Appetizers"
+            },
+            "picture_address": "https://example.com/images/appetizers.jpg",
+            "name": "Mozzarella Sticks",
+            "price": 5.99,
+            "available": true,
+            "highlight": false,
+            "rating": 4.3,
+            "option": [
+                {
+                    "name": "Add marinara sauce",
+                    "availability": true,
+                    "price": 0.50
+                }
+            ],
+            "created_at": "2022-02-18T11:15:00Z",
+            "updated_at": "2022-02-18T11:45:00Z",
+            "updated_by": 2
+        }
+    ]
+}
+
+
+// GET /restaurant/{restaurant_id}/menus/{menu_id}
+
+"Response": {
+    "id": 123,
+    "restaurant_id": 456,
+    "category_id": 789,
+    "picture_address": "https://example.com/image.jpg",
+    "name": "Spaghetti Bolognese",
+    "price": 12.99,
+    "available": true,
+    "highlight": true,
+    "rating": 4.5,
+    "options": [
+        {
+            "name": "Extra cheese",
+            "available": true,
+            "price": 1.50
+        },
+        {
+            "name": "Gluten-free",
+            "available": true,
+            "price": 2.00
+        }
+    ],
+    "created_at": "2022-02-18T10:23:54Z",
+    "updated_at": "2022-02-18T13:45:21Z",
+    "updated_by": 2
+}
+
+
+// GET /restaurant/{restaurant_id}/orders
+
+"Response": [
+    {
+        "order_id": 123,
+        "restaurant_id": 456,
+        "option_chosen": true,
+        "option": {
+            "name": "Extra cheese",
+            "price": 2.5
+        },
+        "table_number": 4,
+        "menu_id": 789,
+        "session_id": 1011,
+        "status": "in_progress",
+        "created_at": "2022-02-17T08:34:56Z",
+        "updated_at": "2022-02-17T09:21:43Z",
+        "updated_by": 1234
+    },
+    {
+        "order_id": 234,
+        "restaurant_id": 456,
+        "option_chosen": false,
+        "option": null,
+        "table_number": 2,
+        "menu_id": 345,
+        "session_id": 1213,
+        "status": "completed",
+        "created_at": "2022-02-16T18:43:12Z",
+        "updated_at": "2022-02-16T20:12:05Z",
+        "updated_by": 5678
+    }
+]
+
+
+
+// GET /restaurant/{restaurant_id}/orders/{order_id}
+
+"Response": {
+    "order_id": 234,
+    "restaurant_id": 456,
+    "option_chosen": false,
+    "option": null,
+    "table_number": 2,
+    "menu_id": 345,
+    "session_id": 1213,
+    "status": "completed",
+    "created_at": "2022-02-16T18:43:12Z",
+    "updated_at": "2022-02-16T20:12:05Z",
+    "updated_by": 5678
+}
+
+// GET /restaurant/{restaurant_id}/sessions
+
+"Response": {
+    "sessions": [
+        {
+            "id": 1,
+            "started_at": "2023-02-19T13:00:00Z",
+            "end_at": "2023-02-19T16:00:00Z",
+            "table_number": 1,
+            "restaurant_id": 123,
+            "user_id": 456
+        },
+        {
+            "id": 2,
+            "started_at": "2023-02-19T16:00:00Z",
+            "end_at": "2023-02-19T19:00:00Z",
+            "table_number": 2,
+            "restaurant_id": 123,
+            "user_id": 789
+        },
+        {
+            "id": 3,
+            "started_at": "2023-02-19T19:00:00Z",
+            "end_at": "2023-02-19T22:00:00Z",
+            "table_number": 3,
+            "restaurant_id": 123,
+            "user_id": 456
+        }
+    ]
+}
+
+
+// GET /restaurant/{restaurant_id}/sessions/{session_id}
+
+"Response": {
+    "id": 1,
+    "started_at": "2023-02-19T13:00:00Z",
+    "end_at": "2023-02-19T16:00:00Z",
+    "table_number": 1,
+    "restaurant_id": 123,
+    "user_id": 456
+}
+
+// GET /user/confirm_email/{confirmation_code}
+
+"Response" : {
+    "message": "Email confirmed successfully."
+}
+
+
+// GET /user/{user_id}
+
+"Response": {
+    "id": 12345,
+    "first_name": "John",
+    "last_name": "Doe",
+    "address": "123 Main St, Anytown USA",
+    "email_or_phone": "email",
+    "login_cred": "johndoe@example.com",
+    "confirmed": true,
+    "created_at": "2022-02-15T10:30:00Z",
+    "updated_at": "2022-02-19T08:15:00Z",
+    "updated_by": "admin@example.com",
+    "roles": [
+        {
+            "id": 1,
+            "role": "manager",
+            "restaurant_id": 123,
+            "user_id": 12345,
+            "updated_at": "2022-02-18T14:30:00Z",
+            "updated_by": "admin@example.com"
+        },
+        {
+            "id": 2,
+            "role": "waiter",
+            "restaurant_id": 456,
+            "user_id": 12345,
+            "updated_at": "2022-02-19T08:15:00Z",
+            "updated_by": "admin@example.com"
+        }
+    ]
+}
+
+
+
+/*******************************************************************************************POST***************************************************************************/
+
+
+
+
+// POST /restaurant/signup
+
+"Request": {
+    "name": "La Belle Équipe",
+    "city": "Paris",
+    "code_postal": "75011",
+    "country": "France",
+    "phone_number": "+33 1 43 57 57 45",
+    "email": "labelleequipe@example.com",
+    "speciality": "French cuisine",
+    "opening_time": "10:00:00",
+    "closing_time": "22:00:00",
+    "code_wifi": "labelleequipe123",
+    "password": "password123"
+}
+"Response": {
+    "id": 1,
+    "name": "La Belle Équipe",
+    "city": "Paris",
+    "code_postal": "75011",
+    "country": "France",
+    "phone_number": "+33 1 43 57 57 45",
+    "email": "labelleequipe@example.com",
+    "speciality": "French cuisine",
+    "opening_time": "10:00:00",
+    "closing_time": "22:00:00",
+    "status": "closed",
+    "code_wifi": "labelleequipe123",
+    "created_at": "2023-02-19T08:00:00Z",
+    "updated_at": "2023-02-19T08:00:00Z",
+    "updated_by": 0
+}
+
+// POST /restaurant/login
+
+"Request": {
+    "email_or_phone": "example@example.com", // or "+1234567890" for phone_number
+    "password": "password123"
+}
+"Response": {
+    "id": 1,
+    "name": "Example Restaurant",
+    "city": "Example City",
+    "code_postal": "12345",
+    "country": "Example Country",
+    "phone_number": "123-456-7890",
+    "email": "example@restaurant.com",
+    "speciality": "Example Cuisine",
+    "opening_time": "09:00",
+    "closing_time": "22:00",
+    "status": "open",
+    "code_wifi": "examplewifi",
+    "created_at": "2023-02-19T12:00:00Z",
+    "updated_at": "2023-02-19T15:00:00Z",
+    "updated_by": 1
+}
+
+// POST /restaurant/{restaurant_id}/menus
+
+"Request": {
+    "name": "Pasta",
+    "category_id": 5678,
+    "picture_address": "https://example.com/images/pasta.jpg",
+    "price": 10.99,
+    "available": true,
+    "highlight": false,
+    "rating": 4.5,
+    "options": [
+        {
+            "name": "Gluten-free pasta",
+            "available": true,
+            "price": 2.0
+        },
+        {
+            "name": "Extra sauce",
+            "available": true,
+            "price": 1.0
+        }
+    ]
+}
+  "Response": {
+    "id": 9876,
+    "name": "Pasta",
+    "category_id": 5678,
+    "picture_address": "https://example.com/images/pasta.jpg",
+    "price": 10.99,
+    "available": true,
+    "highlight": false,
+    "rating": 4.5,
+    "options": [
+        {
+            "name": "Gluten-free pasta",
+            "available": true,
+            "price": 2.0
+        },
+        {
+            "name": "Extra sauce",
+            "available": true,
+            "price": 1.0
+        }
+    ],
+    "created_at": "2023-02-20T10:30:00Z",
+    "updated_at": "2023-02-20T10:30:00Z",
+    "updated_by": 1234
+}
+
+// POST /restaurant/{restaurant_id}/orders
+
+"Request": {
+    "option_chosen": true,
+    "option": {
+        "name": "Extra cheese",
+        "price": 2.5
+    },
+    "table_number": 3,
+    "menu_id": 1234,
+    "session_id": 5678
+}
+"Response": {
+    "order_id": 9876
+}
+
+// POST /restaurant/{restaurant_id}/sessions
+// need to be clarified how we generate the session id
+
+
+
+// POST /restaurant/{restaurant_id}/categories
+
+"Request": {
+    "name": "Appetizers"
+}
+
+"Response": {
+    "id": 1,
+    "name": "Appetizers",
+    "menu_id": null,
+    "created_at": "2023-02-19T10:30:00Z",
+    "updated_at": "2023-02-19T10:30:00Z",
+    "updated_by": null
+}
+
+// POST /restaurant/{restaurant_id}/categories/{category_id}/menus
+
+"Request": {
+    "picture_address": "https://example.com/image.png",
+    "name": "Spaghetti Carbonara",
+    "price": 12.99,
+    "available": true,
+    "highlight": true,
+    "rating": 4.5,
+    "option": [
+        {
+            "name": "Extra Cheese",
+            "availability": true,
+            "price": 1.99
+        },
+        {
+            "name": "Bacon Bits",
+            "availability": false,
+            "price": 0.99
+        }
+    ]
+}
+
+"Response": {
+    "id": 1234,
+    "picture_address": "https://example.com/image.png",
+    "name": "Spaghetti Carbonara",
+    "price": 12.99,
+    "available": true,
+    "highlight": true,
+    "rating": 4.5,
+    "option": [
+        {
+            "name": "Extra Cheese",
+            "availability": true,
+            "price": 1.99
+        },
+        {
+            "name": "Bacon Bits",
+            "availability": false,
+            "price": 0.99
+        }
+    ],
+    "created_at": "2023-02-19T12:00:00Z",
+    "updated_at": "2023-02-19T12:00:00Z",
+    "updated_by": 123
+}
+
+// POST /restaurant/{restaurant_id}/picture
+
+"Request":
+<binary data>
+
+"Response": {
+    "url": "https://s3.amazonaws.com/example-bucket/pictures/1234/abcd1234.jpg"
+}
+
+// POST /user/signup
+
+"Request": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "address": "123 Main St, Anytown USA",
+    "email_or_phone": "email",
+    "login_cred": "johndoe@example.com",
+    "pwd": "password123",
+    "roles": [
+        "customer"
+    ],
+    "created_at": "2023-02-19T12:00:00Z"
+}
+  
+
+"Response": {
+    "message": "Please check your email/SMS to confirm your profile"
+}
+
+
+// POST /user/login
+
+"Request": {
+    "login_cred": "johndoe@example.com",
+    "pwd": "mypassword"
+}
+
+"Response": {
+    "user_id": 1234,
+    "first_name": "John",
+    "last_name": "Doe",
+    "email_or_phone": "email",
+    "created_at": "2022-02-18T08:30:00Z",
+    "updated_at": "2022-02-18T08:30:00Z",
+    "updated_by": 1234,
+    "roles": [
+        "customer",
+        "staff"
+    ]
+}
+
+
+
+
+/*******************************************************************************************PUT***************************************************************************/
+
+
+
+
+
+// PUT /restaurant/{restaurant_id}
+
+The request should contain Tokens (JWTs) for authorization
+"Request": {
+    "name": "New Restaurant Name",
+    "city": "Paris",
+    "code_postal": "75001",
+    "country": "France",
+    "phone_number": "+33 1 23 45 67 89",
+    "email": "newemail@example.com",
+    "speciality": "French cuisine",
+    "opening_time": "10:00",
+    "closing_time": "22:00",
+    "status": "open",
+    "code_wifi": "password123"
+}
+  "Response": {
+    "message": "Restaurant details updated successfully"
+}
+
+
+// PUT /restaurant/{restaurant_id}/menus/{menu_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Request": {
+    "name": "New Menu Name",
+    "description": "New Menu Description",
+    "price": 15.99,
+    "category_id": 2
+}
+"Response": {
+    "message": "Menu updated successfully"
+}
+
+
+// PUT /restaurant/{restaurant_id}/orders/{order_id}
+
+"Request": {
+    "option_chosen": true,
+    "option": {
+        "name": "Extra cheese",
+        "price": 1.5
+    },
+    "table_number": 4,
+    "menu_id": 1234,
+    "session_id": 5678,
+    "status": "closed",
+    "updated_at": "2022-02-19T14:30:00Z",
+    "updated_by": 456
+}
+
+"Response": {
+    "message": "Order successfully updated"
+}
+
+// PUT /restaurant/{restaurant_id}/sessions/{session_id}
+
+"Request": {
+    "start_time": "2023-02-20T12:00:00Z",
+    "end_time": "2023-02-20T14:00:00Z",
+    "table_number": 3,
+    "status": "closed"
+}
+"Response": {
+    "message": "Session updated successfully"
+}
+
+
+// PUT /restaurant/{restaurant_id}/categories/{category_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Request": {
+    "name": "Beverages",
+    "description": "All kinds of drinks",
+    "image_url": "https://example.com/images/beverages.jpg"
+}
+  
+  "Response": {
+    "message": "Category updated successfully"
+}
+
+// PUT /restaurant/{restaurant_id}/categories/{category_id}/menus/{menu_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Request": {
+    "name": "Updated Menu Name",
+    "description": "Updated menu description",
+    "price": 15.99,
+    "updated_at": "2023-02-20T10:00:00.000Z",
+    "updated_by": 1234
+}
+"Response": {
+    "message": "Menu updated successfully"
+}
+
+// PUT /user/{user_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Request": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "address": "123 Main St, Anytown USA",
+    "email_or_phone": "email",
+    "login_cred": "johndoe@example.com",
+    "pwd": "newpassword",
+    "confirmed": true,
+    "updated_by": "admin@example.com",
+    "updated_at": "2022-10-01T13:24:31.123456Z"
+}
+
+"Response"{
+    "message": "User updated successfully"
+}
+
+
+// PUT /restaurant/{restaurant_id}/users/{user_id}/role
+
+"Request": {
+    "role": "manager",
+    "updated_by": "123456"
+}
+
+"Response": [
+    {
+        "message": "User role updated successfully"
+    }
+]
+
+
+
+
+
+/*******************************************************************************************DELETE***************************************************************************/
+
+
+
+
+
+
+// DELETE /restaurant/{restaurant_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "Restaurant with ID 123 has been successfully deleted"
+}
+
+// DELETE /restaurant/{restaurant_id}/menus/{menu_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "Menu with ID 456 has been deleted from restaurant 123."
+}  
+
+// DELETE /restaurant/{restaurant_id}/orders/{order_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "Order with ID 456 has been deleted from restaurant 123."
+}
+
+// DELETE /restaurant/{restaurant_id}/categories/{category_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "Category with ID 456 has been deleted from restaurant 123."
+}
+
+// DELETE /restaurant/{restaurant_id}/categories/{category_id}/menus/{menu_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "Menu with ID 789 was successfully deleted from category 456 in restaurant 123."
+}
+
+// DELETE /user/{user_id}
+// The request should contain Tokens (JWTs) for authorization
+
+"Response": {
+    "message": "User with ID 123 has been successfully deleted"
+}

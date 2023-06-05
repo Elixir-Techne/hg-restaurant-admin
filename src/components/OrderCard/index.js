@@ -1,15 +1,16 @@
 import { Avatar, Box, Divider, Typography } from '@mui/material'
+import moment from 'moment'
 import Image from 'next/image'
 import styled from 'styled-components'
 
 import { theme } from '@/theme'
 
 import cancelIcon from '../../assets/icons/cancel-icon.png'
+import OrderImage from '../../assets/images/burger.png'
 
 const StyledMainContainer = styled(Box)({
-  width: '248px',
+  width: '241px',
   height: '365px',
-
   position: 'relative',
   '& ::-webkit-scrollbar': {
     width: '2px',
@@ -63,7 +64,7 @@ const StyledServedTitle = styled(Typography)({
   margin: '0 1rem',
 })
 
-function orderCard() {
+function orderCard({ ordersDetail, orderStatus }) {
   const OrderCardData = [
     {
       id: 1,
@@ -90,100 +91,132 @@ function orderCard() {
       name: 'Loaded Fries',
     },
   ]
-  const orderServed = false
-  const NewOrder = true
+  const handleCancelOrder = () => {
+    console.log('order cancel')
+  }
+
   return (
-    <Box sx={{ marginLeft: '500px', marginTop: '10px' }}>
-      <StyledMainContainer>
-        <Image
-          src={cancelIcon}
-          style={{ position: 'absolute', top: '-4%', left: '88%', zIndex: 1 }}
-        />
-        <StyledSubContainer
-          sx={{ border: NewOrder ? '1px solid #5d6d30' : null }}
-        >
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '63.2px',
-              height: '23px',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            {NewOrder ? (
-              <Typography
+    <Box
+      display="flex"
+      flexDirection="row"
+      flexWrap="wrap"
+      gap="1vw"
+      sx={{margin:'0 2.5rem'}}
+    >
+      {ordersDetail?.map((item, index) => {
+        return (
+          <StyledMainContainer>
+            <Image
+              src={cancelIcon}
+              style={{
+                position: 'absolute',
+                left: '88%',
+                zIndex: 1,
+                cursor: 'pointer',
+              }}
+              onClick={handleCancelOrder}
+            />
+            <StyledSubContainer
+              sx={{
+                border:
+                  item.status === 'in_progress' ? '1px solid #5d6d30' : null,
+              }}
+            >
+              <Box
                 sx={{
-                  textTransform: 'uppercase',
-                  background: theme.palette.primary.main,
-                  color: '#FFFFFF',
-                  fontWeight: 'bold',
-                  fontSize: '13px',
-                  borderRadius: '15px',
-                  textAlign: 'center',
+                  position: 'absolute',
+                  width: '63.2px',
+                  height: '23px',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
                 }}
               >
-                New
-              </Typography>
-            ) : null}
-          </Box>
-          <Box display="flex" justifyContent="center" mt="8px">
-            <StyledHeadTitle>Table 1 (inside)</StyledHeadTitle>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            flexWrap="wrap"
-            gap="0.5vh"
-          >
-            <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
-              <StyledTitle>Waiter</StyledTitle>
-              <StyledBoldTitle>Saba</StyledBoldTitle>
-            </Box>
-            <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
-              <StyledTitle>Time:</StyledTitle>
-              <StyledBoldTitle>19:45</StyledBoldTitle>
-            </Box>
-            <Divider sx={{ width: '209px', height: '2px', margin: '0 auto' }} />
-          </Box>
-          <Box
-            display="flex"
-            sx={{
-              overflowY: 'auto',
-              overflowX: 'hidden',
-              height: orderServed ? '165px' : '225px',
-              width: '230px',
-              flexDirection: 'column ',
-            }}
-          >
-            {OrderCardData &&
-              OrderCardData.map((item, index) => {
-                return (
-                  <Box
-                    key={item.key}
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                    gap="2vw"
-                    sx={{ padding: '0.5rem 1rem' }}
+                {item.status === 'in_progress' ? (
+                  <Typography
+                    sx={{
+                      textTransform: 'uppercase',
+                      background: theme.palette.primary.main,
+                      color: '#FFFFFF',
+                      fontWeight: 'bold',
+                      fontSize: '13px',
+                      borderRadius: '15px',
+                      textAlign: 'center',
+                    }}
                   >
-                    <Avatar>R</Avatar>
-                    <StyledTitle>{item.name}</StyledTitle>
-                  </Box>
-                )
-              })}
-          </Box>
-          {orderServed ? <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ marginTop: '1.5rem' }}
-          >
-            <StyledServedTitle>Served</StyledServedTitle>
-            <StyledBoldTitle>$190</StyledBoldTitle>
-          </Box> : null}
-        </StyledSubContainer>
-      </StyledMainContainer>
+                    New
+                  </Typography>
+                ) : null}
+              </Box>
+              <Box
+                display="flex"
+                justifyContent="center"
+                sx={{
+                  paddingTop: item.status === 'in_progress' ? '8px' : '10px',
+                }}
+              >
+                <StyledHeadTitle>
+                  Table {item.table_number} (inside)
+                </StyledHeadTitle>
+              </Box>
+              <Box display="flex" flexDirection="column" flexWrap="wrap">
+                <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
+                  <StyledTitle>Waiter</StyledTitle>
+                  <StyledBoldTitle>Saba</StyledBoldTitle>
+                </Box>
+                <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
+                  <StyledTitle>Time:</StyledTitle>
+                  <StyledBoldTitle>
+                    {moment(item.created_at).format('mm:ss')}
+                  </StyledBoldTitle>
+                </Box>
+                <Divider
+                  sx={{ width: '209px', height: '2px', margin: '0 auto' }}
+                />
+              </Box>
+              <Box
+                display="flex"
+                sx={{
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
+                  height: item.status === 'completed' ? '165px' : '225px',
+                  width: '230px',
+                  flexDirection: 'column ',
+                  // gap:"0.5vh"
+                }}
+              >
+                {OrderCardData &&
+                  OrderCardData.map((item, index) => {
+                    return (
+                      <Box
+                        key={item.key}
+                        display="flex"
+                        flexDirection="row"
+                        alignItems="center"
+                        gap="1vw"
+                        sx={{ padding: '0.5rem 1rem' }}
+                      >
+                        {/* <Avatar>{OrderImage}</Avatar> */}
+                        <Image src={OrderImage} width="46px" height="46px" />
+                        <StyledTitle>{item.name}</StyledTitle>
+                      </Box>
+                    )
+                  })}
+              </Box>
+              {item.status === 'completed' ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{ marginTop: '1.5rem' }}
+                >
+                  <StyledServedTitle>Served</StyledServedTitle>
+                  <StyledBoldTitle>$190</StyledBoldTitle>
+                </Box>
+              ) : null}
+            </StyledSubContainer>
+          </StyledMainContainer>
+        )
+      })}
     </Box>
   )
 }
