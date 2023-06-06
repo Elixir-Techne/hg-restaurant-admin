@@ -55,6 +55,7 @@ function TableSitting({ TableDetails }) {
         width: '100%',
         marginTop: '3.5rem',
         padding: '0.5rem',
+
       }}
     >
       {TableDetails &&
@@ -64,8 +65,10 @@ function TableSitting({ TableDetails }) {
               display="flex"
               key={item.id}
               sx={{
+                flexGrow:1,
                 height: item.table_sitting <= 10 ? '216px' : '475px',
-                width: item.table_sitting <= 10 ? '204px' : '234px',
+                // width: item.table_sitting <= 10 ? '204px' : '234px',
+                width:'auto'
               }}
             >
               <Box

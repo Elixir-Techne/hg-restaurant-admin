@@ -1,11 +1,6 @@
-import { Transform } from '@mui/icons-material'
 import AddIcon from '@mui/icons-material/Add'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { Box, Button, Typography } from '@mui/material'
-import Image from 'next/image'
 import styled from 'styled-components'
-
-import { theme } from '@/theme'
 
 import TableSitting from './tableSitting'
 
@@ -15,19 +10,6 @@ const StyledTableFilter = styled(Button)({
   width: '156px',
   padding: '0.5rem 1.5rem',
   filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-})
-
-const StyledTableBox = styled(Box)({
-  flexDirection: 'column',
-  background: ' #ffffff',
-  borderRadius: '20px',
-  filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-  maxWidth: '223px',
-  padding: '1rem 0.5rem',
-})
-
-const SyledImage = styled(Image)({
-  margin: '0.5rem',
 })
 
 const Tables = ({ TableDetails }) => {
@@ -41,14 +23,22 @@ const Tables = ({ TableDetails }) => {
       tableMediumSitting.push(el)
     }
   })
+
+  const handleTableSide = (event) => {
+    console.log('==', event)
+  }
+  const handleNewTable = () => {
+    console.log('====new table =====')
+  }
   const inside = true
   return (
-    <Box sx={{ padding: '2rem', paddingTop: '0' }}>
+    <Box sx={{ padding: '2rem', paddingTop: '0',width:'100%' }}>
       <Box display="flex" flexDirection="column" sx={{ position: 'relative' }}>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
           sx={{ fontSize: '18px', borderRadius: '15px', alignSelf: 'flex-end' }}
+          onClick={handleNewTable}
         >
           Add New
         </Button>
@@ -69,6 +59,7 @@ const Tables = ({ TableDetails }) => {
               background: inside ? '#077254' : '#FFFFFF',
               color: inside ? '#FFFFFF' : '#888888',
             }}
+            onClick={() => handleTableSide('Inside')}
           >
             Inside
           </StyledTableFilter>
@@ -78,6 +69,7 @@ const Tables = ({ TableDetails }) => {
               background: !inside ? '#077254' : '#FFFFFF',
               color: !inside ? '#FFFFFF' : '#888888',
             }}
+            onClick={() => handleTableSide('Outside')}
           >
             Outside
           </StyledTableFilter>
@@ -86,12 +78,13 @@ const Tables = ({ TableDetails }) => {
       <Box
         display="flex"
         flexDirection="row"
-        sx={{ padding: '0 1rem', overflowY: 'auto' }}
+        flexWrap='wrap'
+        sx={{ padding: '0 1rem' }}
       >
-        <Box sx={{ width: '80%' }}>
+        <Box sx={{ width: '80%', overflowY: 'auto' }}>
           <TableSitting TableDetails={tableMediumSitting} />
         </Box>
-        <Box sx={{ width: '20%' }}>
+        <Box sx={{ width: '20%',flex:1 }}>
           <TableSitting TableDetails={tableLargeSitting} />
         </Box>
       </Box>

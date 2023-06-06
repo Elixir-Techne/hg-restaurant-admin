@@ -17,14 +17,14 @@ const TablesStatus = () => {
   return (
     <Box sx={{ width: '100%', height: 'auto',padding:'1.5rem 1rem' }}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
-        <Box>
+        <Box sx={{width:'20%'}}>
           <Typography sx={{fontSize:'24px',color:'#3C49FF',fontWeight: 'bold'}}>Tables</Typography>
         </Box>
         <Box
           display="flex"
           flexDirection="row"
           justifyContent="space-between"
-          sx={{ width: '40%', padding: '0 1rem' }}
+          sx={{ width: 'auto', padding: '0 1rem' }}
         >
           <StyledTableStatusContainer sx={{ color: '#DE0D65' }}>
             <FiberManualRecordIcon />

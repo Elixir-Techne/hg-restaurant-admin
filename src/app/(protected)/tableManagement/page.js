@@ -38,9 +38,11 @@ export default function TableManagement() {
       <Box
         display="flex"
         flexDirection="column"
+        justifyContent='center'
+        alignItems='center'
         sx={{
-          height: '871px',
-          width: '1313px',
+          height: '85%',
+          width: '90%',
           borderRadius: '20px',
           background: '#FFFFFF',
           filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
