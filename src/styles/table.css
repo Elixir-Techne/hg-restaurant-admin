@@ -1,86 +1,87 @@
 .MuiDataGrid-columnSeparator {
-    display: none !important;
-  }
-  
-  .MuiDataGrid-root {
-    border: none !important;
-  }
-  
-  .MuiDataGrid-main {
-    background: #ffffff;
-    box-shadow: 0px -20px 20px rgb(113 74 252 / 8%);
-    /* border-top-right-radius: 8px;
-    border-top-left-radius: 8px; */
-  }
-  
-  .MuiDataGrid-columnHeaders {
-    background-color: #E3E9EF50;
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-    color: #067153;
-  }
-  
-  .MuiDataGrid-row {
-    max-height: 50px !important;
-    min-height: 50px !important;
-    border: none !important;
-  }
-  
-  .MuiDataGrid-cell {
-    max-height: 50px !important;
-    min-height: 50px !important;
-    border: none !important;
+  display: none !important;
+}
 
-  }
-  
-  .MuiDataGrid-cellContent {
-    font-weight: 500 !important;
-    font-size: 15px !important;
-    line-height: 18px !important;
-  }
-  
-  .MuiDataGrid-columnHeaderTitle {
-    color: #077254 !important;
-    font-size: 15px;
-    font-weight: bold;
-    font-style: normal;
-    text-align: left;
-  }
-  
-  .MuiDataGrid-cell:focus,
-  .MuiDataGrid-cell:focus-within {
-    outline: 0 !important;
-   
-  }
-  
-  .MuiDataGrid-footerContainer {
-    display: none !important;
-  }
-  
-  .Mui-selected {
-    background-color: #067153 !important;
-    border-radius: 10px;
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    font-size: 16px !important;
-    line-height: 20px !important;
-  }
-  
-  .Mui-disabled {
-    opacity: 5 !important;
-  }
-  
-  .MuiPaginationItem-previousNext {
-    color: #067153 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .MuiPaginationItem-icon {
-    height: 45px !important;
-    width: 45px !important;
-  }
-  
-  .MuiDataGrid-sortIcon {
-    fill: #ffffff !important;
-  }
+.MuiDataGrid-root {
+  border: none !important;
+}
+
+.MuiDataGrid-main {
+  background: #ffffff;
+  box-shadow: 0px -20px 20px rgb(113 74 252 / 8%);
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #e3e9ef50;
+  border-radius: 10px !important;
+  color: #067153;
+}
+
+.MuiDataGrid-row {
+  max-height: 50px !important;
+  min-height: 50px !important;
+  border: none !important;
+}
+
+.MuiDataGrid-cell {
+  max-height: 50px !important;
+  min-height: 50px !important;
+  border: none !important;
+}
+
+.MuiDataGrid-cellContent {
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  color: #077254 !important;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  text-align: left;
+}
+
+.MuiDataGrid-cell:focus,
+.MuiDataGrid-cell:focus-within {
+  outline: 0 !important;
+}
+
+.MuiDataGrid-footerContainer {
+  justify-content: center;
+  border: 0;
+  color: #7d8185;
+}
+
+.Mui-selected {
+  background-color: #067153 !important;
+  border-radius: 10px;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+}
+
+.Mui-disabled {
+  opacity: 5 !important;
+}
+
+.MuiPaginationItem-previousNext {
+  color: #7d8185 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.MuiPaginationItem-icon {
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.MuiDataGrid-sortIcon {
+  fill: #067153 !important;
+}
+
+.MuiTablePagination-displayedRows {
+  display: none !important;
+}

@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import ContactSvg from '@/assets/icons/contcatSvg'
@@ -46,11 +47,26 @@ const StyledButton = styled(Button)({
 })
 
 const data = [
-  { id: 1, name: 'Dashboard', icon: DashBoardSvg },
+  {
+    id: 1,
+    name: 'Dashboard',
+    icon: DashBoardSvg,
+    path: '/dashboard',
+  },
   { id: 2, name: 'Order Reception', icon: OrderSvg },
   { id: 3, name: 'Table Management', icon: TableMangSvg },
-  { id: 4, name: 'Waiter Managemet', icon: WaiterSvg },
-  { id: 5, name: 'Menu Management', icon: MenuSvg },
+  {
+    id: 4,
+    name: 'Waiter Managemet',
+    icon: WaiterSvg,
+    path: '/waiter',
+  },
+  {
+    id: 5,
+    name: 'Menu Management',
+    icon: MenuSvg,
+    path: '/menu',
+  },
   { id: 6, name: 'Support and Contact', icon: ContactSvg },
 ]
 function Sidebar() {
@@ -95,24 +111,29 @@ function Sidebar() {
               marginBottom: '20px',
             }}
           >
-            <ListItemButton
-              selected={selectedIndex === index}
-              onClick={(event) => handleListItemClick(event, index)}
-              sx={{
-                borderRadius: '40px',
-                height: '54px',
-              }}
+            <Link
+              href={item?.path || ''}
+              style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <ListItemIcon
+              <ListItemButton
+                selected={selectedIndex === index}
+                onClick={(event) => handleListItemClick(event, index)}
                 sx={{
-                  marginRight: isMobile ? theme.spacing(1) : theme.spacing(2),
-                  marginLeft: isMobile ? theme.spacing(2) : theme.spacing(4),
+                  borderRadius: '40px',
+                  height: '54px',
                 }}
               >
-                <item.icon selected={selectedIndex === index} />
-              </ListItemIcon>
-              <ListItemText primary={item.name} />
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    marginRight: isMobile ? theme.spacing(1) : theme.spacing(2),
+                    marginLeft: isMobile ? theme.spacing(2) : theme.spacing(4),
+                  }}
+                >
+                  <item.icon selected={selectedIndex === index} />
+                </ListItemIcon>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>

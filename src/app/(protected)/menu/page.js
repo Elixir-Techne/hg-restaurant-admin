@@ -16,53 +16,54 @@ import { theme } from '@/theme'
 
 const columns = [
   {
-    field: 'id',
-    headerName: 'Pic',
-    width: 90,
-    renderCell: ({ row }) => {
-      return <Avatar />
-    },
-  },
-  {
     field: 'firstName',
-    headerName: 'Name',
+    headerName: 'Category',
     width: 150,
     editable: true,
   },
   {
     field: 'lastName',
-    headerName: 'Waiter ID',
+    headerName: 'Sub-Category',
     width: 150,
     editable: true,
   },
   {
     field: 'age',
-    headerName: 'ID Card',
+    headerName: 'Food-Type',
     type: 'number',
     width: 110,
     editable: true,
   },
   {
     field: 'loc',
-    headerName: 'Location',
+    headerName: 'Item Name',
     sortable: false,
-    width: 160,
+    width: 120,
   },
   {
     field: 'type',
-    headerName: 'Type',
+    headerName: 'Price',
     sortable: false,
-    width: 160,
+    width: 80,
   },
   {
     field: 'status',
-    headerName: 'Status',
+    headerName: 'Out of Order',
     sortable: false,
-    width: 200,
+    width: 140,
+  },
+  {
+    field: 'selling',
+    headerName: 'Best Selling',
+    sortable: false,
+    width: 140,
+  },
+  {
+    field: 'id',
+    headerName: 'Pic',
+    width: 90,
     renderCell: ({ row }) => {
-      return (
-        <ToggleButtons label2="In-active" label1="Active" variant="table" />
-      )
+      return <Avatar />
     },
   },
 ]
@@ -79,11 +80,12 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ]
 
-export default function Waiter() {
+export default function Menu() {
   return (
     <Card
       sx={{
         maxHeight: '874px',
+        maxWidth: `calc( 100vw - 31vw)`,
         borderRadius: '20px',
         filter: 'drop-shadow(0px 5px 12.5px rgba(82,87,93,0.1 ))',
         boxShadow: 'none',
@@ -93,7 +95,7 @@ export default function Waiter() {
         paddingTop: theme.spacing(3.5),
       }}
     >
-      <CardHeader title="Waiters" sx={{ color: '#3C49FF' }} />
+      <CardHeader title="Menu" sx={{ color: '#3C49FF' }} />
       <Divider variant="middle" />
       <CardContent>
         <Box display="flex" justifyContent="flex-end">
