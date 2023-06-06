@@ -5,8 +5,8 @@ import styled from 'styled-components'
 
 import { theme } from '@/theme'
 
-import cancelIcon from '../../assets/icons/cancel-icon.png'
 import OrderImage from '../../../public/images/burger.png'
+import cancelIcon from '../../assets/icons/cancel-icon.png'
 
 const StyledMainContainer = styled(Box)({
   width: '241px',
@@ -101,11 +101,11 @@ function orderCard({ ordersDetail, orderStatus }) {
       flexDirection="row"
       flexWrap="wrap"
       gap="1vw"
-      sx={{margin:'0 2.5rem'}}
+      sx={{ margin: '0 2.5rem' }}
     >
       {ordersDetail?.map((item, index) => {
         return (
-          <StyledMainContainer>
+          <StyledMainContainer key={index}>
             <Image
               src={cancelIcon}
               style={{
@@ -115,6 +115,7 @@ function orderCard({ ordersDetail, orderStatus }) {
                 cursor: 'pointer',
               }}
               onClick={handleCancelOrder}
+              alt=""
             />
             <StyledSubContainer
               sx={{
@@ -196,7 +197,12 @@ function orderCard({ ordersDetail, orderStatus }) {
                         sx={{ padding: '0.5rem 1rem' }}
                       >
                         {/* <Avatar>{OrderImage}</Avatar> */}
-                        <Image src={OrderImage} width="46px" height="46px" />
+                        <Image
+                          src={OrderImage}
+                          width="46px"
+                          height="46px"
+                          alt=""
+                        />
                         <StyledTitle>{item.name}</StyledTitle>
                       </Box>
                     )

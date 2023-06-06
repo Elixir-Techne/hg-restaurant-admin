@@ -1,8 +1,7 @@
 'use client'
 
-import Sidebar from '@/components/sidebar'
+import Sidebar from '@/components/Sidebar'
 
-  
 export default function ProtectedLayout({ children }) {
   return (
     <div>
