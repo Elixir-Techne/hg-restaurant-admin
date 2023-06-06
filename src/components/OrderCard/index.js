@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { theme } from '@/theme'
 
 import cancelIcon from '../../assets/icons/cancel-icon.png'
-import OrderImage from '../../assets/images/burger.png'
+import OrderImage from '../../../public/images/burger.png'
 
 const StyledMainContainer = styled(Box)({
   width: '241px',
@@ -110,7 +110,7 @@ function orderCard({ ordersDetail, orderStatus }) {
               src={cancelIcon}
               style={{
                 position: 'absolute',
-                left: '88%',
+                left: '90%',
                 zIndex: 1,
                 cursor: 'pointer',
               }}

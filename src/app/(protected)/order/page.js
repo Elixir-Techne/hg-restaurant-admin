@@ -156,7 +156,7 @@ export default function Order() {
     setOrderStatus(filterOrderData.name)
   }
   return (
-    <div style={{ width: '75%', marginLeft: 'auto'}}>
+    <div style={{ width: '75%', marginLeft: 'auto',marginBottom:"1.5rem"}}>
       <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
       <Typography
         sx={{ fontSize: '27px', color: '#3C49FF', fontWeight: 'bold', marginLeft:'3.5rem' }}
