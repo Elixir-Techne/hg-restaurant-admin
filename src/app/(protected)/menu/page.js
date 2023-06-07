@@ -8,65 +8,11 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  useMediaQuery,
 } from '@mui/material'
 
 import Table from '@/components/Table'
-import ToggleButtons from '@/components/ToogleButton'
 import { theme } from '@/theme'
-
-const columns = [
-  {
-    field: 'firstName',
-    headerName: 'Category',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Sub-Category',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Food-Type',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'loc',
-    headerName: 'Item Name',
-    sortable: false,
-    width: 120,
-  },
-  {
-    field: 'type',
-    headerName: 'Price',
-    sortable: false,
-    width: 80,
-  },
-  {
-    field: 'status',
-    headerName: 'Out of Order',
-    sortable: false,
-    width: 140,
-  },
-  {
-    field: 'selling',
-    headerName: 'Best Selling',
-    sortable: false,
-    width: 140,
-  },
-  {
-    field: 'id',
-    headerName: 'Pic',
-    width: 90,
-    renderCell: ({ row }) => {
-      return <Avatar />
-    },
-  },
-]
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -81,6 +27,65 @@ const rows = [
 ]
 
 export default function Menu() {
+  const isMobile = useMediaQuery('(max-width:768px)')
+  const columns = [
+    {
+      field: 'firstName',
+      headerName: 'Category',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'lastName',
+      headerName: 'Sub-Category',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'age',
+      headerName: 'Food-Type',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+    ...(isMobile
+      ? []
+      : [
+          {
+            field: 'loc',
+            headerName: 'Item Name',
+            sortable: false,
+            width: 120,
+          },
+          {
+            field: 'type',
+            headerName: 'Price',
+            sortable: false,
+            width: 80,
+          },
+          {
+            field: 'status',
+            headerName: 'Out of Order',
+            sortable: false,
+            width: 140,
+          },
+          {
+            field: 'selling',
+            headerName: 'Best Selling',
+            sortable: false,
+            width: 140,
+          },
+          {
+            field: 'id',
+            headerName: 'Pic',
+            width: 90,
+            renderCell: ({ row }) => {
+              return <Avatar />
+            },
+          },
+        ]),
+  ]
+
   return (
     <Card
       sx={{

@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material'
+import { Pagination, useMediaQuery } from '@mui/material'
 import Box from '@mui/material/Box'
 import {
   DataGrid,
@@ -42,6 +42,8 @@ function CustomPagination(props) {
 }
 
 export default function Table({ rows, columns }) {
+  const isMobile = useMediaQuery('(max-width:768px)')
+
   const [rowSelectionModel, setRowSelectionModel] = React.useState([])
   const apiRef = useGridApiRef()
   return (
@@ -51,26 +53,35 @@ export default function Table({ rows, columns }) {
         components={{ ColumnMenuSortAscendingIcon: AscendingSvg }}
         rows={rows}
         columns={[
-          {
-            ...GRID_CHECKBOX_SELECTION_COL_DEF,
-            renderCell: (params) => (
-              <GridCellCheckboxRenderer
-                {...params}
-                checkedIcon={<CheckboxSvg />}
-                icon={<UnCheckboxSvg />}
-              />
-            ),
-          },
+          ...(isMobile
+            ? []
+            : [
+                {
+                  ...GRID_CHECKBOX_SELECTION_COL_DEF,
+                  renderCell: (params) => (
+                    <GridCellCheckboxRenderer
+                      {...params}
+                      checkedIcon={<CheckboxSvg />}
+                      icon={<UnCheckboxSvg />}
+                    />
+                  ),
+                },
+              ]),
+
           ...columns,
-          {
-            field: 'action',
-            headerName: 'Action',
-            sortable: false,
-            width: 160,
-            renderCell: ({ api, row }) => (
-              <ColumnActionButton selected={api.isRowSelected(row.id)} />
-            ),
-          },
+          ...(isMobile
+            ? []
+            : [
+                {
+                  field: 'action',
+                  headerName: 'Action',
+                  sortable: false,
+                  width: 160,
+                  renderCell: ({ api, row }) => (
+                    <ColumnActionButton selected={api.isRowSelected(row.id)} />
+                  ),
+                },
+              ]),
         ]}
         onRowSelectionModelChange={(newRowSelectionModel) => {
           setRowSelectionModel(newRowSelectionModel)
@@ -88,7 +99,7 @@ export default function Table({ rows, columns }) {
         }}
         pageSizeOptions={[5]}
         pagination
-        checkboxSelection
+        checkboxSelection={!isMobile}
       />
     </Box>
   )
