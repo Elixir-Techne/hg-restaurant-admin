@@ -1,24 +1,28 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import { Box,Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 import styled from 'styled-components'
 
 const StyledTableStatusContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent:'center',
-  alignItems:'center'
+  justifyContent: 'center',
+  alignItems: 'center',
 })
 const StyledTableTitle = styled(Typography)({
   fontSize: '20px',
-  marginLeft:'0.8rem'
+  marginLeft: '0.8rem',
 })
 const TablesStatus = () => {
   return (
-    <Box sx={{ width: '100%', height: 'auto',padding:'1.5rem 1rem' }}>
+    <Box sx={{ width: '100%', height: 'auto', padding: '2.5rem 1rem' }}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
-        <Box sx={{width:'20%'}}>
-          <Typography sx={{fontSize:'24px',color:'#3C49FF',fontWeight: 'bold'}}>Tables</Typography>
+        <Box sx={{ width: '20%' }}>
+          <Typography
+            sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
+          >
+            Tables
+          </Typography>
         </Box>
         <Box
           display="flex"
@@ -43,8 +47,8 @@ const TablesStatus = () => {
           </StyledTableStatusContainer>
         </Box>
       </Box>
-      <Divider sx={{ width: '100%'}} />
-      <Divider sx={{ width: '100%',height:'0.5px' }} />
+      <Divider sx={{ width: '100%' }} />
+      <Divider sx={{ width: '100%', height: '0.5px' }} />
     </Box>
   )
 }

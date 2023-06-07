@@ -1,13 +1,10 @@
-'use client';
+'use client'
 
-import { Typography } from '@mui/material';
-import { useState } from 'react';
+import { Typography } from '@mui/material'
+import { useState } from 'react'
 
-
-
-import OrderCard from '@/components/OrderCard';
-import TabFilter from '@/components/TabFilter';
-
+import OrderCard from '@/components/OrderCard'
+import TabFilter from '@/components/TabFilter'
 
 export default function Order() {
   const [orderStatus, setOrderStatus] = useState('Pending')
@@ -158,7 +155,7 @@ export default function Order() {
     setOrderStatus(filterOrderData.name)
   }
   return (
-    <div style={{ width: '75%', marginLeft: 'auto', marginBottom: '1.5rem' }}>
+    <div style={{ marginLeft: 'auto', marginBottom: '1.5rem' }}>
       <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
       <Typography
         sx={{
