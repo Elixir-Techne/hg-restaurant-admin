@@ -11,18 +11,17 @@ const TabGroup = styled(Tabs)({
   width: '658.7px',
   height: '55.5px',
   margin: '0 auto',
-  marginTop: '47px',
+  marginTop: '15px',
 })
 
 const StyledTab = styled(Tab)({
   color: 'black',
-  fontFamily: 'roboto',
   fontSize: '26px',
-  textTransform:'inherit',
+  textTransform: 'inherit',
   //   fontWeight: 'bold',
   fontStyle: 'normal',
   textAlign: 'left',
-  padding: '6px 16px',
+  // padding: '6px 16px',
   '&.Mui-selected': {
     color: 'white',
     background: theme.palette.primary.main,
@@ -36,7 +35,7 @@ const StyledTab = styled(Tab)({
 
 export default function TabFilter({ tabs, onTabSelect }) {
   const [activeTab, setActiveTab] = useState(1)
-  
+
   const handleChange = (event, newValue) => {
     setActiveTab(newValue)
     onTabSelect(newValue)

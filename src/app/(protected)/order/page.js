@@ -8,7 +8,6 @@ import TabFilter from '@/components/TabFilter'
 
 export default function Order() {
   const [orderStatus, setOrderStatus] = useState('Pending')
-  // console.log("🚀 ~ file: page.js:11 ~ Order ~ orderStatus:", orderStatus)
   const tabs = [
     { id: 1, name: 'Pending' },
     { id: 2, name: 'Served' },

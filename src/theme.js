@@ -1,7 +1,8 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles';
+
 
 export const theme = createTheme({
-  spacing: (factor) => `${0.25 * factor}rem`,
+  spacing: (factor) => (factor === 'auto' ? 'auto' : `${0.25 * factor}rem`),
   palette: {
     primary: {
       main: '#067153',
@@ -11,7 +12,6 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto',
     fontSize: 14,
     htmlFontSize: 16,
   },
