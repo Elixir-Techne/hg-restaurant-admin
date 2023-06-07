@@ -19,6 +19,10 @@ export default function ToggleButtons({ label1, label2, variant }) {
       border: 0,
       color: '#000',
     },
+    '& > .Mui-selected': {
+      backgroundColor: '#067153 !important',
+      color: '#fff !important',
+    },
   }
   if (variant === 'table') {
     sx = {

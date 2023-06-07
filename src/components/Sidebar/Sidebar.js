@@ -53,8 +53,13 @@ const data = [
     icon: DashBoardSvg,
     path: '/dashboard',
   },
-  { id: 2, name: 'Order Reception', icon: OrderSvg },
-  { id: 3, name: 'Table Management', icon: TableMangSvg },
+  { id: 2, name: 'Order Reception', icon: OrderSvg, path: '/order' },
+  {
+    id: 3,
+    name: 'Table Management',
+    icon: TableMangSvg,
+    path: '/tableManagement',
+  },
   {
     id: 4,
     name: 'Waiter Managemet',
@@ -100,20 +105,23 @@ function Sidebar() {
       </Box>
       <List sx={{ margin: isMobile ? theme.spacing(3) : theme.spacing(5) }}>
         {data.map((item, index) => (
-          <ListItem
-            key={item.id}
-            disablePadding
-            sx={{
-              backgroundColor: (theme) =>
-                selectedIndex === index ? theme.palette.primary.main : '',
-              color: selectedIndex === index ? 'white' : '',
-              borderRadius: '40px',
-              marginBottom: '20px',
+          <Link
+            href={item?.path || ''}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
             }}
+            key={item.id}
           >
-            <Link
-              href={item?.path || ''}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+            <ListItem
+              disablePadding
+              sx={{
+                backgroundColor: (theme) =>
+                  selectedIndex === index ? theme.palette.primary.main : '',
+                color: selectedIndex === index ? 'white' : '',
+                borderRadius: '40px',
+                marginBottom: '20px',
+              }}
             >
               <ListItemButton
                 selected={selectedIndex === index}
@@ -133,8 +141,8 @@ function Sidebar() {
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
               </ListItemButton>
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <StyledButton
@@ -161,7 +169,7 @@ function Sidebar() {
       {isMobile && (
         <IconButton
           onClick={handleDrawerToggle}
-          sx={{ marginTop: '10px', marginLeft: 2 }}
+          sx={{ marginTop: '10px', marginLeft: 2,position:'absolute' }}
         >
           <Image src={MobileMenuSvg} alt="" />
         </IconButton>

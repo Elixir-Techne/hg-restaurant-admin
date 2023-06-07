@@ -8,64 +8,12 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  useMediaQuery,
 } from '@mui/material'
 
 import Table from '@/components/Table'
 import ToggleButtons from '@/components/ToogleButton'
 import { theme } from '@/theme'
-
-const columns = [
-  {
-    field: 'id',
-    headerName: 'Pic',
-    width: 90,
-    renderCell: ({ row }) => {
-      return <Avatar />
-    },
-  },
-  {
-    field: 'firstName',
-    headerName: 'Name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Waiter ID',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'ID Card',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'loc',
-    headerName: 'Location',
-    sortable: false,
-    width: 160,
-  },
-  {
-    field: 'type',
-    headerName: 'Type',
-    sortable: false,
-    width: 160,
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    sortable: false,
-    width: 200,
-    renderCell: ({ row }) => {
-      return (
-        <ToggleButtons label2="In-active" label1="Active" variant="table" />
-      )
-    },
-  },
-]
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -80,6 +28,69 @@ const rows = [
 ]
 
 export default function Waiter() {
+  const isMobile = useMediaQuery('(max-width:768px)')
+  
+  const columns = [
+    {
+      field: 'id',
+      headerName: 'Pic',
+      width: 90,
+      renderCell: ({ row }) => {
+        return <Avatar />
+      },
+    },
+    {
+      field: 'firstName',
+      headerName: 'Name',
+      flex: 1,
+    },
+    {
+      field: 'lastName',
+      headerName: 'Waiter ID',
+      flex: 1,
+    },
+
+    ...(isMobile
+      ? []
+      : [
+          {
+            field: 'age',
+            headerName: 'ID Card',
+            type: 'number',
+            flex: 1,
+            hide: isMobile,
+          },
+          {
+            field: 'loc',
+            headerName: 'Location',
+            sortable: false,
+            flex: 1,
+            hide: isMobile,
+          },
+          {
+            field: 'type',
+            headerName: 'Type',
+            sortable: false,
+            flex: 1,
+          },
+          {
+            field: 'status',
+            headerName: 'Status',
+            sortable: false,
+            width: 200,
+            hide: isMobile,
+            renderCell: ({ row }) => {
+              return (
+                <ToggleButtons
+                  label2="In-active"
+                  label1="Active"
+                  variant="table"
+                />
+              )
+            },
+          },
+        ]),
+  ]
   return (
     <Card
       sx={{
