@@ -169,7 +169,7 @@ function Sidebar() {
       {isMobile && (
         <IconButton
           onClick={handleDrawerToggle}
-          sx={{ marginTop: '10px', marginLeft: 2 }}
+          sx={{ marginTop: '10px', marginLeft: 2,position:'absolute' }}
         >
           <Image src={MobileMenuSvg} alt="" />
         </IconButton>

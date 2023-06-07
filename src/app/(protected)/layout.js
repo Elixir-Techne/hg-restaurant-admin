@@ -1,12 +1,13 @@
-'use client'
+'use client';
 
-import { Box } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
 
 import Sidebar from '@/components/Sidebar'
 
 export default function ProtectedLayout({ children }) {
+  const isMobile = useMediaQuery('(max-width:768px)')
   return (
-    <Box display="flex">
+    <Box display="flex" flexDirection={isMobile ? 'column' : 'row'}>
       <Sidebar />
       <div
         style={{
@@ -18,6 +19,7 @@ export default function ProtectedLayout({ children }) {
           width: '100%',
         }}
       >
+        {isMobile && <div style={{ height: '50px' }}></div>}
         {children}
       </div>
     </Box>
