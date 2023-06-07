@@ -1,8 +1,6 @@
-'use client';
+'use client'
 
 import { Box, useMediaQuery } from '@mui/material'
-
-import { Box } from '@mui/material'
 
 import Sidebar from '@/components/Sidebar'
 
@@ -19,7 +17,7 @@ export default function ProtectedLayout({ children }) {
           backgroundImage: `url(images/bg-image.png)`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          backgroundPosition: 'right'
+          backgroundPosition: 'right',
         }}
       >
         {isMobile && <div style={{ height: '50px' }}></div>}
