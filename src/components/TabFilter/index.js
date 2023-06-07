@@ -16,7 +16,6 @@ const TabGroup = styled(Tabs)({
 
 const StyledTab = styled(Tab)({
   color: 'black',
-  fontFamily: 'roboto',
   fontSize: '26px',
   textTransform: 'inherit',
   //   fontWeight: 'bold',

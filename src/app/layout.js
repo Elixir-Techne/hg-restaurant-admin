@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material/styles'
 
 import { theme } from '@/theme'
 
+import '../styles/globle.css'
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
