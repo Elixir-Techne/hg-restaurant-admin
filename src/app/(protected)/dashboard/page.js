@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { Grid } from '@mui/material'
 import { useState } from 'react'
@@ -159,9 +159,7 @@ export default function Dashboard() {
   }
   return (
     <>
-      <div style={{ width: '75%', marginLeft: 'auto', marginBottom: '1rem' }}>
-        <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
-      </div>
+      <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
       <Grid container spacing={4} px={8}>
         <Grid container item spacing={2}>
           <Grid item xs={12} md={8} spacing={4}>

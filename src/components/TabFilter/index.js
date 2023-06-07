@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import React, { useState } from 'react'
@@ -8,7 +9,6 @@ import { theme } from '@/theme'
 import '../../styles/tabfilter.css'
 
 const TabGroup = styled(Tabs)({
-  width: '658.7px',
   height: '55.5px',
   margin: '0 auto',
   marginTop: '15px',
@@ -41,13 +41,17 @@ export default function TabFilter({ tabs, onTabSelect }) {
     onTabSelect(newValue)
   }
   return (
-    <>
-      <TabGroup value={activeTab} onChange={handleChange}>
+    <Box display="flex" justifyContent="center">
+      <TabGroup
+        value={activeTab}
+        onChange={handleChange}
+        style={{ marginBottom: '1rem' }}
+      >
         {tabs &&
           tabs.map((item, index) => {
             return <StyledTab key={item.id} value={item.id} label={item.name} />
           })}
       </TabGroup>
-    </>
+    </Box>
   )
 }
