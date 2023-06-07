@@ -62,7 +62,7 @@ const data = [
   },
   {
     id: 4,
-    name: 'Waiter Managemet',
+    name: 'Waiter Management',
     icon: WaiterSvg,
     path: '/waiter',
   },
