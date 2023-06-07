@@ -1,14 +1,14 @@
 'use client'
 
 import { Typography } from '@mui/material'
+import { useState } from 'react'
 
 import OrderCard from '@/components/OrderCard'
 import TabFilter from '@/components/TabFilter'
-import { useState } from 'react'
 
 export default function Order() {
-    const [orderStatus, setOrderStatus] = useState('Pending')
-    // console.log("🚀 ~ file: page.js:11 ~ Order ~ orderStatus:", orderStatus)
+  const [orderStatus, setOrderStatus] = useState('Pending')
+  // console.log("🚀 ~ file: page.js:11 ~ Order ~ orderStatus:", orderStatus)
   const tabs = [
     { id: 1, name: 'Pending' },
     { id: 2, name: 'Served' },
@@ -151,20 +151,24 @@ export default function Order() {
     },
   ]
 
-  const onTabSelect =(newValue)=>{
-    const filterOrderData = tabs.find(el=>el.id === newValue)
+  const onTabSelect = (newValue) => {
+    const filterOrderData = tabs.find((el) => el.id === newValue)
     setOrderStatus(filterOrderData.name)
   }
   return (
-    <div style={{ width: '75%', marginLeft: 'auto',marginBottom:"1.5rem"}}>
+    <div style={{ marginLeft: 'auto', marginBottom: '1.5rem' }}>
       <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
       <Typography
-        sx={{ fontSize: '27px', color: '#3C49FF', fontWeight: 'bold', marginLeft:'3.5rem' }}
+        sx={{
+          fontSize: '27px',
+          color: '#3C49FF',
+          fontWeight: 'bold',
+          marginLeft: '3.5rem',
+        }}
       >
-        {
-        orderStatus} Orders
+        {orderStatus} Orders
       </Typography>
-      <OrderCard ordersDetail={ordersDetail} orderStatus={orderStatus}/>
+      <OrderCard ordersDetail={ordersDetail} orderStatus={orderStatus} />
     </div>
   )
 }
