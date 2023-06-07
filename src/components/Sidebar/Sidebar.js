@@ -72,10 +72,10 @@ const data = [
     icon: MenuSvg,
     path: '/menu',
   },
-  { id: 6, name: 'Support and Contact', icon: ContactSvg },
+  { id: 6, name: 'Support and Contact', icon: ContactSvg, path: '/support' },
 ]
 function Sidebar() {
-  const [selectedIndex, setSelectedIndex] = useState(1)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useMediaQuery('(max-width:768px)')
 
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -169,7 +169,7 @@ function Sidebar() {
       {isMobile && (
         <IconButton
           onClick={handleDrawerToggle}
-          sx={{ marginTop: '10px', marginLeft: 2,position:'absolute' }}
+          sx={{ marginTop: '10px', marginLeft: 2, position: 'absolute' }}
         >
           <Image src={MobileMenuSvg} alt="" />
         </IconButton>

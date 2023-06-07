@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 
 import { theme } from '@/theme'
 
-import '../styles/globle.css'
+import './global.css'
 
 export default function RootLayout({ children }) {
   return (

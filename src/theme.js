@@ -1,5 +1,4 @@
-import { createTheme } from '@mui/material/styles';
-
+import { createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
   spacing: (factor) => (factor === 'auto' ? 'auto' : `${0.25 * factor}rem`),
@@ -14,6 +13,7 @@ export const theme = createTheme({
   typography: {
     fontSize: 14,
     htmlFontSize: 16,
+    fontFamily: 'Segoe UI',
   },
   components: {
     MuiButtonBase: {
