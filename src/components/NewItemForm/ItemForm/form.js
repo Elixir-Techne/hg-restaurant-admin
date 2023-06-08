@@ -24,7 +24,7 @@ const StyledImage = styled(Image)({
   margin: '0 0.5rem',
   cursor: 'pointer',
 })
-function ItemForm({ path }) {
+function ItemForm({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [priceOut, setPriceOut] = useState('')
   const { control, register, handleSubmit, formState } = useForm()
@@ -335,7 +335,7 @@ function ItemForm({ path }) {
           </Grid>
         </Grid>
       </Grid>
-      {path.includes('edit') ? (
+      {title === 'Edit Item' ? (
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"

@@ -40,11 +40,7 @@ export default function NewItem() {
           },
         }}
       >
-        <ItemForm
-        // testingFoodType={testingFoodType}
-        // testingSubCategory={testingSubCategory}
-        // testingCategory={testingCategory}
-        />
+        <ItemForm title="New Item" />
       </Box>
     </Box>
   )

@@ -14,10 +14,13 @@ export default function ProtectedLayout({ children }) {
           width: '100%',
           height: '100vh',
           overflowY: 'auto',
-          backgroundImage: `url(images/bg-image.png)`,
+          backgroundImage: `url(images/lightBgImage.png)`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'right',
+          // background: '#283618',
+          // background:
+          //   'linear-gradient(-134deg, #283618 0.00%, #6f7864 100.00%)',
         }}
       >
         {isMobile && <div style={{ height: '50px' }}></div>}

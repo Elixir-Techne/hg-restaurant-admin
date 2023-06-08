@@ -32,7 +32,7 @@ const Tables = ({ TableDetails }) => {
   }
   const handleNewTable = (e) => {
     e.preventDefault()
-    route.push('/tableManagement/new')
+    route.push('/table-management/new')
   }
   const inside = true
   return (

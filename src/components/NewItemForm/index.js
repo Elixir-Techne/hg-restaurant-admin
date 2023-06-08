@@ -10,7 +10,7 @@ const StyledForm = styled(Box)({
   borderRadius: '21px',
 })
 
-function ItemForm() {
+function ItemForm({ title }) {
   const path = window.location.pathname
   return (
     <Box
@@ -25,12 +25,12 @@ function ItemForm() {
         <Typography
           sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
         >
-          {path.includes('edit') ? 'Edit Item' : 'New Item'}
+          {title}
         </Typography>
         <Divider sx={{ width: '100%', height: '5px' }} />
       </Box>
       <StyledForm>
-        <Form path={path} />
+        <Form title={title} />
       </StyledForm>
     </Box>
   )

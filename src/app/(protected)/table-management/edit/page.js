@@ -6,7 +6,7 @@ import TablesStatus from '@/components/TablesStatus'
 
 import TableForm from '../../../../components/NewTableForm/index'
 
-export default function NewTable() {
+export default function EditTable() {
   return (
     <Box
       display="flex"
@@ -30,7 +30,7 @@ export default function NewTable() {
           },
         }}
       >
-        <TableForm />
+        <TableForm title="Edit Table" />
       </Box>
     </Box>
   )

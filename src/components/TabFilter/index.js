@@ -16,7 +16,7 @@ const TabGroup = styled(Tabs)({
 
 const StyledTab = styled(Tab)({
   color: 'black',
-  fontSize: '26px',
+  fontSize: '1.7rem',
   textTransform: 'inherit',
   //   fontWeight: 'bold',
   fontStyle: 'normal',
@@ -24,6 +24,7 @@ const StyledTab = styled(Tab)({
   // padding: '6px 16px',
   '&.Mui-selected': {
     color: 'white',
+    fontSize: '1.5rem',
     background: theme.palette.primary.main,
     borderRadius: '25px',
     height: '25px',

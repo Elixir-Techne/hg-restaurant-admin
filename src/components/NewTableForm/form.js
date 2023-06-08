@@ -16,6 +16,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import moment from 'moment'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -80,10 +81,9 @@ const StyledImage = styled(Image)({
   margin: '0.5rem',
 })
 
-function Form() {
+function Form({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const fileInputRef = useRef(null)
-  const path = window.location.pathname
   const testingDaa = [
     { id: 1, name: 'hello' },
     { id: 2, name: 'world' },
@@ -359,7 +359,7 @@ function Form() {
           </Box>
         </Grid>
       </Grid>
-      {path.includes('edit') ? (
+      {title === 'Edit Table' ? (
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"

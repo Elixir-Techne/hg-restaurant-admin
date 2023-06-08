@@ -2,6 +2,8 @@
 
 import { Box } from '@mui/system'
 
+import { theme } from '@/theme'
+
 import Tables from '../../../components/Tables/index'
 import TablesStatus from '../../../components/TablesStatus/index'
 
@@ -75,9 +77,8 @@ export default function TableManagement() {
   return (
     <Box
       display="flex"
-      alignItems="center"
       justifyContent="center"
-      sx={{ height: '100%' }}
+      sx={{ margin: theme.spacing(10) }}
     >
       <Box
         display="flex"

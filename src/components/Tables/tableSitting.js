@@ -53,7 +53,7 @@ function TableSitting({ TableDetails }) {
 
   const handleEditTable = (e) => {
     e.preventDefault()
-    route.push('tableManagement/edit')
+    route.push('table-management/edit')
   }
   return (
     <Box

@@ -41,11 +41,7 @@ export default function EditItem() {
           },
         }}
       >
-        <ItemForm
-        // testingFoodType={testingFoodType}
-        // testingSubCategory={testingSubCategory}
-        // testingCategory={testingCategory}
-        />
+        <ItemForm title="Edit Item" />
       </Box>
     </Box>
   )

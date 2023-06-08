@@ -24,6 +24,10 @@ const StyledMainContainer = styled(Box)({
   '& ::-webkit-scrollbar-thumb': {
     background: '#D8E3EB',
   },
+  '@media (max-width:768px)': {
+    width: '176px',
+    height: '298px',
+  },
 })
 
 const StyledSubContainer = styled(Box)({
@@ -34,6 +38,10 @@ const StyledSubContainer = styled(Box)({
   filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
   borderRadius: '15px',
   backgroundColor: '#FFFFFF',
+  '@media (max-width:768px)': {
+    width: '168px',
+    height: '286px',
+  },
 })
 const StyledHeadTitle = styled(Typography)({
   fontSize: '20px',
@@ -45,23 +53,32 @@ const StyledTitle = styled(Typography)({
   color: '#52575D',
   margin: ' 0 auto',
   fontSize: '18px',
+  '@media (max-width:768px)': {
+    margin: '0 0.5rem',
+  },
 })
 const StyledBoldTitle = styled(Typography)({
   color: '#52575D',
   margin: ' 0 auto',
   fontSize: '18px',
   fontWeight: 'bold',
+  '@media (max-width:768px)': {
+    margin: '0 0.5rem',
+  },
 })
 
 const StyledServedTitle = styled(Typography)({
   borderRadius: '15px',
-  width: '110px',
   color: 'white',
-  fontSize: '18px',
+  fontSize: '1.4rem',
   background: theme.palette.primary.main,
   textAlign: 'center',
   padding: '2px 25px',
   margin: '0 1rem',
+  '@media (max-width:768px)': {
+    fontSize: '0.9rem',
+    margin: '0',
+  },
 })
 
 function orderCard({ ordersDetail, orderStatus }) {
@@ -100,8 +117,27 @@ function orderCard({ ordersDetail, orderStatus }) {
       display="flex"
       flexDirection="row"
       flexWrap="wrap"
-      gap="1vw"
-      sx={{ margin: '0 2.5rem' }}
+      gap="2vw"
+      sx={{
+        margin: theme.spacing(10),
+        '@media (max-width:1440px)': {
+          gap: '1vw',
+        },
+        '@media (max-width:1024px)': {
+          margin: theme.spacing(4),
+        },
+        '@media (max-width:768px)': {
+          margin: theme.spacing(2),
+        },
+        '@media (max-width:425px)': {
+          margin: theme.spacing(2),
+          gap: '3vw',
+        },
+        '@media (max-width:375px)': {
+          margin: theme.spacing(2),
+          gap: '1vw',
+        },
+      }}
     >
       {ordersDetail?.map((item, index) => {
         return (
@@ -115,7 +151,7 @@ function orderCard({ ordersDetail, orderStatus }) {
                 cursor: 'pointer',
               }}
               onClick={handleCancelOrder}
-              alt=""
+              alt="cancel icon"
             />
             <StyledSubContainer
               sx={{
@@ -160,11 +196,29 @@ function orderCard({ ordersDetail, orderStatus }) {
                 </StyledHeadTitle>
               </Box>
               <Box display="flex" flexDirection="column" flexWrap="wrap">
-                <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
+                <Box
+                  display="flex"
+                  gap="5vw"
+                  sx={{
+                    margin: ' 0 auto',
+                    '@media (max-width:768px)': {
+                      margin: '0',
+                    },
+                  }}
+                >
                   <StyledTitle>Waiter</StyledTitle>
                   <StyledBoldTitle>Saba</StyledBoldTitle>
                 </Box>
-                <Box display="flex" gap="5vw" sx={{ margin: ' 0 auto' }}>
+                <Box
+                  display="flex"
+                  gap="5vw"
+                  sx={{
+                    margin: ' 0 auto',
+                    '@media (max-width:768px)': {
+                      margin: '0',
+                    },
+                  }}
+                >
                   <StyledTitle>Time:</StyledTitle>
                   <StyledBoldTitle>
                     {moment(item.created_at).format('mm:ss')}
@@ -182,7 +236,10 @@ function orderCard({ ordersDetail, orderStatus }) {
                   height: item.status === 'completed' ? '165px' : '225px',
                   width: '230px',
                   flexDirection: 'column ',
-                  // gap:"0.5vh"
+                  '@media (max-width:768px)': {
+                    height: item.status === 'completed' ? '118px' : '176px',
+                    width: '167px',
+                  },
                 }}
               >
                 {OrderCardData &&
@@ -201,7 +258,7 @@ function orderCard({ ordersDetail, orderStatus }) {
                           src={OrderImage}
                           width="46px"
                           height="46px"
-                          alt=""
+                          alt="Food image"
                         />
                         <StyledTitle>{item.name}</StyledTitle>
                       </Box>
@@ -213,7 +270,10 @@ function orderCard({ ordersDetail, orderStatus }) {
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
-                  sx={{ marginTop: '1.5rem' }}
+                  sx={{
+                    marginTop: '1.5rem',
+                    '@media (max-width:768px)': { marginTop: '1rem' },
+                  }}
                 >
                   <StyledServedTitle>Served</StyledServedTitle>
                   <StyledBoldTitle>$190</StyledBoldTitle>
