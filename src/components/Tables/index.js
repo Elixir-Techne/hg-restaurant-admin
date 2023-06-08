@@ -1,5 +1,6 @@
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Typography } from '@mui/material'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 
 import TableSitting from './tableSitting'
@@ -13,6 +14,8 @@ const StyledTableFilter = styled(Button)({
 })
 
 const Tables = ({ TableDetails }) => {
+  const route = useRouter()
+
   const tableLargeSitting = []
   const tableMediumSitting = []
 
@@ -27,12 +30,13 @@ const Tables = ({ TableDetails }) => {
   const handleTableSide = (event) => {
     console.log('==', event)
   }
-  const handleNewTable = () => {
-    console.log('====new table =====')
+  const handleNewTable = (e) => {
+    e.preventDefault()
+    route.push('/tableManagement/new')
   }
   const inside = true
   return (
-    <Box sx={{ padding: '2rem', paddingTop: '0',width:'100%' }}>
+    <Box sx={{ padding: '2rem', paddingTop: '0', width: '100%' }}>
       <Box display="flex" flexDirection="column" sx={{ position: 'relative' }}>
         <Button
           variant="contained"
@@ -78,13 +82,13 @@ const Tables = ({ TableDetails }) => {
       <Box
         display="flex"
         flexDirection="row"
-        flexWrap='wrap'
+        flexWrap="wrap"
         sx={{ padding: '0 1rem' }}
       >
         <Box sx={{ width: '80%', overflowY: 'auto' }}>
           <TableSitting TableDetails={tableMediumSitting} />
         </Box>
-        <Box sx={{ width: '20%',flex:1 }}>
+        <Box sx={{ width: '20%', flex: 1 }}>
           <TableSitting TableDetails={tableLargeSitting} />
         </Box>
       </Box>

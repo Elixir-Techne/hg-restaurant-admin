@@ -21,6 +21,7 @@ const StyledForm = styled(Box)({
 })
 
 function NewTableForm() {
+  const path = window.location.pathname
   return (
     <Box
       sx={{
@@ -34,7 +35,7 @@ function NewTableForm() {
         <Typography
           sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
         >
-          New Table
+          {path.includes('edit') ? 'Edit Table' : 'New Table'}
         </Typography>
         <Divider sx={{ width: '100%', height: '5px' }} />
       </Box>

@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 
 import TablesStatus from '@/components/TablesStatus'
 
-import TableForm from '../../../components/NewTableForm/index'
+import TableForm from '../../../../components/NewTableForm/index'
 
 export default function NewTable() {
   return (

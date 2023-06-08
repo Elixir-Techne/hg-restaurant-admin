@@ -1,6 +1,7 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 
 import Crawn from '../../../public/images/crawn.png'
@@ -16,8 +17,11 @@ const StyledTableBox = styled(Box)({
 })
 const SyledImage = styled(Image)({
   margin: '0.5rem',
+  cursor: 'pointer',
 })
 function TableSitting({ TableDetails }) {
+  const route = useRouter()
+
   const TableStatusIndicator = {
     reserved: '#DE0D65',
     occupied: '#49BF91',
@@ -46,6 +50,11 @@ function TableSitting({ TableDetails }) {
     8: '96',
     16: '284',
   }
+
+  const handleEditTable = (e) => {
+    e.preventDefault()
+    route.push('tableManagement/edit')
+  }
   return (
     <Box
       display="flex"
@@ -55,7 +64,6 @@ function TableSitting({ TableDetails }) {
         width: '100%',
         marginTop: '3.5rem',
         padding: '0.5rem',
-
       }}
     >
       {TableDetails &&
@@ -65,10 +73,10 @@ function TableSitting({ TableDetails }) {
               display="flex"
               key={item.id}
               sx={{
-                flexGrow:1,
+                flexGrow: 1,
                 height: item.table_sitting <= 10 ? '216px' : '475px',
                 // width: item.table_sitting <= 10 ? '204px' : '234px',
-                width:'auto'
+                width: 'auto',
               }}
             >
               <Box
@@ -145,7 +153,7 @@ function TableSitting({ TableDetails }) {
                   </Typography>
                 </Box>
                 <Box display="flex" flexDirection="row" alignItems="center">
-                  <SyledImage src={Edit} />
+                  <SyledImage src={Edit} onClick={handleEditTable} />
                   <SyledImage src={Delete} />
                 </Box>
               </Box>

@@ -25,7 +25,7 @@ import MinusIcon from '../../../public/images/minusIcon.png'
 import NumberIcon from '../../../public/images/numberIcon.png'
 import PhoneIcon from '../../../public/images/phone.png'
 import PlusIcon from '../../../public/images/plusIcon.png'
-import '../../../styles/form.css'
+import '../../styles/form.css'
 
 const ToogleButton = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -83,6 +83,7 @@ const StyledImage = styled(Image)({
 function Form() {
   const [selectedImage, setSelectedImage] = useState(null)
   const fileInputRef = useRef(null)
+  const path = window.location.pathname
   const testingDaa = [
     { id: 1, name: 'hello' },
     { id: 2, name: 'world' },
@@ -135,7 +136,7 @@ function Form() {
         }}
       >
         <Grid item container md={7} xs={12} sm={12} gap={8}>
-          <Grid xs={12}>
+          <Grid xs={12} item>
             <Controller
               name="TableNumber"
               control={control}
@@ -156,7 +157,7 @@ function Form() {
               )}
             />
           </Grid>
-          <Grid xs={12}>
+          <Grid xs={12} item>
             <Controller
               name="TableNumber"
               control={control}
@@ -179,7 +180,7 @@ function Form() {
               )}
             />
           </Grid>
-          <Grid xs={12} display="flex">
+          <Grid xs={12} display="flex" item>
             <StyledImage src={MinusIcon} alt="minus" />
             <Controller
               name="TotalPerson"
@@ -201,6 +202,7 @@ function Form() {
           </Grid>
           <Grid
             xs={12}
+            item
             display="flex"
             justifyContent="space-around"
             sx={{
@@ -223,7 +225,7 @@ function Form() {
             />
             {/* </Box> */}
           </Grid>
-          <Grid xs={12}>
+          <Grid xs={12} item>
             <Controller
               name="personName"
               control={control}
@@ -243,24 +245,30 @@ function Form() {
               )}
             />
           </Grid>
-          <Grid
-            item
-            container
-            sx={12}
-            display="flex"
-            justifyContent="space-between"
-          >
-            <Grid xs={5.5} sx={{ background: '#F5F6FA', borderRadius: '17px' }}>
+          <Grid item container sx={12} spacing={6}>
+            <Grid xs={6} item>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker']}>
+                <DemoContainer
+                  components={['DatePicker']}
+                  sx={{ paddingTop: '0' }}
+                >
                   <DatePicker
                     placeholder="Enter Date"
-                    slotProps={{ textField: { size: 'small' } }}
+                    slotProps={{
+                      textField: {
+                        fullWidth: true,
+                        sx: {
+                          background: '#F5F6FA',
+                          borderRadius: '17px',
+                        },
+                      },
+                    }}
+                    //
                   />
                 </DemoContainer>
               </LocalizationProvider>
             </Grid>
-            <Grid xs={5.5}>
+            <Grid xs={6} item>
               <Controller
                 name="MobileNumber"
                 control={control}
@@ -269,6 +277,7 @@ function Form() {
                   <TextField
                     {...field}
                     placeholder="Enter Mobile Number"
+                    fullWidth
                     InputProps={{
                       endAdornment: (
                         <StyledImage src={PhoneIcon} alt="phone icon" />
@@ -284,14 +293,16 @@ function Form() {
         <Grid item md={5} sm={12} xs={12}>
           <Box
             sx={{
-              // margin: '0 1.5rem',
-              // padding: '1.1rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               height: '50%',
-              width: '100%',
+              width: '90%',
+              margin: '0 auto',
               filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
               background: '#ffffff',
               borderRadius: '20px',
-              pointer: 'cursor',
+              cursor: 'pointer',
               '@media (max-width: 899px)': {
                 height: '188px',
                 width: '350px',
@@ -310,70 +321,110 @@ function Form() {
             }}
             onClick={handleImageClick}
           >
-            {!selectedImage && (
-              <Typography sx={{ textAlign: 'center' }}>
-                Click to upload
-              </Typography>
-            )}
+            {!selectedImage && <Typography>Click to Upload</Typography>}
             {selectedImage && (
               <Box
                 sx={{
                   margin: '0 auto',
                   width: '90%',
                   height: '90%',
-                  backgroundImage: `url(images/tableBgImage.png)`,
-                  backgroundRepeat: 'no - repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'right',
                 }}
               >
-                <Controller
-                  name="TableImage"
-                  control={control}
-                  rules={{ required: 'Mobile Number is required' }}
-                  render={({ field }) => (
-                    <img
-                      {...field}
-                      src={selectedImage}
-                      alt="Selected"
-                      style={{
-                        height: '100%',
-                        width: '100%',
-                        objectFit: 'contain',
-                      }}
-                    />
-                  )}
+                <img
+                  src={selectedImage}
+                  alt="Selected"
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    objectFit: 'contain',
+                  }}
                 />
               </Box>
             )}
-            <input
-              hidden
-              accept="*"
-              type="file"
-              onChange={(event) => handleImageUpload(event)}
+            <Controller
+              name="itemImage"
+              control={control}
+              // rules={{ required: 'item image is required' }}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  ref={fileInputRef}
+                  accept="*"
+                  type="file"
+                  onChange={(event) => handleImageUpload(event)}
+                  style={{ display: 'none' }}
+                />
+              )}
             />
           </Box>
         </Grid>
       </Grid>
-      <Box display="flex" justifyContent="end">
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            marginTop: '1rem',
-            fontSize: '1.8rem',
-            borderRadius: '20px',
-            alignSelf: 'flex-end',
-            padding: '0 2rem',
-            '@media (max-width: 899px)': {
-              fontSize: '1.5rem',
-            },
-          }}
-          onClick={() => handleSubmit(onSubmit)}
-        >
-          Save
-        </Button>
-      </Box>
+      {path.includes('edit') ? (
+        <Box display="flex" justifyContent="end">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              marginRight: '0.5rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Update
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              backgroundColor: '#A7A7AA',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Cancel
+          </Button>
+        </Box>
+      ) : (
+        <Box display="flex" justifyContent="end">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 899px)': {
+                fontSize: '1.5rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Save
+          </Button>
+        </Box>
+      )}
     </Box>
   )
 }
