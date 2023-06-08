@@ -4,6 +4,7 @@ import {
   Button,
   FormControlLabel,
   Grid,
+  Hidden,
   IconButton,
   Switch,
   TextField,
@@ -15,7 +16,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import moment from 'moment'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -24,7 +25,6 @@ import MinusIcon from '../../../public/images/minusIcon.png'
 import NumberIcon from '../../../public/images/numberIcon.png'
 import PhoneIcon from '../../../public/images/phone.png'
 import PlusIcon from '../../../public/images/plusIcon.png'
-import { theme } from '../../theme'
 import './form.css'
 
 const ToogleButton = styled((props) => (
@@ -82,18 +82,16 @@ const StyledImage = styled(Image)({
 
 function Form() {
   const [selectedImage, setSelectedImage] = useState(null)
-
+  const fileInputRef = useRef(null)
   const testingDaa = [
     { id: 1, name: 'hello' },
     { id: 2, name: 'world' },
     { id: 3, name: 'india' },
   ]
   const { control, register, handleSubmit, errors } = useForm()
-  const renderToggle = (params) => (
-    <IconButton>
-      <Image src={DropDown} alt="Dropdown" />
-    </IconButton>
-  )
+  const handleImageClick = () => {
+    fileInputRef.current.click()
+  }
   const handleImageUpload = (event) => {
     const file = event.target.files[0]
 
@@ -154,7 +152,6 @@ function Form() {
                   renderInput={(params) => (
                     <TextField {...params} placeholder="choose sector" />
                   )}
-                  renderToggle={renderToggle}
                 />
               )}
             />
@@ -294,6 +291,7 @@ function Form() {
               filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
               background: '#ffffff',
               borderRadius: '20px',
+              pointer: 'cursor',
               '@media (max-width: 899px)': {
                 height: '188px',
                 width: '350px',
@@ -310,6 +308,7 @@ function Form() {
                 margin: '0 auto',
               },
             }}
+            onClick={handleImageClick}
           >
             {!selectedImage && (
               <Typography sx={{ textAlign: 'center' }}>
@@ -321,7 +320,7 @@ function Form() {
                 sx={{
                   margin: '0 auto',
                   width: '90%',
-                  height: '`90`%',
+                  height: '90%',
                   backgroundImage: `url(images/tableBgImage.png)`,
                   backgroundRepeat: 'no - repeat',
                   backgroundSize: 'cover',
@@ -362,7 +361,7 @@ function Form() {
           variant="contained"
           sx={{
             marginTop: '1rem',
-            fontSize: '2rem',
+            fontSize: '1.8rem',
             borderRadius: '20px',
             alignSelf: 'flex-end',
             padding: '0 2rem',
