@@ -10,6 +10,7 @@ import {
   Divider,
   useMediaQuery,
 } from '@mui/material'
+import { useRouter } from 'next/navigation'
 
 import Table from '@/components/Table'
 import { theme } from '@/theme'
@@ -27,6 +28,7 @@ const rows = [
 ]
 
 export default function Menu() {
+  const router = useRouter()
   const isMobile = useMediaQuery('(max-width:768px)')
   const columns = [
     {
@@ -86,6 +88,11 @@ export default function Menu() {
         ]),
   ]
 
+  const handleNewItem = (e) => {
+    e.preventDefault()
+    router.push('/menu/add')
+  }
+
   return (
     <Card
       sx={{
@@ -106,6 +113,7 @@ export default function Menu() {
         <Box display="flex" justifyContent="flex-end">
           <Button
             variant="contained"
+            onClick={handleNewItem}
             sx={{ borderRadius: '25px', margin: (theme) => theme.spacing(2) }}
           >
             + Add new

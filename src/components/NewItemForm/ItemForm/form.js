@@ -19,17 +19,15 @@ import AddItemIcon from '../../../../public/images/addItemIcon.png'
 import DropDown from '../../../../public/images/dropdown.png'
 import MinusIcon from '../../../../public/images/minusIcon.png'
 import PlusIcon from '../../../../public/images/plusIcon.png'
-import '../../NewTableForm/form.css'
 
 const StyledImage = styled(Image)({
   margin: '0 0.5rem',
   cursor: 'pointer',
 })
-function ItemForm() {
+function ItemForm({ path }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [priceOut, setPriceOut] = useState('')
   const { control, register, handleSubmit, formState } = useForm()
-
   const fileInputRef = useRef(null)
 
   const testingCategory = [
@@ -337,24 +335,72 @@ function ItemForm() {
           </Grid>
         </Grid>
       </Grid>
-      <Box display="flex" justifyContent="end">
-        <Button
-          variant="contained"
-          sx={{
-            marginTop: '1rem',
-            fontSize: '1.6rem',
-            borderRadius: '20px',
-            alignSelf: 'flex-end',
-            padding: '0 2rem',
-            '@media (max-width: 899px)': {
-              fontSize: '1.5rem',
-            },
-          }}
-          onClick={handleSubmit(onSubmit)}
-        >
-          Save
-        </Button>
-      </Box>
+      {path.includes('edit') ? (
+        <Box display="flex" justifyContent="end">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              marginRight: '0.5rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Update
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              backgroundColor: '#A7A7AA',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Cancel
+          </Button>
+        </Box>
+      ) : (
+        <Box display="flex" justifyContent="end">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 899px)': {
+                fontSize: '1.5rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Save
+          </Button>
+        </Box>
+      )}
     </Box>
   )
 }

@@ -10,6 +10,7 @@ import {
   useGridApiRef,
   useGridSelector,
 } from '@mui/x-data-grid'
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 import AscendingSvg from '@/assets/icons/ascendingSvg'
@@ -42,6 +43,7 @@ function CustomPagination(props) {
 }
 
 export default function Table({ rows, columns }) {
+  const router = useRouter()
   const isMobile = useMediaQuery('(max-width:768px)')
 
   const [rowSelectionModel, setRowSelectionModel] = React.useState([])

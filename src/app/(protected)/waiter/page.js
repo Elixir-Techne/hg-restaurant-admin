@@ -10,6 +10,7 @@ import {
   Divider,
   useMediaQuery,
 } from '@mui/material'
+import { useRouter } from 'next/navigation'
 
 import Table from '@/components/Table'
 import ToggleButtons from '@/components/ToogleButton'
@@ -29,7 +30,7 @@ const rows = [
 
 export default function Waiter() {
   const isMobile = useMediaQuery('(max-width:768px)')
-  
+  const route = useRouter()
   const columns = [
     {
       field: 'id',
@@ -91,6 +92,11 @@ export default function Waiter() {
           },
         ]),
   ]
+
+  const handleWaiter = (e) => {
+    e.preventDefault()
+    route.push('waiter/add')
+  }
   return (
     <Card
       sx={{
@@ -110,6 +116,7 @@ export default function Waiter() {
         <Box display="flex" justifyContent="flex-end">
           <Button
             variant="contained"
+            onClick={handleWaiter}
             sx={{ borderRadius: '25px', margin: (theme) => theme.spacing(2) }}
           >
             + Add new

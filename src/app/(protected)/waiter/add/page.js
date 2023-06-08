@@ -2,21 +2,9 @@
 
 import { Box } from '@mui/material'
 
-import ItemForm from '../../../../components/NewItemForm/index'
+import WaiterFrom from '../../../../components/WaiterForm/index'
 
-export default function newItem() {
-  const testingCategory = [
-    { id: 1, name: 'veg' },
-    { id: 2, name: 'non-veg' },
-  ]
-  const testingSubCategory = [
-    { id: 1, name: 'salad' },
-    { id: 2, name: 'gujarati' },
-  ]
-  const testingFoodType = [
-    { id: 1, name: 'sweet' },
-    { id: 2, name: 'spicy' },
-  ]
+export default function AddWaiter() {
   return (
     <Box
       display="flex"
@@ -40,11 +28,7 @@ export default function newItem() {
           },
         }}
       >
-        <ItemForm
-        // testingFoodType={testingFoodType}
-        // testingSubCategory={testingSubCategory}
-        // testingCategory={testingCategory}
-        />
+        <WaiterFrom />
       </Box>
     </Box>
   )

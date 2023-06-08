@@ -25,7 +25,7 @@ import MinusIcon from '../../../public/images/minusIcon.png'
 import NumberIcon from '../../../public/images/numberIcon.png'
 import PhoneIcon from '../../../public/images/phone.png'
 import PlusIcon from '../../../public/images/plusIcon.png'
-import './form.css'
+import '../../../styles/form.css'
 
 const ToogleButton = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />

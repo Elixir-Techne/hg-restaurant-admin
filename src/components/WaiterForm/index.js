@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from '@mui/material'
 import styled from 'styled-components'
 
-import Form from './ItemForm/form'
+import Form from './WaiterForm/form'
 
 const StyledForm = styled(Box)({
   margin: '2rem 1.5rem',
@@ -10,8 +10,7 @@ const StyledForm = styled(Box)({
   borderRadius: '21px',
 })
 
-function ItemForm() {
-  const path = window.location.pathname
+function WaiterForm() {
   return (
     <Box
       sx={{
@@ -25,15 +24,15 @@ function ItemForm() {
         <Typography
           sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
         >
-          {path.includes('edit') ? 'Edit Item' : 'New Item'}
+          Add Waiter
         </Typography>
         <Divider sx={{ width: '100%', height: '5px' }} />
       </Box>
       <StyledForm>
-        <Form path={path} />
+        <Form />
       </StyledForm>
     </Box>
   )
 }
 
-export default ItemForm
+export default WaiterForm
