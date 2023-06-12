@@ -58,7 +58,7 @@ const data = [
     id: 3,
     name: 'Table Management',
     icon: TableMangSvg,
-    path: '/tableManagement',
+    path: '/table-management',
   },
   {
     id: 4,

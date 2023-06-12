@@ -2,11 +2,21 @@
 
 import { Box } from '@mui/material'
 
-import TablesStatus from '@/components/TablesStatus'
+import ItemForm from '../../../../components/NewItemForm/index'
 
-import TableForm from '../../../components/NewTableForm/index'
-
-export default function NewTable() {
+export default function NewItem() {
+  const testingCategory = [
+    { id: 1, name: 'veg' },
+    { id: 2, name: 'non-veg' },
+  ]
+  const testingSubCategory = [
+    { id: 1, name: 'salad' },
+    { id: 2, name: 'gujarati' },
+  ]
+  const testingFoodType = [
+    { id: 1, name: 'sweet' },
+    { id: 2, name: 'spicy' },
+  ]
   return (
     <Box
       display="flex"
@@ -23,14 +33,14 @@ export default function NewTable() {
           borderRadius: '20px',
           background: '#FFFFFF',
           filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-          '@media (max-width: 768px)': {
+          '@media (max-width: 899px)': {
             width: '100%',
-            height: '90%',
+            height: '95%',
             alignItems: 'end',
           },
         }}
       >
-        <TableForm />
+        <ItemForm title="New Item" />
       </Box>
     </Box>
   )

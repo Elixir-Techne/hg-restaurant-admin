@@ -1,6 +1,7 @@
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
 
 import Crawn from '../../../public/images/crawn.png'
@@ -13,11 +14,38 @@ const StyledTableBox = styled(Box)({
   borderRadius: '20px',
   filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
   padding: '1rem 0.5rem',
+  '@media (max-width:1024px)': {
+    padding: '0.1rem 0.3rem',
+  },
 })
 const SyledImage = styled(Image)({
   margin: '0.5rem',
+  cursor: 'pointer',
+  '@media (max-width:1024px)': {
+    margin: '0',
+    height: '3rem',
+    width: '3.5rem',
+  },
+})
+const SyledImageIcon = styled(Image)({
+  margin: '0.5rem',
+  cursor: 'pointer',
+  '@media (max-width:1024px)': {
+    margin: '0.2rem',
+    height: '1rem',
+    width: '1rem',
+  },
+})
+const SyledImageCrawn = styled(Image)({
+  cursor: 'pointer',
+  '@media (max-width:1024px)': {
+    height: '0.7rem',
+    width: '0.8rem',
+  },
 })
 function TableSitting({ TableDetails }) {
+  const route = useRouter()
+
   const TableStatusIndicator = {
     reserved: '#DE0D65',
     occupied: '#49BF91',
@@ -46,6 +74,11 @@ function TableSitting({ TableDetails }) {
     8: '96',
     16: '284',
   }
+
+  const handleEditTable = (e) => {
+    e.preventDefault()
+    route.push('table-management/edit')
+  }
   return (
     <Box
       display="flex"
@@ -55,7 +88,14 @@ function TableSitting({ TableDetails }) {
         width: '100%',
         marginTop: '3.5rem',
         padding: '0.5rem',
-
+        '@media (max-width:1024px)': {
+          gap: '1vw',
+        },
+        '@media (max-width:525px)': {
+          justifyContent: 'center',
+          gap: '1vh',
+          marginTop: '1.5rem',
+        },
       }}
     >
       {TableDetails &&
@@ -65,10 +105,14 @@ function TableSitting({ TableDetails }) {
               display="flex"
               key={item.id}
               sx={{
-                flexGrow:1,
+                flexGrow: 1,
                 height: item.table_sitting <= 10 ? '216px' : '475px',
-                // width: item.table_sitting <= 10 ? '204px' : '234px',
-                width:'auto'
+                // width: item.table_sitting <= 10 ? '204px' : '268px',
+                width: 'auto',
+                '@media (max-width:1024px)': {
+                  width: '116px',
+                  height: item.table_sitting <= 10 ? '114px' : '238px',
+                },
               }}
             >
               <Box
@@ -86,14 +130,25 @@ function TableSitting({ TableDetails }) {
                   <Typography
                     sx={{
                       marginRight: '0.5rem',
-                      fontSize: '16px',
+                      fontSize: '1rem',
                       color: '#077254',
                       fontWeight: 'bold',
+                      '@media (max-width:1024px)': {
+                        fontSize: '0.7rem',
+                      },
                     }}
                   >
                     Table {item.table_name}
                   </Typography>
-                  <Image src={Crawn} />
+                  <SyledImageCrawn
+                    src={Crawn}
+                    // style={{
+                    //   '@media (max-width:1024px)': {
+                    //     height: '0.4rem',
+                    //     width: '0.6rem',
+                    //   },
+                    // }}
+                  />
                 </Box>
                 <FiberManualRecordIcon
                   sx={{ color: TableStatusIndicator[item.status] }}
@@ -104,6 +159,11 @@ function TableSitting({ TableDetails }) {
                 justifyContent="center"
                 alignItems="center"
                 mt="1.5rem"
+                sx={{
+                  '@media (max-width:1024px)': {
+                    marginTop: '0.3rem',
+                  },
+                }}
               >
                 <SyledImage
                   src={item?.table_image}
@@ -128,25 +188,31 @@ function TableSitting({ TableDetails }) {
                 >
                   <Typography
                     sx={{
-                      fontSize: '12px',
+                      fontSize: '0.8rem',
                       fontWeight: 'bold',
                       color: TableWaiterStatus[item.status],
+                      '@media (max-width:1024px)': {
+                        fontSize: '0.6rem',
+                      },
                     }}
                   >
                     Saba Javed
                   </Typography>
                   <Typography
                     sx={{
-                      fontSize: '11px',
+                      fontSize: '0.7rem',
                       color: TableTimeStatus[item.status],
+                      '@media (max-width:1024px)': {
+                        fontSize: '0.5rem',
+                      },
                     }}
                   >
                     5:00 - 6:00 PM
                   </Typography>
                 </Box>
                 <Box display="flex" flexDirection="row" alignItems="center">
-                  <SyledImage src={Edit} />
-                  <SyledImage src={Delete} />
+                  <SyledImageIcon src={Edit} onClick={handleEditTable} />
+                  <SyledImageIcon src={Delete} />
                 </Box>
               </Box>
             </StyledTableBox>

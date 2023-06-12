@@ -1,0 +1,14 @@
+.MuiOutlinedInput-notchedOutline {
+  border: none !important;
+}
+.fileName {
+  display: none;
+}
+@media (max-width: 768px){
+.cancel-image{
+  left:84% !important;
+  top: 1%;
+  height:32px ;
+  width:32px ;
+}
+}
