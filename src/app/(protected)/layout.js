@@ -1,14 +1,18 @@
 'use client'
 
 import { Box, useMediaQuery } from '@mui/material'
+import { usePathname } from 'next/navigation'
 
 import Sidebar from '@/components/Sidebar'
 
 export default function ProtectedLayout({ children }) {
+  const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width:768px)')
   return (
     <Box display="flex" flexDirection={isMobile ? 'column' : 'row'}>
-      <Sidebar />
+      {pathname.includes('sign-up') || pathname.includes('sign-in') ? null : (
+        <Sidebar />
+      )}
       <div
         style={{
           width: '100%',
@@ -18,9 +22,6 @@ export default function ProtectedLayout({ children }) {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'right',
-          // background: '#283618',
-          // background:
-          //   'linear-gradient(-134deg, #283618 0.00%, #6f7864 100.00%)',
         }}
       >
         {isMobile && <div style={{ height: '50px' }}></div>}

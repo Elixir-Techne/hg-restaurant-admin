@@ -11,13 +11,14 @@ import {
   useGridSelector,
 } from '@mui/x-data-grid'
 import { useRouter } from 'next/navigation'
-import * as React from 'react'
+import React, { useEffect } from 'react'
 
 import AscendingSvg from '@/assets/icons/ascendingSvg'
 import CheckboxSvg from '@/assets/icons/checkboxSvg'
 import UnCheckboxSvg from '@/assets/icons/unChecboxSvg'
 
 import '../../styles/table.css'
+import { deleteWaiter, getWaiter } from '../../utils/api'
 import ColumnActionButton from '../ColumnActionButtons'
 
 function Cpagination({ page, onPageChange, className }) {
@@ -42,12 +43,13 @@ function CustomPagination(props) {
   return <GridPagination ActionsComponent={Cpagination} {...props} />
 }
 
-export default function Table({ rows, columns }) {
+export default function Table({ rows, columns, data }) {
   const router = useRouter()
   const isMobile = useMediaQuery('(max-width:768px)')
 
   const [rowSelectionModel, setRowSelectionModel] = React.useState([])
   const apiRef = useGridApiRef()
+
   return (
     <Box display="block">
       <DataGrid

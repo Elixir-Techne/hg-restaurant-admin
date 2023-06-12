@@ -11,10 +11,13 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 import Table from '@/components/Table'
 import ToggleButtons from '@/components/ToogleButton'
 import { theme } from '@/theme'
+
+import { deleteWaiter, getWaiter } from '../../../utils/api'
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -97,6 +100,21 @@ export default function Waiter() {
     e.preventDefault()
     route.push('waiter/add')
   }
+  //API get the waiter
+
+  // useEffect(() => {
+  //   getWaiter()
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [getWaiter])
+
+  //API delete the waiter
+
+  // useEffect(() => {
+  //   deleteWaiter()
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err))
+  // }, [deleteWaiter])
   return (
     <Card
       sx={{

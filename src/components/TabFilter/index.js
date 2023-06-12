@@ -18,19 +18,30 @@ const StyledTab = styled(Tab)({
   color: 'black',
   fontSize: '1.7rem',
   textTransform: 'inherit',
-  //   fontWeight: 'bold',
   fontStyle: 'normal',
-  textAlign: 'left',
-  // padding: '6px 16px',
   '&.Mui-selected': {
     color: 'white',
-    fontSize: '1.5rem',
+    fontSize: '1.7rem',
     background: theme.palette.primary.main,
     borderRadius: '25px',
     height: '25px',
+    '@media (max-width:510px)': {
+      fontSize: '1.1rem',
+    },
+    '@media (max-width:325px)': {
+      fontSize: '0.9rem',
+    },
   },
   '&.MuiTabs-indicator': {
     display: 'none',
+  },
+  '@media (max-width:475px)': {
+    fontSize: '1.1rem',
+    padding: 0,
+  },
+  '@media (max-width:325px)': {
+    fontSize: '0.9rem',
+    padding: 0,
   },
 })
 

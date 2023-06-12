@@ -11,9 +11,12 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 import Table from '@/components/Table'
 import { theme } from '@/theme'
+
+import { deleteMenu, getMenu } from '../../../utils/api'
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -92,6 +95,22 @@ export default function Menu() {
     e.preventDefault()
     router.push('/menu/add')
   }
+
+  //API get menu
+
+  // useEffect(() => {
+  //   getMenu(restaurant_id)
+  //     .then((res) => res.data)
+  //     .catch((err) => console.log(err))
+  // }, [getMenu])
+
+  //API delete menu
+
+  // useEffect(() => {
+  //   deleteMenu(restaurant_id, menu_id)
+  //     .then((res) => res.data)
+  //     .catch((err) => console.log(err))
+  // }, [deleteMenu])
 
   return (
     <Card

@@ -10,16 +10,51 @@ const StyledTableStatusContainer = styled(Box)({
   alignItems: 'center',
 })
 const StyledTableTitle = styled(Typography)({
-  fontSize: '20px',
+  fontSize: '1.3rem',
   marginLeft: '0.8rem',
+  '@media (max-width:525px)': {
+    fontSize: '0.9rem',
+    marginLeft: '0.4rem',
+  },
+  '@media (max-width:375px)': {
+    fontSize: '0.7rem',
+    marginLeft: '0.2rem',
+  },
+})
+const StyledFiberManualRecordIcon = styled(FiberManualRecordIcon)({
+  '@media (max-width:525px)': {
+    fontSize: 'small',
+  },
 })
 const TablesStatus = () => {
   return (
-    <Box sx={{ width: '100%', height: 'auto', padding: '2.5rem 1rem' }}>
+    <Box
+      sx={{
+        width: '100%',
+        height: 'auto',
+        padding: '2.5rem 1rem',
+        '@media (max-width:768px)': {
+          paddingBottom: '0.5rem',
+        },
+        '@media (max-width:525px)': {
+          paddingBottom: '0.3rem',
+        },
+      }}
+    >
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <Box sx={{ width: '20%' }}>
           <Typography
-            sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
+            sx={{
+              fontSize: '1.6rem',
+              color: '#3C49FF',
+              fontWeight: 'bold',
+              '@media (max-width:525px)': {
+                fontSize: '1.2rem',
+              },
+              '@media (max-width:320px)': {
+                fontSize: '0.8rem',
+              },
+            }}
           >
             Tables
           </Typography>
@@ -28,22 +63,35 @@ const TablesStatus = () => {
           display="flex"
           flexDirection="row"
           justifyContent="space-between"
-          sx={{ width: 'auto', padding: '0 1rem' }}
+          sx={{
+            width: 'auto',
+            padding: '0 1rem',
+            '@media (max-width:320px)': {
+              padding: '0 0.2rem',
+            },
+          }}
         >
           <StyledTableStatusContainer sx={{ color: '#DE0D65' }}>
-            <FiberManualRecordIcon />
+            <StyledFiberManualRecordIcon />
             <StyledTableTitle>Reserved</StyledTableTitle>
           </StyledTableStatusContainer>
           <StyledTableStatusContainer sx={{ color: '#49BF91' }}>
-            <FiberManualRecordIcon />
+            <StyledFiberManualRecordIcon />
             <StyledTableTitle>Occupied</StyledTableTitle>
           </StyledTableStatusContainer>
           <StyledTableStatusContainer sx={{ color: '#888888' }}>
-            <FiberManualRecordIcon />
+            <StyledFiberManualRecordIcon />
             <StyledTableTitle>Free</StyledTableTitle>
           </StyledTableStatusContainer>
           <StyledTableStatusContainer>
-            <InfoOutlinedIcon sx={{ color: '#B3B8BD' }} />
+            <InfoOutlinedIcon
+              sx={{
+                color: '#B3B8BD',
+                '@media (max-width:525px)': {
+                  fontSize: 'small',
+                },
+              }}
+            />
           </StyledTableStatusContainer>
         </Box>
       </Box>

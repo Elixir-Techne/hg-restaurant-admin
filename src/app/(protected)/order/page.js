@@ -8,6 +8,7 @@ import TabFilter from '@/components/TabFilter'
 
 export default function Order() {
   const [orderStatus, setOrderStatus] = useState('Pending')
+  const [orderCancelled, setOrderCancelled] = useState(false)
   const tabs = [
     { id: 1, name: 'Pending' },
     { id: 2, name: 'Served' },
@@ -157,17 +158,25 @@ export default function Order() {
   return (
     <div style={{ marginLeft: 'auto', marginBottom: '1.5rem' }}>
       <TabFilter tabs={tabs} onTabSelect={onTabSelect} />
-      <Typography
-        sx={{
-          fontSize: '27px',
-          color: '#3C49FF',
-          fontWeight: 'bold',
-          marginLeft: '3.5rem',
-        }}
-      >
-        {orderStatus} Orders
-      </Typography>
-      <OrderCard ordersDetail={ordersDetail} orderStatus={orderStatus} />
+      {!orderCancelled ? (
+        <Typography
+          sx={{
+            fontSize: '27px',
+            color: '#3C49FF',
+            fontWeight: 'bold',
+            marginLeft: '3.5rem',
+          }}
+        >
+          {orderStatus} Orders
+        </Typography>
+      ) : null}
+
+      <OrderCard
+        ordersDetail={ordersDetail}
+        orderStatus={orderStatus}
+        setOrderCancelled={setOrderCancelled}
+        orderCancelled={orderCancelled}
+      />
     </div>
   )
 }

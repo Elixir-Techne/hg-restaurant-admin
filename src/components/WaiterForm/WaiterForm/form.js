@@ -6,11 +6,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
 import '../../../styles/form.css'
+import { waiterForm } from '../../../utils/api'
 
 const StyledSubContainer = styled(Box)({
   display: 'flex',
@@ -49,6 +50,16 @@ const StyledAutocomplete = styled(Autocomplete)({
   borderRadius: '13px',
   border: '1px solid #AACDE8',
 })
+
+const StyledErrorMessage = styled(Typography)({
+  fontSize: '0.8rem',
+  color: 'red',
+  marginLeft: '15%',
+  position: 'absolute',
+  '@media (max-width:375px)': {
+    marginLeft: '0',
+  },
+})
 function Form() {
   const testingData = [
     { id: 1, name: 'Ahmedabad' },
@@ -57,6 +68,8 @@ function Form() {
   const fileInputRef = useRef(null)
   const [selectedFile, setSelectedFile] = useState(null)
   const { control, register, handleSubmit, formState } = useForm()
+  const error = formState.errors
+  console.log(formState.errors)
   const handleImageClick = () => {
     fileInputRef.current.click() // Trigger click on the hidden file input element
   }
@@ -67,6 +80,11 @@ function Form() {
   }
 
   const onSubmit = (data) => {
+    //API for post waiter form
+
+    // waiterForm(data)
+    //   .then((res) => res)
+    //   .catch((err) => console.log(err))
     console.log(data, '============')
   }
   return (
@@ -78,21 +96,7 @@ function Form() {
         },
       }}
     >
-      <Grid
-        container
-        spacing={4}
-        display="flex"
-        gap={10}
-        xs={12}
-        // sx={{
-        //   '@media (max-width: 899px)': {
-        //     flexDirection: 'column-reverse',
-        //   },
-        //   '@media (max-width: 768px)': {
-        //     flexDirection: 'column-reverse',
-        //   },
-        // }}
-      >
+      <Grid container spacing={4} display="flex" gap={10} xs={12}>
         <Grid item xs={12}>
           <StyledSubContainer>
             <StyledFormLabel>Name</StyledFormLabel>
@@ -103,6 +107,9 @@ function Form() {
               render={({ field }) => <StyledTextField {...field} />}
             />
           </StyledSubContainer>
+          {error?.name?.type === 'required' ? (
+            <StyledErrorMessage>{error?.name?.message}</StyledErrorMessage>
+          ) : null}
         </Grid>
         <Grid item xs={12}>
           <StyledSubContainer display="flex" alignItems="center">
@@ -114,6 +121,9 @@ function Form() {
               render={({ field }) => <StyledTextField {...field} />}
             />
           </StyledSubContainer>
+          {error?.cnic?.type === 'required' ? (
+            <StyledErrorMessage>{error?.cnic?.message}</StyledErrorMessage>
+          ) : null}
         </Grid>
         <Grid item xs={12}>
           <StyledSubContainer
@@ -125,19 +135,28 @@ function Form() {
             <Controller
               name="uploadCnic"
               control={control}
-              rules={{ required: 'Upload CNIC is required' }}
-              render={({ field }) => (
+              rules={{ required: 'CNIC file is required' }}
+              render={({ field: { value, onChange, ...field } }) => (
                 <StyledTextField
                   {...field}
                   ref={fileInputRef}
                   accept="*"
                   type="file"
-                  onChange={(event) => handleImageUpload(event)}
+                  value={value?.fileName}
+                  onChange={(event) => {
+                    onChange(event.target.files[0])
+                    handleImageUpload(event)
+                  }}
                   //   style={{ display: 'none' }}
                 />
               )}
             />
           </StyledSubContainer>
+          {error?.uploadCnic?.type === 'required' ? (
+            <StyledErrorMessage>
+              {error?.uploadCnic?.message}
+            </StyledErrorMessage>
+          ) : null}
         </Grid>
         <Grid item xs={12}>
           <StyledSubContainer
@@ -156,6 +175,7 @@ function Form() {
                   fullWidth
                   options={testingData}
                   getOptionLabel={(option) => option.name}
+                  onChange={(event, newValue) => field.onChange(newValue)}
                   sx={{
                     background: '#F5F6FA',
                     borderRadius: '17px',
@@ -165,6 +185,9 @@ function Form() {
               )}
             />
           </StyledSubContainer>
+          {error?.location?.type === 'required' ? (
+            <StyledErrorMessage>{error?.location?.message}</StyledErrorMessage>
+          ) : null}
         </Grid>
         <Grid item xs={12}>
           <StyledSubContainer
@@ -183,6 +206,7 @@ function Form() {
                   fullWidth
                   options={testingData}
                   getOptionLabel={(option) => option.name}
+                  onChange={(event, newValue) => field.onChange(newValue)}
                   sx={{
                     background: '#F5F6FA',
                     borderRadius: '17px',
@@ -192,6 +216,9 @@ function Form() {
               )}
             />
           </StyledSubContainer>
+          {error?.type?.type === 'required' ? (
+            <StyledErrorMessage>{error?.type?.message}</StyledErrorMessage>
+          ) : null}
         </Grid>
       </Grid>
       <Box display="flex" justifyContent="center">
