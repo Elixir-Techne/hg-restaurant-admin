@@ -12,7 +12,8 @@ import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import ContactSvg from '@/assets/icons/contcatSvg'
 import DashBoardSvg from '@/assets/icons/dasboardSvg'
@@ -77,8 +78,13 @@ const data = [
 function Sidebar() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useMediaQuery('(max-width:768px)')
-
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const item = data.find((d) => pathname.includes(d.path))
+    if (item) setSelectedIndex(item.id)
+  }, [pathname, data])
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -117,15 +123,15 @@ function Sidebar() {
               disablePadding
               sx={{
                 backgroundColor: (theme) =>
-                  selectedIndex === index ? theme.palette.primary.main : '',
-                color: selectedIndex === index ? 'white' : '',
+                  selectedIndex === item.id ? theme.palette.primary.main : '',
+                color: selectedIndex === item.id ? 'white' : '',
                 borderRadius: '40px',
                 marginBottom: '20px',
               }}
             >
               <ListItemButton
-                selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}
+                selected={selectedIndex === item.id}
+                onClick={(event) => handleListItemClick(event, item.id)}
                 sx={{
                   borderRadius: '40px',
                   height: '54px',
@@ -137,7 +143,7 @@ function Sidebar() {
                     marginLeft: isMobile ? theme.spacing(2) : theme.spacing(4),
                   }}
                 >
-                  <item.icon selected={selectedIndex === index} />
+                  <item.icon selected={selectedIndex === item.id} />
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
               </ListItemButton>
