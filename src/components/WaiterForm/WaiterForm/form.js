@@ -67,16 +67,17 @@ function Form() {
   ]
   const fileInputRef = useRef(null)
   const [selectedFile, setSelectedFile] = useState(null)
+
   const { control, register, handleSubmit, formState } = useForm()
   const error = formState.errors
-  console.log(formState.errors)
+  console.log(selectedFile)
   const handleImageClick = () => {
     fileInputRef.current.click() // Trigger click on the hidden file input element
   }
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]
-    setSelectedFile(file)
+    setSelectedFile(file.size)
   }
 
   const onSubmit = (data) => {
@@ -152,11 +153,21 @@ function Form() {
               )}
             />
           </StyledSubContainer>
+
           {error?.uploadCnic?.type === 'required' ? (
             <StyledErrorMessage>
               {error?.uploadCnic?.message}
             </StyledErrorMessage>
-          ) : null}
+          ) : (
+            <Typography
+              sx={{
+                color: selectedFile < 2048 ? 'green' : 'red',
+                marginLeft: '15%',
+              }}
+            >
+              Maximum file size 2MB, File Formate JPG/PNG/JPEG
+            </Typography>
+          )}
         </Grid>
         <Grid item xs={12}>
           <StyledSubContainer

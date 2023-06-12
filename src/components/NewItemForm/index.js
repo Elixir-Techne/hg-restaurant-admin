@@ -11,7 +11,6 @@ const StyledForm = styled(Box)({
 })
 
 function ItemForm({ title }) {
-  const path = window.location.pathname
   return (
     <Box
       sx={{
