@@ -16,15 +16,16 @@ const TabGroup = styled(Tabs)({
 
 const StyledTab = styled(Tab)({
   color: 'black',
-  fontSize: '1.7rem',
+  fontSize: '1.3rem',
   textTransform: 'inherit',
   fontStyle: 'normal',
+  minHeight: '38px',
+  padding: '0 1.5rem',
   '&.Mui-selected': {
     color: 'white',
-    fontSize: '1.7rem',
+    fontSize: '1.3rem',
     background: theme.palette.primary.main,
     borderRadius: '25px',
-    height: '25px',
     '@media (max-width:510px)': {
       fontSize: '1.1rem',
     },

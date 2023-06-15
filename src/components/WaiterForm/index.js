@@ -8,9 +8,13 @@ const StyledForm = styled(Box)({
   background: '#FDFDFD',
   filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
   borderRadius: '21px',
+  height: '90%',
+  '@media (max-height:725px)': {
+    height: '85%',
+  },
 })
 
-function WaiterForm() {
+function WaiterForm({ title }) {
   return (
     <Box
       sx={{
@@ -24,12 +28,12 @@ function WaiterForm() {
         <Typography
           sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
         >
-          Add Waiter
+          {title}
         </Typography>
         <Divider sx={{ width: '100%', height: '5px' }} />
       </Box>
       <StyledForm>
-        <Form />
+        <Form title={title} />
       </StyledForm>
     </Box>
   )

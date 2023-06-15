@@ -28,7 +28,7 @@ export default function AddWaiter() {
           },
         }}
       >
-        <WaiterFrom />
+        <WaiterFrom title="Add Waiter" />
       </Box>
     </Box>
   )

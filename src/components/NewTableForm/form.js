@@ -116,7 +116,6 @@ function Form({ title }) {
     },
   })
 
-  console.log(formState.errors)
   const error = formState.errors
 
   //API get form
@@ -159,10 +158,6 @@ function Form({ title }) {
   const handleCancel = () => {
     route.push('/table-management')
   }
-
-  const handleUp = () => {
-    console.log('==')
-  }
   const handleIncrement = () => {
     const price = getValues('TotalPerson')
     setValue('TotalPerson', Number(price) + 1)
@@ -177,10 +172,9 @@ function Form({ title }) {
   return (
     <Box
       sx={{
+        height: '100%',
         padding: '1rem',
-        '@media (max-width:899px)': {
-          padding: '0.5rem',
-        },
+        overflowY: 'auto',
       }}
     >
       <Grid

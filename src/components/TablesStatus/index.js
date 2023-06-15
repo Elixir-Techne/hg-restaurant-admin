@@ -8,16 +8,35 @@ const StyledTableStatusContainer = styled(Box)({
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
+  margin: '0 1rem',
+  '@media (max-width:525px)': {
+    margin: '0 0.4rem',
+  },
+  '@media (max-width:425px)': {
+    margin: '0 0.3rem',
+  },
 })
 const StyledTableTitle = styled(Typography)({
   fontSize: '1.3rem',
   marginLeft: '0.8rem',
+  '@media (max-width:1024px)': {
+    fontSize: '1.1rem',
+    marginLeft: '0.5rem',
+  },
+  '@media (max-width:525px)': {
+    fontSize: '1rem',
+    marginLeft: '0.3rem',
+  },
   '@media (max-width:525px)': {
     fontSize: '0.9rem',
-    marginLeft: '0.4rem',
+    marginLeft: '0.3rem',
+  },
+  '@media (max-width:475px)': {
+    fontSize: '0.7rem',
+    marginLeft: '0.2rem',
   },
   '@media (max-width:375px)': {
-    fontSize: '0.7rem',
+    fontSize: '0.6rem',
     marginLeft: '0.2rem',
   },
 })
@@ -83,7 +102,7 @@ const TablesStatus = () => {
             <StyledFiberManualRecordIcon />
             <StyledTableTitle>Free</StyledTableTitle>
           </StyledTableStatusContainer>
-          <StyledTableStatusContainer>
+          <StyledTableStatusContainer sx={{ margin: '0 !important' }}>
             <InfoOutlinedIcon
               sx={{
                 color: '#B3B8BD',

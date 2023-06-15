@@ -7,14 +7,6 @@ import OrderCard from '@/components/OrderCard'
 import TabFilter from '@/components/TabFilter'
 
 export default function Order() {
-  const [orderStatus, setOrderStatus] = useState('Pending')
-  const [orderCancelled, setOrderCancelled] = useState(false)
-  const tabs = [
-    { id: 1, name: 'Pending' },
-    { id: 2, name: 'Served' },
-    { id: 3, name: 'Paid' },
-    { id: 4, name: 'Cancelled' },
-  ]
   const ordersDetail = [
     {
       order_id: 123,
@@ -46,7 +38,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 235,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -59,7 +51,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 236,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -72,7 +64,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 237,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -85,7 +77,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 238,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -98,7 +90,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 239,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -111,7 +103,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 240,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -124,7 +116,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 241,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -137,7 +129,7 @@ export default function Order() {
       updated_by: 5678,
     },
     {
-      order_id: 234,
+      order_id: 242,
       restaurant_id: 456,
       option_chosen: false,
       option: null,
@@ -150,10 +142,26 @@ export default function Order() {
       updated_by: 5678,
     },
   ]
+  const tabs = [
+    { id: 1, name: 'Pending' },
+    { id: 2, name: 'Served' },
+    { id: 3, name: 'Paid' },
+    { id: 4, name: 'Cancelled' },
+  ]
+  const [orderStatus, setOrderStatus] = useState('Pending')
+  const [orderCancelled, setOrderCancelled] = useState(false)
+  const [orderData, setOrderData] = useState(
+    ordersDetail.filter((el) => el.status === 'in_progress'),
+  )
 
   const onTabSelect = (newValue) => {
     const filterOrderData = tabs.find((el) => el.id === newValue)
     setOrderStatus(filterOrderData.name)
+    if (filterOrderData.name === 'Pending') {
+      setOrderData(ordersDetail.filter((el) => el.status === 'in_progress'))
+    } else if (filterOrderData.name === 'Served') {
+      setOrderData(ordersDetail.filter((el) => el.status === 'completed'))
+    }
   }
   return (
     <div style={{ marginLeft: 'auto', marginBottom: '1.5rem' }}>
@@ -176,6 +184,7 @@ export default function Order() {
         orderStatus={orderStatus}
         setOrderCancelled={setOrderCancelled}
         orderCancelled={orderCancelled}
+        orderData={orderData}
       />
     </div>
   )

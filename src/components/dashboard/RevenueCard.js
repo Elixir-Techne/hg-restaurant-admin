@@ -23,7 +23,7 @@ const StyledCard = styled(Card)({
   boxShadow: 'none',
 })
 
-function RevenueCard() {
+function RevenueCard({ orderStatus }) {
   useEffect(() => {
     var ctx = document.getElementById('myChart').getContext('2d')
     var myChart = new Chart(ctx, {
@@ -96,7 +96,10 @@ function RevenueCard() {
         title={
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="center" gap="5px">
-              <Typography sx={{ color: '#3C49FF' }} variant="h5">
+              <Typography
+                sx={{ color: '#3C49FF', fontWeight: 'bold' }}
+                variant="h5"
+              >
                 Revenue
               </Typography>
               <InfoOutlinedIcon sx={{ color: '#B3B8BD' }} />
@@ -105,13 +108,25 @@ function RevenueCard() {
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg />
                 <Typography sx={{ color: '#3C49FF' }} variant="h5">
-                  Yesterday
+                  {orderStatus === 'Today'
+                    ? 'Yesterday'
+                    : orderStatus === 'This week'
+                    ? 'Last week'
+                    : orderStatus === 'This month'
+                    ? 'Last month'
+                    : 'Before'}
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg selected />
                 <Typography sx={{ color: '#8CA6FB' }} variant="h5">
-                  Today
+                  {orderStatus === 'Today'
+                    ? 'Today'
+                    : orderStatus === 'This week'
+                    ? 'Current week'
+                    : orderStatus === 'This month'
+                    ? 'Current month'
+                    : 'now'}
                 </Typography>
               </Box>
             </Box>

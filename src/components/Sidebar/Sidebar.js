@@ -1,4 +1,4 @@
-import { styled, useMediaQuery } from '@mui/material'
+import { Badge, styled, useMediaQuery } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -90,6 +90,7 @@ function Sidebar() {
   }
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index)
+    if (isMobile) setMobileOpen(!mobileOpen)
   }
   const drawer = (
     <>
@@ -146,6 +147,13 @@ function Sidebar() {
                   <item.icon selected={selectedIndex === item.id} />
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
+                {item.name === 'Order Reception' ? (
+                  <Badge
+                    color="secondary"
+                    badgeContent="10"
+                    sx={{ marginRight: '0.5rem', fontSize: '1.5rem' }}
+                  ></Badge>
+                ) : null}
               </ListItemButton>
             </ListItem>
           </Link>

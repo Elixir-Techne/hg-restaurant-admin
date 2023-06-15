@@ -2,7 +2,10 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import styled from 'styled-components'
+
+import { deleteTable } from '@/utils/api'
 
 import Crawn from '../../../public/images/crawn.png'
 import Delete from '../../../public/images/delete.png'
@@ -44,8 +47,8 @@ const SyledImageCrawn = styled(Image)({
   },
 })
 function TableSitting({ TableDetails }) {
+  const [tables, setTables] = useState(TableDetails)
   const route = useRouter()
-
   const TableStatusIndicator = {
     reserved: '#DE0D65',
     occupied: '#49BF91',
@@ -79,6 +82,10 @@ function TableSitting({ TableDetails }) {
     e.preventDefault()
     route.push('table-management/edit')
   }
+  const handleDeleteTable = (id) => {
+    const newData = TableDetails.filter((el) => el.id !== id)
+    setTables(newData)
+  }
   return (
     <Box
       display="flex"
@@ -98,126 +105,138 @@ function TableSitting({ TableDetails }) {
         },
       }}
     >
-      {TableDetails &&
-        TableDetails?.map((item, index) => {
-          return (
-            <StyledTableBox
-              display="flex"
-              key={item.id}
-              sx={{
-                flexGrow: 1,
-                height: item.table_sitting <= 10 ? '216px' : '475px',
-                // width: item.table_sitting <= 10 ? '204px' : '268px',
-                width: 'auto',
-                '@media (max-width:1024px)': {
-                  width: '116px',
-                  height: item.table_sitting <= 10 ? '114px' : '238px',
-                },
-              }}
-            >
-              <Box
+      {tables &&
+        tables
+          ?.filter((el) => el.table_clear)
+          ?.map((item, index) => {
+            return (
+              <StyledTableBox
                 display="flex"
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="center"
+                key={item.id}
+                sx={{
+                  flexGrow: 1,
+                  height: item.table_sitting <= 10 ? '216px' : '475px',
+                  // width: item.table_sitting <= 10 ? '204px' : '268px',
+                  width: 'auto',
+                  '@media (max-width:1024px)': {
+                    width: '116px',
+                    height: item.table_sitting <= 10 ? '114px' : '238px',
+                  },
+                }}
               >
                 <Box
                   display="flex"
                   flexDirection="row"
+                  justifyContent="space-between"
                   alignItems="center"
-                  justifyContent="center"
                 >
-                  <Typography
-                    sx={{
-                      marginRight: '0.5rem',
-                      fontSize: '1rem',
-                      color: '#077254',
-                      fontWeight: 'bold',
-                      '@media (max-width:1024px)': {
-                        fontSize: '0.7rem',
-                      },
-                    }}
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    Table {item.table_name}
-                  </Typography>
-                  <SyledImageCrawn
-                    src={Crawn}
-                    // style={{
-                    //   '@media (max-width:1024px)': {
-                    //     height: '0.4rem',
-                    //     width: '0.6rem',
-                    //   },
-                    // }}
+                    <Typography
+                      sx={{
+                        marginRight: '0.5rem',
+                        fontSize: '1rem',
+                        color: '#077254',
+                        fontWeight: 'bold',
+                        '@media (max-width:1024px)': {
+                          fontSize: '0.7rem',
+                        },
+                      }}
+                    >
+                      Table {item.table_name}
+                    </Typography>
+                    <SyledImageCrawn
+                      src={Crawn}
+                      alt="CrawnIcon"
+                      // style={{
+                      //   '@media (max-width:1024px)': {
+                      //     height: '0.4rem',
+                      //     width: '0.6rem',
+                      //   },
+                      // }}
+                    />
+                  </Box>
+                  <FiberManualRecordIcon
+                    sx={{ color: TableStatusIndicator[item.status] }}
                   />
                 </Box>
-                <FiberManualRecordIcon
-                  sx={{ color: TableStatusIndicator[item.status] }}
-                />
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt="1.5rem"
-                sx={{
-                  '@media (max-width:1024px)': {
-                    marginTop: '0.3rem',
-                  },
-                }}
-              >
-                <SyledImage
-                  src={item?.table_image}
-                  width={TableImageWidth[item.table_sitting]}
-                  height={TableImageHeight[item.table_sitting]}
-                />
-              </Box>
-              <Box
-                display="flex"
-                flexDirection="row"
-                sx={{
-                  justifyContent: 'space-between',
-                  marginTop: item.table_sitting <= 10 ? '0' : 'auto',
-                }}
-              >
                 <Box
                   display="flex"
-                  flexDirection="column"
                   justifyContent="center"
                   alignItems="center"
-                  mr="0.5rem"
+                  mt="1.5rem"
+                  sx={{
+                    '@media (max-width:1024px)': {
+                      marginTop: '0.3rem',
+                    },
+                  }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: '0.8rem',
-                      fontWeight: 'bold',
-                      color: TableWaiterStatus[item.status],
-                      '@media (max-width:1024px)': {
-                        fontSize: '0.6rem',
-                      },
-                    }}
-                  >
-                    Saba Javed
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '0.7rem',
-                      color: TableTimeStatus[item.status],
-                      '@media (max-width:1024px)': {
-                        fontSize: '0.5rem',
-                      },
-                    }}
-                  >
-                    5:00 - 6:00 PM
-                  </Typography>
+                  <SyledImage
+                    src={item?.table_image}
+                    alt="tableImage"
+                    width={TableImageWidth[item.table_sitting]}
+                    height={TableImageHeight[item.table_sitting]}
+                  />
                 </Box>
-                <Box display="flex" flexDirection="row" alignItems="center">
-                  <SyledImageIcon src={Edit} onClick={handleEditTable} />
-                  <SyledImageIcon src={Delete} />
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  sx={{
+                    justifyContent: 'space-between',
+                    marginTop: item.table_sitting <= 10 ? '0' : 'auto',
+                  }}
+                >
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    mr="0.5rem"
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: '0.8rem',
+                        fontWeight: 'bold',
+                        color: TableWaiterStatus[item.status],
+                        '@media (max-width:1024px)': {
+                          fontSize: '0.6rem',
+                        },
+                      }}
+                    >
+                      Saba Javed
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: '0.7rem',
+                        color: TableTimeStatus[item.status],
+                        '@media (max-width:1024px)': {
+                          fontSize: '0.5rem',
+                        },
+                      }}
+                    >
+                      5:00 - 6:00 PM
+                    </Typography>
+                  </Box>
+                  <Box display="flex" flexDirection="row" alignItems="center">
+                    <SyledImageIcon
+                      src={Edit}
+                      onClick={handleEditTable}
+                      alt="editIcon"
+                    />
+                    <SyledImageIcon
+                      src={Delete}
+                      onClick={() => handleDeleteTable(item.id)}
+                      alt="deleteIcon"
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </StyledTableBox>
-          )
-        })}
+              </StyledTableBox>
+            )
+          })}
     </Box>
   )
 }
