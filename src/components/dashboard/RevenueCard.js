@@ -97,17 +97,44 @@ function RevenueCard({ orderStatus }) {
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="center" gap="5px">
               <Typography
-                sx={{ color: '#3C49FF', fontWeight: 'bold' }}
+                sx={{
+                  color: '#3C49FF',
+                  fontWeight: 'bold',
+                  '@media (max-width:475px)': {
+                    fontSize: '1.1rem',
+                  },
+                  '@media (max-width:360px)': {
+                    fontSize: '0.8rem',
+                  },
+                }}
                 variant="h5"
               >
                 Revenue
               </Typography>
-              <InfoOutlinedIcon sx={{ color: '#B3B8BD' }} />
+              <InfoOutlinedIcon
+                sx={{
+                  color: '#B3B8BD',
+                  '@media (max-width:475px)': {
+                    fontSize: 'medium',
+                  },
+                }}
+              />
             </Box>
             <Box display="flex" gap="10px">
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg />
-                <Typography sx={{ color: '#3C49FF' }} variant="h5">
+                <Typography
+                  sx={{
+                    color: '#3C49FF',
+                    '@media (max-width:475px)': {
+                      fontSize: '1.1rem',
+                    },
+                    '@media (max-width:360px)': {
+                      fontSize: '0.8rem',
+                    },
+                  }}
+                  variant="h5"
+                >
                   {orderStatus === 'Today'
                     ? 'Yesterday'
                     : orderStatus === 'This week'
@@ -119,7 +146,18 @@ function RevenueCard({ orderStatus }) {
               </Box>
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg selected />
-                <Typography sx={{ color: '#8CA6FB' }} variant="h5">
+                <Typography
+                  sx={{
+                    color: '#8CA6FB',
+                    '@media (max-width:475px)': {
+                      fontSize: '1.1rem',
+                    },
+                    '@media (max-width:360px)': {
+                      fontSize: '0.8rem',
+                    },
+                  }}
+                  variant="h5"
+                >
                   {orderStatus === 'Today'
                     ? 'Today'
                     : orderStatus === 'This week'

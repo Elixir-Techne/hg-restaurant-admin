@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import ContactSvg from '@/assets/icons/contcatSvg'
 import DashBoardSvg from '@/assets/icons/dasboardSvg'
@@ -21,6 +21,7 @@ import MenuSvg from '@/assets/icons/menuSvg'
 import OrderSvg from '@/assets/icons/orderSvg'
 import TableMangSvg from '@/assets/icons/tableManSvg'
 import WaiterSvg from '@/assets/icons/waiterSvg'
+import { OrdersDetailContext } from '@/context/orderDetailContext'
 import { theme } from '@/theme'
 
 import companyPng from '../../assets/icons/company.png'
@@ -46,6 +47,22 @@ const StyledButton = styled(Button)({
   borderRadius: '0px',
   justifyContent: 'flex-start',
 })
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    marginRight: '0.5rem',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    padding: '0.8rem',
+    borderRadius: '25px',
+    '@media (max-width: 1024px) and (min-width: 769px)': {
+      marginRight: '0',
+      fontSize: '1rem',
+      padding: '0.6rem',
+      borderRadius: '25px',
+    },
+  },
+}))
 
 const data = [
   {
@@ -76,15 +93,21 @@ const data = [
   { id: 6, name: 'Support and Contact', icon: ContactSvg, path: '/support' },
 ]
 function Sidebar() {
+  const { ordersDetail } = useContext(OrdersDetailContext)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useMediaQuery('(max-width:768px)')
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [totalPendingOrders, setTotalPendingOrders] = useState(0)
   const pathname = usePathname()
 
   useEffect(() => {
     const item = data.find((d) => pathname.includes(d.path))
     if (item) setSelectedIndex(item.id)
-  }, [pathname, data])
+    const pendingOrders = ordersDetail.filter(
+      (el) => el.status === 'in_progress',
+    )
+    setTotalPendingOrders(pendingOrders.length)
+  }, [pathname, data, ordersDetail])
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -148,11 +171,11 @@ function Sidebar() {
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
                 {item.name === 'Order Reception' ? (
-                  <Badge
+                  <StyledBadge
                     color="secondary"
-                    badgeContent="10"
-                    sx={{ marginRight: '0.5rem', fontSize: '1.5rem' }}
-                  ></Badge>
+                    badgeContent={totalPendingOrders}
+                    sx={{ marginRight: '0.5rem' }}
+                  ></StyledBadge>
                 ) : null}
               </ListItemButton>
             </ListItem>

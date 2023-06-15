@@ -97,7 +97,7 @@ export default function Table({ rows, columns, data, title }) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 10,
+              pageSize: isMobile ? 6 : 10,
             },
           },
         }}

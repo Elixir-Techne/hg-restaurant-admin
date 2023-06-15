@@ -129,12 +129,12 @@ export default function Menu() {
     <Card
       sx={{
         height: '90%',
-        maxWidth: `calc( 100vw - 31vw)`,
+        maxWidth: isMobile ? `calc( 100vw - 10vw)` : `calc( 100vw - 31vw)`,
         borderRadius: '20px',
         filter: 'drop-shadow(0px 5px 12.5px rgba(82,87,93,0.1 ))',
         boxShadow: 'none',
         background: '#ffffff',
-        paddingX: theme.spacing(9),
+        // paddingX: theme.spacing(9),
         paddingTop: theme.spacing(3.5),
         margin: `${theme.spacing(10)} auto`,
       }}
