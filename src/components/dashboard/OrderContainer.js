@@ -86,7 +86,12 @@ const StyledBoldTitle = styled(Typography)({
   fontSize: '18px',
   fontWeight: 'bold',
 })
-
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  color: '#3C49FF',
+  '& .MuiCardHeader-title': {
+    fontWeight: 'bold',
+  },
+}))
 function OrderContainer({ ordersDetail, orderStatus }) {
   const OrderCardData = [
     {
@@ -120,7 +125,7 @@ function OrderContainer({ ordersDetail, orderStatus }) {
 
   return (
     <StyledCard>
-      <CardHeader title="Order in process" sx={{ color: '#3C49FF' }} />
+      <StyledCardHeader title="Order in process" />
       <Divider variant="middle" />
       <CardContent>
         <Box display="flex" gap="1vw" sx={{ margin: '0 2.5rem' }}>

@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 import Image from 'next/image'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import OrderImage from '../../../public/images/burger.png'
@@ -91,15 +92,24 @@ const OrderCardData = [
 ]
 
 function OrderCountCard() {
+  const [selected, setselected] = useState('')
   return (
     <StyledCard>
       <CardHeader
         title={
           <Box display="flex" justifyContent="space-between">
-            <Typography sx={{ color: '#3C49FF' }} variant="h5">
+            <Typography
+              sx={{ color: '#3C49FF', fontWeight: 'bold' }}
+              variant="h5"
+            >
               Orders
             </Typography>
-            <ToggleButtons label1="Least" label2="Most" />
+            <ToggleButtons
+              label1="Least"
+              label2="Most"
+              selected={selected}
+              setselected={setselected}
+            />
           </Box>
         }
       ></CardHeader>

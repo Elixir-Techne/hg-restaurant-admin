@@ -10,7 +10,7 @@ import RevenueCard from '@/components/dashboard/RevenueCard'
 import StatusCard from '@/components/dashboard/StatusCard'
 
 export default function Dashboard() {
-  const [orderStatus, setOrderStatus] = useState('Pending')
+  const [orderStatus, setOrderStatus] = useState('Today')
   const tabs = [
     { id: 1, name: 'Today' },
     { id: 2, name: 'This week' },
@@ -163,7 +163,7 @@ export default function Dashboard() {
       <Grid container spacing={4} px={8}>
         <Grid container item spacing={2}>
           <Grid item xs={12} md={8} spacing={4}>
-            <RevenueCard />
+            <RevenueCard orderStatus={orderStatus} />
           </Grid>
           <Grid item xs={12} md={4} spacing={4}>
             <OrderCountCard />

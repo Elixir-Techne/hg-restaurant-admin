@@ -70,7 +70,6 @@ function Form() {
 
   const { control, register, handleSubmit, formState } = useForm()
   const error = formState.errors
-  console.log(selectedFile)
   const handleImageClick = () => {
     fileInputRef.current.click() // Trigger click on the hidden file input element
   }
@@ -91,10 +90,9 @@ function Form() {
   return (
     <Box
       sx={{
+        height: '100%',
         padding: '1rem',
-        '@media (max-width:899px)': {
-          padding: '0.5rem',
-        },
+        overflowY: 'auto',
       }}
     >
       <Grid container spacing={4} display="flex" gap={10} xs={12}>

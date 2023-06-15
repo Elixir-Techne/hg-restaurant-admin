@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import styled from 'styled-components'
 
 import Table from '@/components/Table'
 import ToggleButtons from '@/components/ToogleButton'
@@ -19,19 +20,25 @@ import { theme } from '@/theme'
 
 import { deleteWaiter, getWaiter } from '../../../utils/api'
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-]
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  color: '#3C49FF',
+  '& .MuiCardHeader-title': {
+    fontWeight: 'bold',
+  },
+}))
 
 export default function Waiter() {
+  const rows = [
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  ]
   const isMobile = useMediaQuery('(max-width:768px)')
   const route = useRouter()
   const columns = [
@@ -46,12 +53,12 @@ export default function Waiter() {
     {
       field: 'firstName',
       headerName: 'Name',
-      flex: 1,
+      width: 150,
     },
     {
       field: 'lastName',
       headerName: 'Waiter ID',
-      flex: 1,
+      width: 150,
     },
 
     ...(isMobile
@@ -118,17 +125,18 @@ export default function Waiter() {
   return (
     <Card
       sx={{
-        maxHeight: '874px',
+        height: '90%',
+        maxWidth: `calc( 100vw - 31vw)`,
         borderRadius: '20px',
         filter: 'drop-shadow(0px 5px 12.5px rgba(82,87,93,0.1 ))',
         boxShadow: 'none',
         background: '#ffffff',
-        margin: theme.spacing(10),
+        margin: `${theme.spacing(10)} auto`,
         paddingX: theme.spacing(9),
         paddingTop: theme.spacing(3.5),
       }}
     >
-      <CardHeader title="Waiters" sx={{ color: '#3C49FF' }} />
+      <StyledCardHeader title="Waiters" />
       <Divider variant="middle" />
       <CardContent>
         <Box display="flex" justifyContent="flex-end">
@@ -140,7 +148,7 @@ export default function Waiter() {
             + Add new
           </Button>
         </Box>
-        <Table rows={rows} columns={columns} />
+        <Table rows={rows} columns={columns} title="waiter" />
       </CardContent>
     </Card>
   )

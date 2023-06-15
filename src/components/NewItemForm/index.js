@@ -8,6 +8,11 @@ const StyledForm = styled(Box)({
   background: '#FDFDFD',
   filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
   borderRadius: '21px',
+  paddingBottom: '3px',
+  height: '90%',
+  '@media (max-height:725px)': {
+    height: '85%',
+  },
 })
 
 function ItemForm({ title }) {

@@ -43,7 +43,7 @@ function CustomPagination(props) {
   return <GridPagination ActionsComponent={Cpagination} {...props} />
 }
 
-export default function Table({ rows, columns, data }) {
+export default function Table({ rows, columns, data, title }) {
   const router = useRouter()
   const isMobile = useMediaQuery('(max-width:768px)')
 
@@ -82,7 +82,10 @@ export default function Table({ rows, columns, data }) {
                   sortable: false,
                   width: 160,
                   renderCell: ({ api, row }) => (
-                    <ColumnActionButton selected={api.isRowSelected(row.id)} />
+                    <ColumnActionButton
+                      selected={api.isRowSelected(row.id)}
+                      title={title}
+                    />
                   ),
                 },
               ]),
@@ -94,7 +97,7 @@ export default function Table({ rows, columns, data }) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
