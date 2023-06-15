@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
+
 import Sidebar from '@/components/Sidebar'
 
 export default function Home() {
