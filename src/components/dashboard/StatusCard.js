@@ -7,10 +7,12 @@ import {
   Typography,
 } from '@mui/material'
 import Image from 'next/image'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import { theme } from '@/theme'
 
+import downIcon from '../../assets/icons/down.svg'
 import upIcon from '../../assets/icons/upArrow.svg'
 import ToggleButtons from '../ToogleButton'
 
@@ -23,35 +25,45 @@ const StyledCard = styled(Card)({
   marginBottom: theme.spacing(5),
 })
 
-const data = [
-  {
-    id: 1,
-    cardTitle: 'Orders',
-    label1: 'Cancelled',
-    label2: 'Completed',
-    count: '2,052',
-    precent: '5%',
-  },
-  {
-    id: 2,
-    cardTitle: 'Customers',
-    label1: 'Inside',
-    label2: 'Outside',
-    count: '3,052',
-    precent: '6%',
-  },
-]
-
 function StatusCard() {
+  const [toggle1, settoggle1] = useState('Cancelled')
+  const [toggle2, settoggle2] = useState('Inside')
+  const data = [
+    {
+      id: 1,
+      cardTitle: 'Orders',
+      label1: 'Cancelled',
+      label2: 'Completed',
+      count: '2,052',
+      precent: '5%',
+      callback: (status) => settoggle1(status),
+    },
+    {
+      id: 2,
+      cardTitle: 'Customers',
+      label1: 'Inside',
+      label2: 'Outside',
+      count: '3,052',
+      precent: '6%',
+      callback: (status) => settoggle2(status),
+    },
+  ]
   return data.map((item) => (
     <StyledCard key={item.id}>
       <CardHeader
         title={
           <Box display="flex" justifyContent="space-between">
-            <Typography sx={{ color: '#3C49FF' }} variant="h5">
+            <Typography
+              sx={{ color: '#3C49FF', fontWeight: 'bold' }}
+              variant="h5"
+            >
               {item.cardTitle}
             </Typography>
-            <ToggleButtons label1={item.label1} label2={item.label2} />
+            <ToggleButtons
+              label1={item.label1}
+              label2={item.label2}
+              callback={item.callback}
+            />
           </Box>
         }
       ></CardHeader>
@@ -62,7 +74,12 @@ function StatusCard() {
             {item.count}
           </Typography>
           <Box display="flex" alignItems="center">
-            <Image src={upIcon} alt="" />
+            {toggle1 === item.label1 || toggle2 === item.label1 ? (
+              <Image src={upIcon} alt="" />
+            ) : (
+              <Image src={downIcon} alt="" />
+            )}
+
             <Typography sx={{ color: '#005290', ml: '5px' }} variant="h6">
               {item.precent}
             </Typography>

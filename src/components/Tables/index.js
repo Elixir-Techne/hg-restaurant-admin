@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { deleteTable, tableManagement } from '../../utils/api'
@@ -28,11 +28,11 @@ const StyledTableFilter = styled(Button)({
 })
 
 const Tables = ({ TableDetails }) => {
+  const [insideSittingArea, setInsideSittingArea] = useState(true)
   const route = useRouter()
 
   const tableLargeSitting = []
   const tableMediumSitting = []
-
   TableDetails.forEach((el) => {
     if (el.table_sitting >= 10) {
       tableLargeSitting.push(el)
@@ -42,7 +42,7 @@ const Tables = ({ TableDetails }) => {
   })
 
   const handleTableSide = (event) => {
-    console.log('==', event)
+    setInsideSittingArea(!insideSittingArea)
   }
   const handleNewTable = (e) => {
     e.preventDefault()
@@ -65,7 +65,6 @@ const Tables = ({ TableDetails }) => {
   //     .catch((err) => console.log(err))
   // }, [deleteTable])
 
-  const inside = true
   return (
     <Box
       sx={{
@@ -116,8 +115,8 @@ const Tables = ({ TableDetails }) => {
           <StyledTableFilter
             variant="contained"
             sx={{
-              background: inside ? '#077254' : '#FFFFFF',
-              color: inside ? '#FFFFFF' : '#888888',
+              background: insideSittingArea ? '#077254' : '#FFFFFF',
+              color: insideSittingArea ? '#FFFFFF' : '#888888',
             }}
             onClick={() => handleTableSide('Inside')}
           >
@@ -126,8 +125,8 @@ const Tables = ({ TableDetails }) => {
           <StyledTableFilter
             variant="contained"
             sx={{
-              background: !inside ? '#077254' : '#FFFFFF',
-              color: !inside ? '#FFFFFF' : '#888888',
+              background: !insideSittingArea ? '#077254' : '#FFFFFF',
+              color: !insideSittingArea ? '#FFFFFF' : '#888888',
             }}
             onClick={() => handleTableSide('Outside')}
           >

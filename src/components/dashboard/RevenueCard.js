@@ -23,7 +23,7 @@ const StyledCard = styled(Card)({
   boxShadow: 'none',
 })
 
-function RevenueCard() {
+function RevenueCard({ orderStatus }) {
   useEffect(() => {
     var ctx = document.getElementById('myChart').getContext('2d')
     var myChart = new Chart(ctx, {
@@ -96,22 +96,75 @@ function RevenueCard() {
         title={
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="center" gap="5px">
-              <Typography sx={{ color: '#3C49FF' }} variant="h5">
+              <Typography
+                sx={{
+                  color: '#3C49FF',
+                  fontWeight: 'bold',
+                  '@media (max-width:475px)': {
+                    fontSize: '1.1rem',
+                  },
+                  '@media (max-width:360px)': {
+                    fontSize: '0.8rem',
+                  },
+                }}
+                variant="h5"
+              >
                 Revenue
               </Typography>
-              <InfoOutlinedIcon sx={{ color: '#B3B8BD' }} />
+              <InfoOutlinedIcon
+                sx={{
+                  color: '#B3B8BD',
+                  '@media (max-width:475px)': {
+                    fontSize: 'medium',
+                  },
+                }}
+              />
             </Box>
             <Box display="flex" gap="10px">
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg />
-                <Typography sx={{ color: '#3C49FF' }} variant="h5">
-                  Yesterday
+                <Typography
+                  sx={{
+                    color: '#3C49FF',
+                    '@media (max-width:475px)': {
+                      fontSize: '1.1rem',
+                    },
+                    '@media (max-width:360px)': {
+                      fontSize: '0.8rem',
+                    },
+                  }}
+                  variant="h5"
+                >
+                  {orderStatus === 'Today'
+                    ? 'Yesterday'
+                    : orderStatus === 'This week'
+                    ? 'Last week'
+                    : orderStatus === 'This month'
+                    ? 'Last month'
+                    : 'Before'}
                 </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg selected />
-                <Typography sx={{ color: '#8CA6FB' }} variant="h5">
-                  Today
+                <Typography
+                  sx={{
+                    color: '#8CA6FB',
+                    '@media (max-width:475px)': {
+                      fontSize: '1.1rem',
+                    },
+                    '@media (max-width:360px)': {
+                      fontSize: '0.8rem',
+                    },
+                  }}
+                  variant="h5"
+                >
+                  {orderStatus === 'Today'
+                    ? 'Today'
+                    : orderStatus === 'This week'
+                    ? 'Current week'
+                    : orderStatus === 'This month'
+                    ? 'Current month'
+                    : 'now'}
                 </Typography>
               </Box>
             </Box>

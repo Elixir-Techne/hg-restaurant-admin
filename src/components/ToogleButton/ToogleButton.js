@@ -2,13 +2,17 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import * as React from 'react'
 
-export default function ToggleButtons({ label1, label2, variant }) {
+export default function ToggleButtons({ label1, label2, variant, callback }) {
   const [selected, setselected] = React.useState(label1)
 
   const handleSelection = (event, newAlignment) => {
-    event.stopPropagation()
-    setselected(newAlignment)
+    if (newAlignment) {
+      event.stopPropagation()
+      setselected(newAlignment)
+      if (callback) callback(newAlignment)
+    }
   }
+
   let sx = {
     height: '35px',
     border: '1px solid #067153',

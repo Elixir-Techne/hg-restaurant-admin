@@ -15,6 +15,7 @@ export default function TableManagement() {
       table_image: 'images/fourCircle.png',
       status: 'reserved',
       table_sitting: '4',
+      table_clear: 'no',
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export default function TableManagement() {
       table_image: 'images/twoCircle.png',
       status: 'free',
       table_sitting: '2',
+      table_clear: 'no',
     },
     {
       id: 3,
@@ -29,6 +31,7 @@ export default function TableManagement() {
       table_image: 'images/4square.png',
       status: 'occupied',
       table_sitting: '8',
+      table_clear: 'no',
     },
     {
       id: 4,
@@ -36,6 +39,7 @@ export default function TableManagement() {
       table_image: 'images/16rectangle.png',
       status: 'reserved',
       table_sitting: '16',
+      table_clear: 'no',
     },
     {
       id: 5,
@@ -43,6 +47,7 @@ export default function TableManagement() {
       table_image: 'images/4square.png',
       status: 'free',
       table_sitting: '4',
+      table_clear: 'no',
     },
     {
       id: 6,
@@ -50,6 +55,7 @@ export default function TableManagement() {
       table_image: 'images/fourCircle.png',
       status: 'reserved',
       table_sitting: '4',
+      table_clear: 'no',
     },
     {
       id: 7,
@@ -57,6 +63,7 @@ export default function TableManagement() {
       table_image: 'images/4square.png',
       status: 'occupied',
       table_sitting: '8',
+      table_clear: 'no',
     },
     {
       id: 8,
@@ -64,6 +71,7 @@ export default function TableManagement() {
       table_image: 'images/twoCircle.png',
       status: 'free',
       table_sitting: '2',
+      table_clear: 'no',
     },
     {
       id: 9,
@@ -71,6 +79,7 @@ export default function TableManagement() {
       table_image: 'images/4square.png',
       status: 'occupied',
       table_sitting: '4',
+      table_clear: 'no',
     },
   ]
 

@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from '@mui/material'
 import moment from 'moment'
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { theme } from '@/theme'
@@ -79,6 +79,7 @@ const StyledServedTitle = styled(Typography)({
   textAlign: 'center',
   padding: '2px 25px',
   margin: '0 1rem',
+  cursor: 'pointer',
   '@media (max-width:768px)': {
     fontSize: '0.9rem',
     margin: '0',
@@ -90,6 +91,8 @@ function orderCard({
   orderStatus,
   setOrderCancelled,
   orderCancelled,
+  setOrderData,
+  orderData,
 }) {
   const OrderCardData = [
     {
@@ -117,11 +120,14 @@ function orderCard({
       name: 'Loaded Fries',
     },
   ]
+
   const handleCancelOrder = () => {
-    console.log('order cancel')
     setOrderCancelled(true)
   }
 
+  const handleServed = (id) => {
+    const servedOrder = ordersDetail.find((el) => el.order_id === id)
+  }
   //API for GET orders
 
   // useEffect(() => {
@@ -174,7 +180,7 @@ function orderCard({
           },
         }}
       >
-        {ordersDetail?.map((item, index) => {
+        {orderData?.map((item, index) => {
           return (
             <StyledMainContainer key={index}>
               <Image
@@ -185,6 +191,8 @@ function orderCard({
                   left: '90%',
                   zIndex: 1,
                   cursor: 'pointer',
+                  background: 'white',
+                  borderRadius: '50%',
                 }}
                 onClick={handleCancelOrder}
                 alt="cancel icon"
@@ -192,7 +200,10 @@ function orderCard({
               <StyledSubContainer
                 sx={{
                   border:
-                    item.status === 'in_progress' ? '1px solid #5d6d30' : null,
+                    item.status === 'in_progress'
+                      ? '1.5px solid #5d6d30'
+                      : null,
+                  borderTopRight: 'transparent',
                 }}
               >
                 <Box
@@ -316,7 +327,11 @@ function orderCard({
                       '@media (max-width:768px)': { marginTop: '1rem' },
                     }}
                   >
-                    <StyledServedTitle>Served</StyledServedTitle>
+                    <StyledServedTitle
+                      onClick={() => handleServed(item.order_id)}
+                    >
+                      Served
+                    </StyledServedTitle>
                     <StyledBoldTitle>$190</StyledBoldTitle>
                   </Box>
                 ) : null}

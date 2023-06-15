@@ -113,10 +113,9 @@ function ItemForm({ title }) {
   return (
     <Box
       sx={{
+        height: '100%',
         padding: '1rem',
-        '@media (max-width:899px)': {
-          padding: '0.5rem',
-        },
+        overflowY: 'auto',
       }}
     >
       <Grid
@@ -132,7 +131,20 @@ function ItemForm({ title }) {
           },
         }}
       >
-        <Grid item container md={7} xs={12} sm={12} gap={9}>
+        <Grid
+          item
+          container
+          md={7}
+          xs={12}
+          sm={12}
+          gap={9}
+          sx={{
+            gap: {
+              xs: 2, // Gap value for xs breakpoint
+              md: 8, // Gap value for md breakpoint
+            },
+          }}
+        >
           <Grid xs={12}>
             <Controller
               name="category"
@@ -324,6 +336,11 @@ function ItemForm({ title }) {
                 '@media (max-width: 524px)': {
                   height: '164px',
                   width: '265px',
+                  margin: '0 auto',
+                },
+                '@media (max-width: 475px)': {
+                  height: '144px',
+                  width: '195px',
                   margin: '0 auto',
                 },
                 '@media (max-width: 375px)': {
