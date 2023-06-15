@@ -1,147 +1,14 @@
 'use client'
 
 import { Typography } from '@mui/material'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import OrderCard from '@/components/OrderCard'
 import TabFilter from '@/components/TabFilter'
+import { OrdersDetailContext } from '@/context/orderDetailContext'
 
 export default function Order() {
-  const ordersDetail = [
-    {
-      order_id: 123,
-      restaurant_id: 456,
-      option_chosen: true,
-      option: {
-        name: 'Extra cheese',
-        price: 2.5,
-      },
-      table_number: 4,
-      menu_id: 789,
-      session_id: 1011,
-      status: 'in_progress',
-      created_at: '2022-02-17T08:34:56Z',
-      updated_at: '2022-02-17T09:21:43Z',
-      updated_by: 1234,
-    },
-    {
-      order_id: 234,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 235,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 236,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 237,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 238,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 239,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 240,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 241,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-    {
-      order_id: 242,
-      restaurant_id: 456,
-      option_chosen: false,
-      option: null,
-      table_number: 2,
-      menu_id: 345,
-      session_id: 1213,
-      status: 'completed',
-      created_at: '2022-02-16T18:43:12Z',
-      updated_at: '2022-02-16T20:12:05Z',
-      updated_by: 5678,
-    },
-  ]
+  const { ordersDetail } = useContext(OrdersDetailContext)
   const tabs = [
     { id: 1, name: 'Pending' },
     { id: 2, name: 'Served' },
@@ -151,16 +18,16 @@ export default function Order() {
   const [orderStatus, setOrderStatus] = useState('Pending')
   const [orderCancelled, setOrderCancelled] = useState(false)
   const [orderData, setOrderData] = useState(
-    ordersDetail.filter((el) => el.status === 'in_progress'),
+    ordersDetail?.filter((el) => el?.status === 'in_progress'),
   )
 
   const onTabSelect = (newValue) => {
-    const filterOrderData = tabs.find((el) => el.id === newValue)
+    const filterOrderData = tabs?.find((el) => el?.id === newValue)
     setOrderStatus(filterOrderData.name)
     if (filterOrderData.name === 'Pending') {
-      setOrderData(ordersDetail.filter((el) => el.status === 'in_progress'))
+      setOrderData(ordersDetail?.filter((el) => el?.status === 'in_progress'))
     } else if (filterOrderData.name === 'Served') {
-      setOrderData(ordersDetail.filter((el) => el.status === 'completed'))
+      setOrderData(ordersDetail?.filter((el) => el?.status === 'completed'))
     }
   }
   return (

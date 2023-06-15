@@ -3,6 +3,7 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 
+import { OrdersDetailProvider } from '@/context/orderDetailContext'
 import { theme } from '@/theme'
 
 import '../styles/form.css'
@@ -13,7 +14,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body>{children}</body>
+        <body>
+          <OrdersDetailProvider>{children}</OrdersDetailProvider>
+        </body>
       </ThemeProvider>
     </html>
   )
