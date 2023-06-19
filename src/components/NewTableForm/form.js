@@ -88,7 +88,7 @@ const StyledErrorMessage = styled(Typography)({
   fontSize: '0.7rem',
   color: 'red',
   paddingLeft: '0.5rem',
-  position: 'absolute',
+  position: 'fix',
 })
 
 function Form({ title }) {
@@ -96,9 +96,9 @@ function Form({ title }) {
   const fileInputRef = useRef(null)
   const route = useRouter()
   const testingDaa = [
-    { id: 1, name: 'hello' },
-    { id: 2, name: 'world' },
-    { id: 3, name: 'india' },
+    { id: 1, name: 'sector 1' },
+    { id: 2, name: 'sector 2' },
+    { id: 3, name: 'sector 3' },
   ]
   const {
     control,
@@ -255,7 +255,6 @@ function Form({ title }) {
                 name="TotalPerson"
                 control={control}
                 rules={{ required: 'Total person is required' }}
-                defaultValue={0}
                 render={({ field }) => (
                   <TextField
                     {...field}

@@ -19,6 +19,7 @@ import {
   Grid,
   TextField,
   Typography,
+  withStyles,
 } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -55,15 +56,15 @@ const StyledErrorMessage = styled(Typography)({
   fontSize: '0.7rem',
   color: 'red',
   paddingLeft: '0.5rem',
-  position: 'absolute',
+  position: 'fix',
 })
 
 const data = [
-  { id: 1, name: 'Home' },
-  { id: 2, name: 'FAQs' },
-  { id: 3, name: 'Contact' },
-  { id: 4, name: 'Sign up' },
-  { id: 5, name: 'Login' },
+  { id: 1, name: 'Home', url: '/' },
+  { id: 2, name: 'FAQs', url: '/' },
+  { id: 3, name: 'Contact', url: '/support' },
+  { id: 4, name: 'Sign up', url: '/' },
+  { id: 5, name: 'Login', url: '/' },
 ]
 const cardData = [
   {
@@ -127,7 +128,7 @@ const socialProfile = [
 const askedQuestions = [
   {
     id: '01',
-    question: 'How much time doesa it take ?',
+    question: 'How much time does it take ?',
     answer:
       'Lorem ipsum dolor sit consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore mangna aliquaveniam.',
   },
@@ -167,10 +168,15 @@ export default function Support() {
     const socialhandle = socialProfile.find((el) => el.id === id)
     route.push(socialhandle.link)
   }
+  const handleUrl = (id) => {
+    const urlhandle = data.find((el) => el.id === id)
+    route.push(urlhandle.url)
+  }
+
   return (
     <div style={{ backgroundColor: '#F3F2F5', overflow: 'hidden' }}>
-      <div
-        style={{
+      <Box
+        sx={{
           width: '100%',
           backgroundImage: `url(images/support.png)`,
           backgroundColor: '#80DAF1',
@@ -186,21 +192,25 @@ export default function Support() {
             },
           }}
         >
-          <Image
-            src={companyPng}
-            alt=""
-            style={{
-              '@media (max-width:475px)': {
-                width: '180px',
-                height: '150px',
-                margin: '0 auto',
+          <Image src={companyPng} alt="" className="company-logo" />
+
+          <Box
+            display="flex"
+            gap="40px"
+            alignItems="center"
+            sx={{
+              '@media (max-width:575px)': {
+                justifyContent: 'center',
+                overflowX: 'auto',
               },
             }}
-          />
-
-          <Box display="flex" gap="40px" alignItems="center">
+          >
             {data.map((item) => (
-              <Typography sx={{ color: '#077254' }} key={item.id}>
+              <Typography
+                sx={{ color: '#077254', cursor: 'pointer' }}
+                key={item.id}
+                onClick={() => handleUrl(item.id)}
+              >
                 {item.name}
               </Typography>
             ))}
@@ -213,10 +223,17 @@ export default function Support() {
           alignItems="center"
           p={16}
           sx={{
-            width: '50%',
+            width: '45%',
             margin: '0 auto',
-            '@media (max-width:768px)': {
+            '@media (max-width:1440px)': {
+              width: '60%',
+            },
+            '@media (max-width:1024px)': {
+              width: '80%',
+            },
+            '@media (max-width:575px)': {
               width: '100%',
+              paddingTop: '0.5rem',
             },
           }}
         >
@@ -249,7 +266,7 @@ export default function Support() {
             size="small"
           />
         </Box>
-      </div>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -325,15 +342,15 @@ export default function Support() {
                   color: '#3C49FF',
                   fontSize: '2.5rem',
                   fontWeight: 'bold',
-                  '@media (max-width:768px)': {
-                    fontSize: '2rem',
+                  '@media (max-width:1024px)': {
+                    fontSize: '2.1rem',
                   },
                 }}
               >
-                Write Us a
+                Write us a Message
               </Typography>
             </Grid>
-            <Grid item lg={12} xs={6}>
+            {/* <Grid item lg={12} xs={6}>
               <Typography
                 sx={{
                   color: '#3C49FF',
@@ -346,7 +363,7 @@ export default function Support() {
               >
                 Message
               </Typography>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <Typography sx={{ color: '#565872' }}>
                 Lorem ipsum dolor sit consectetur adipiscing elit, sed do
@@ -543,6 +560,13 @@ export default function Support() {
                     expandIcon={<AddIcon fontSize="large" />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    sx={{
+                      '& .MuiAccordionSummary-expandIconWrapper': {
+                        '&.Mui-expanded': {
+                          transform: 'rotate(45deg)',
+                        },
+                      },
+                    }}
                   >
                     <Box display="flex">
                       <Typography

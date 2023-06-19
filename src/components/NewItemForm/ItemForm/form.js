@@ -30,7 +30,7 @@ const StyledErrorMessage = styled(Typography)({
   fontSize: '0.7rem',
   color: 'red',
   paddingLeft: '0.5rem',
-  position: 'absolute',
+  position: 'fix',
 })
 function ItemForm({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)

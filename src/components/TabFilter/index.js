@@ -26,7 +26,7 @@ const StyledTab = styled(Tab)({
     fontSize: '1.3rem',
     background: theme.palette.primary.main,
     borderRadius: '25px',
-    '@media (max-width:510px)': {
+    '@media (max-width:475px)': {
       fontSize: '1.1rem',
     },
     '@media (max-width:325px)': {
@@ -46,8 +46,8 @@ const StyledTab = styled(Tab)({
   },
 })
 
-export default function TabFilter({ tabs, onTabSelect }) {
-  const [activeTab, setActiveTab] = useState(1)
+export default function TabFilter({ tabs, onTabSelect, selectedTab }) {
+  const [activeTab, setActiveTab] = useState(selectedTab?.id)
 
   const handleChange = (event, newValue) => {
     setActiveTab(newValue)

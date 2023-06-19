@@ -11,7 +11,7 @@ import {
   useGridSelector,
 } from '@mui/x-data-grid'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import AscendingSvg from '@/assets/icons/ascendingSvg'
 import CheckboxSvg from '@/assets/icons/checkboxSvg'
@@ -44,6 +44,7 @@ function CustomPagination(props) {
 }
 
 export default function Table({ rows, columns, data, title }) {
+  const [rowData, setRowData] = useState(rows)
   const router = useRouter()
   const isMobile = useMediaQuery('(max-width:768px)')
 
@@ -55,7 +56,7 @@ export default function Table({ rows, columns, data, title }) {
       <DataGrid
         apiRef={apiRef}
         components={{ ColumnMenuSortAscendingIcon: AscendingSvg }}
-        rows={rows}
+        rows={rowData}
         columns={[
           ...(isMobile
             ? []
@@ -85,6 +86,8 @@ export default function Table({ rows, columns, data, title }) {
                     <ColumnActionButton
                       selected={api.isRowSelected(row.id)}
                       title={title}
+                      setRowData={setRowData}
+                      id={row.id}
                     />
                   ),
                 },
@@ -97,7 +100,7 @@ export default function Table({ rows, columns, data, title }) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: isMobile ? 6 : 10,
+              pageSize: 13,
             },
           },
         }}
