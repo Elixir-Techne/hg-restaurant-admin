@@ -55,7 +55,7 @@ const StyledErrorMessage = styled(Typography)({
   fontSize: '0.8rem',
   color: 'red',
   marginLeft: '15%',
-  position: 'absolute',
+  position: 'fix',
   '@media (max-width:375px)': {
     marginLeft: '0',
   },

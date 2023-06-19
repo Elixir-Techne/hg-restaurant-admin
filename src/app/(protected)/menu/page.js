@@ -128,6 +128,7 @@ export default function Menu() {
   return (
     <Card
       sx={{
+        overflowY: 'auto',
         height: '90%',
         maxWidth: isMobile ? `calc( 100vw - 10vw)` : `calc( 100vw - 31vw)`,
         borderRadius: '20px',

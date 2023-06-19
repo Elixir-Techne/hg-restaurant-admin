@@ -83,9 +83,18 @@ function TableSitting({ TableDetails }) {
     route.push('table-management/edit')
   }
   const handleDeleteTable = (id) => {
-    const newData = TableDetails.filter((el) => el.id !== id)
-    setTables(newData)
+    setTables((prev) =>
+      prev.map((table) =>
+        table.id === id
+          ? {
+              ...table,
+              table_clear: 'yes',
+            }
+          : table,
+      ),
+    )
   }
+
   return (
     <Box
       display="flex"
@@ -107,7 +116,7 @@ function TableSitting({ TableDetails }) {
     >
       {tables &&
         tables
-          ?.filter((el) => el.table_clear)
+          ?.filter((el) => el.table_clear === 'no')
           ?.map((item, index) => {
             return (
               <StyledTableBox

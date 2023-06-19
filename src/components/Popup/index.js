@@ -1,11 +1,26 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
 
-export default function PopUp({ setOrderCancelled }) {
+export default function PopUp({
+  setOrderCancelled,
+  setOrderData,
+  cancelledId,
+}) {
   const { control, register, handleSubmit, formState } = useForm()
+  console.log(cancelledId)
   const onSubmit = (data) => {
+    setOrderData((prev) =>
+      prev.map((o) =>
+        o.order_id === cancelledId
+          ? {
+              ...o,
+              status: 'cancelled',
+              cooking_status: 'cancelled',
+            }
+          : o,
+      ),
+    )
     setOrderCancelled(false)
-    console.log(data)
   }
   return (
     <Box

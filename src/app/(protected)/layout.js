@@ -9,7 +9,21 @@ export default function ProtectedLayout({ children }) {
   const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width:768px)')
   return (
-    <Box display="flex" flexDirection={isMobile ? 'column' : 'row'}>
+    <Box
+      display="flex"
+      flexDirection={isMobile ? 'column' : 'row'}
+      sx={{
+        '& ::-webkit-scrollbar': {
+          width: '2px',
+        },
+        '& ::-webkit-scrollbar-track': {
+          background: '#f1f1f1',
+        },
+        '& ::-webkit-scrollbar-thumb': {
+          background: '#D8E3EB',
+        },
+      }}
+    >
       {pathname.includes('sign-up') || pathname.includes('sign-in') ? null : (
         <Sidebar />
       )}
