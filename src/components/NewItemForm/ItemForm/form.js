@@ -5,14 +5,12 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
-  IconButton,
   TextField,
-  TextareaAutosize,
   Typography,
 } from '@mui/material'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -20,7 +18,8 @@ import AddItemIcon from '../../../../public/images/addItemIcon.png'
 import DropDown from '../../../../public/images/dropdown.png'
 import MinusIcon from '../../../../public/images/minusIcon.png'
 import PlusIcon from '../../../../public/images/plusIcon.png'
-import { MenuItem, editMenuItem, postMenuItem } from '../../../utils/api'
+import { rows } from '../../../app/(protected)/menu/page'
+import { OrdersDetailContext } from '../../../context/orderDetailContext'
 
 const StyledImage = styled(Image)({
   margin: '0 0.5rem',
@@ -34,16 +33,10 @@ const StyledErrorMessage = styled(Typography)({
 })
 function ItemForm({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
-  const [selectedFile, setSelectedFile] = useState(null)
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState,
-    setValue,
-    getValues,
-    watch,
-  } = useForm({
+  const [editMenuItem, setEditMenuItem] = useState(null)
+  const { formId } = useContext(OrdersDetailContext)
+  const menuItemId = formId
+  const { control, handleSubmit, formState, setValue, getValues } = useForm({
     defaultValues: {
       bestSelling: true,
       outOfOrder: false,
@@ -65,7 +58,10 @@ function ItemForm({ title }) {
   //     .then((res) => res)
   //     .catch((err) => console.log(err))
   // }, [MenuItem])
-
+  useEffect(() => {
+    const menuDetails = rows.find((el) => el.id === menuItemId)
+    setEditMenuItem(menuDetails)
+  }, [menuItemId])
   const handleImageClick = () => {
     fileInputRef.current.click()
   }
@@ -110,6 +106,8 @@ function ItemForm({ title }) {
       setValue('price', Number(price) - 1)
     }
   }
+
+  console.log(editMenuItem)
   return (
     <Box
       sx={{

@@ -7,7 +7,7 @@ export default function PopUp({
   cancelledId,
 }) {
   const { control, register, handleSubmit, formState } = useForm()
-  console.log(cancelledId)
+
   const onSubmit = (data) => {
     setOrderData((prev) =>
       prev.map((o) =>

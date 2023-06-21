@@ -75,7 +75,24 @@ export default function Table({ rows, columns, data, title }) {
 
           ...columns,
           ...(isMobile
-            ? []
+            ? title === 'menu'
+              ? [
+                  {
+                    field: 'action',
+                    headerName: 'Action',
+                    sortable: false,
+                    width: 160,
+                    renderCell: ({ api, row }) => (
+                      <ColumnActionButton
+                        selected={api.isRowSelected(row.id)}
+                        title={title}
+                        setRowData={setRowData}
+                        id={row.id}
+                      />
+                    ),
+                  },
+                ]
+              : []
             : [
                 {
                   field: 'action',

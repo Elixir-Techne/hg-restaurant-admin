@@ -22,7 +22,7 @@ const StyledCard = styled(Card)({
   background: '#ffffff}',
   height: '189px',
   boxShadow: 'none',
-  marginBottom: theme.spacing(5),
+  marginBottom: `${theme.spacing(5)} !important`,
 })
 
 function StatusCard() {

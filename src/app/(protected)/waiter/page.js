@@ -27,18 +27,18 @@ const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
   },
 }))
 
+export const rows = [
+  { id: 1, waiterId: 'Snow', name: 'Jon', cnicID: 35 },
+  { id: 2, waiterId: 'Lannister', name: 'Cersei', cnicID: 42 },
+  { id: 3, waiterId: 'Lannister', name: 'Jaime', cnicID: 45 },
+  { id: 4, waiterId: 'Stark', name: 'Arya', cnicID: 16 },
+  { id: 5, waiterId: 'Targaryen', name: 'Daenerys', cnicID: null },
+  { id: 6, waiterId: 'Melisandre', name: null, cnicID: 150 },
+  { id: 7, waiterId: 'Clifford', name: 'Ferrara', cnicID: 44 },
+  { id: 8, waiterId: 'Frances', name: 'Rossini', cnicID: 36 },
+  { id: 9, waiterId: 'Roxie', name: 'Harvey', cnicID: 65 },
+]
 export default function Waiter() {
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ]
   const isMobile = useMediaQuery('(max-width:768px)')
   const route = useRouter()
   const columns = [
@@ -51,12 +51,12 @@ export default function Waiter() {
       },
     },
     {
-      field: 'firstName',
+      field: 'name',
       headerName: 'Name',
       width: 150,
     },
     {
-      field: 'lastName',
+      field: 'waiterId',
       headerName: 'Waiter ID',
       width: 150,
     },
@@ -65,7 +65,7 @@ export default function Waiter() {
       ? []
       : [
           {
-            field: 'age',
+            field: 'cnicID',
             headerName: 'ID Card',
             type: 'number',
             flex: 1,
@@ -125,6 +125,7 @@ export default function Waiter() {
   return (
     <Card
       sx={{
+        overflowY: 'auto',
         height: '90%',
         maxWidth: isMobile ? `calc( 100vw - 10vw)` : `calc( 100vw - 31vw)`,
         borderRadius: '20px',

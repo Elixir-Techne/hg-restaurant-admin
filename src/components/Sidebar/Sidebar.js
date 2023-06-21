@@ -27,6 +27,7 @@ import { theme } from '@/theme'
 import companyPng from '../../assets/icons/company.png'
 import MobileMenuSvg from '../../assets/icons/feather-menu.svg'
 import LogoutSvg from '../../assets/icons/logout.svg'
+import { ordersDetail } from '../../context/orderDetailContext'
 
 const StyledDrawer = styled(Drawer)({
   width: '24vw',
@@ -93,7 +94,6 @@ const data = [
   { id: 6, name: 'Support and Contact', icon: ContactSvg, path: '/support' },
 ]
 function Sidebar() {
-  const { ordersDetail } = useContext(OrdersDetailContext)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useMediaQuery('(max-width:768px)')
   const [mobileOpen, setMobileOpen] = useState(false)

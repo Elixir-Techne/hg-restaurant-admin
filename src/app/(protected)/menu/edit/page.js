@@ -5,19 +5,6 @@ import { Box } from '@mui/material'
 import ItemForm from '../../../../components/NewItemForm/index'
 
 export default function EditItem() {
-  const testingCategory = [
-    { id: 1, name: 'veg' },
-    { id: 2, name: 'non-veg' },
-  ]
-  const testingSubCategory = [
-    { id: 1, name: 'salad' },
-    { id: 2, name: 'gujarati' },
-  ]
-  const testingFoodType = [
-    { id: 1, name: 'sweet' },
-    { id: 2, name: 'spicy' },
-  ]
-
   return (
     <Box
       display="flex"

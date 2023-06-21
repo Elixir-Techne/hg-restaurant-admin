@@ -119,9 +119,6 @@ function OrderContainer({ ordersDetail, orderStatus }) {
       name: 'Loaded Fries',
     },
   ]
-  const handleCancelOrder = () => {
-    console.log('order cancel')
-  }
 
   return (
     <StyledCard>

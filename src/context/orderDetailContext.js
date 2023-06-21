@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 export const ordersDetail = [
   {
@@ -148,8 +148,9 @@ export const ordersDetail = [
 export const OrdersDetailContext = createContext(null)
 
 export const OrdersDetailProvider = ({ children }) => {
+  const [formId, setFormId] = useState('')
   return (
-    <OrdersDetailContext.Provider value={{ ordersDetail }}>
+    <OrdersDetailContext.Provider value={{ formId, setFormId }}>
       {children}
     </OrdersDetailContext.Provider>
   )
