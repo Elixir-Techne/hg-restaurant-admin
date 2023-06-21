@@ -6,10 +6,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useEffect, useRef, useState } from 'react'
+import { Title } from 'chart.js'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
+import { OrdersDetailContext } from '@/context/orderDetailContext'
+
+import { rows } from '../../../app/(protected)/waiter/page'
 import '../../../styles/form.css'
 import { waiterForm } from '../../../utils/api'
 
@@ -60,7 +64,7 @@ const StyledErrorMessage = styled(Typography)({
     marginLeft: '0',
   },
 })
-function Form() {
+function Form({ title }) {
   const testingData = [
     { id: 1, name: 'Ahmedabad' },
     { id: 2, name: 'Gandhinagar' },
@@ -70,6 +74,7 @@ function Form() {
 
   const { control, register, handleSubmit, formState } = useForm()
   const error = formState.errors
+
   const handleImageClick = () => {
     fileInputRef.current.click() // Trigger click on the hidden file input element
   }
@@ -87,6 +92,7 @@ function Form() {
     //   .catch((err) => console.log(err))
     console.log(data, '============')
   }
+
   return (
     <Box
       sx={{
@@ -146,7 +152,6 @@ function Form() {
                     onChange(event.target.files[0])
                     handleImageUpload(event)
                   }}
-                  //   style={{ display: 'none' }}
                 />
               )}
             />
@@ -159,7 +164,7 @@ function Form() {
           ) : (
             <Typography
               sx={{
-                color: selectedFile < 2048 ? 'green' : 'red',
+                color: selectedFile < 2548 ? 'green' : 'red',
                 marginLeft: '15%',
               }}
             >
@@ -246,7 +251,7 @@ function Form() {
           }}
           onClick={handleSubmit(onSubmit)}
         >
-          Submit
+          {title === 'Edit Waiter' ? 'Update' : 'Submit'}
         </Button>
       </Box>
     </Box>

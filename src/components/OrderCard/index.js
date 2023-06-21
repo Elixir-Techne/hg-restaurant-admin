@@ -21,7 +21,6 @@ const StyledMainContainer = styled(Box)({
     margin: theme.spacing(4),
   },
   '@media (max-width:768px)': {
-    justifyContent: 'center',
     margin: theme.spacing(3),
   },
   '@media (max-width:425px)': {
@@ -46,8 +45,7 @@ const StyledMainContainer = styled(Box)({
 })
 
 const StyledSubContainer = styled(Box)({
-  flex: 1,
-  maxWidth: '255px',
+  width: '242px',
   height: '355px',
   marginTop: '14px',
   position: 'relative',
@@ -58,7 +56,7 @@ const StyledSubContainer = styled(Box)({
     margin: `${theme.spacing(1.5)} ${theme.spacing(0.55)}`,
   },
   '@media (max-width:768px)': {
-    width: '168px',
+    width: '172px',
     height: '286px',
   },
   '@media (max-width:375px)': {
@@ -144,7 +142,6 @@ function orderCard({
   ]
 
   const handleCancelOrder = (id) => {
-    console.log(id)
     setCancelledId(id)
     setOrderCancelled(true)
   }
@@ -310,12 +307,12 @@ function orderCard({
                   height:
                     item.cooking_status === 'completed' ? '165px' : '225px',
                   // height: '165px',
-                  maxWidth: '252px',
+                  width: '239px',
                   flexDirection: 'column ',
                   '@media (max-width:768px)': {
                     height:
                       item.cooking_status === 'completed' ? '118px' : '176px',
-                    maxWidth: '252px',
+                    width: '168px',
                   },
                 }}
               >

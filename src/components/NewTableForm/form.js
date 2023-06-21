@@ -1,11 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Autocomplete,
   Box,
   Button,
   FormControlLabel,
   Grid,
-  Hidden,
-  IconButton,
   Switch,
   TextField,
   Typography,
@@ -15,21 +14,50 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import dayjs from 'dayjs'
-import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller, set, useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import * as yup from 'yup'
 
-import DropDown from '../../../public/images/dropdown.png'
 import MinusIcon from '../../../public/images/minusIcon.png'
 import NumberIcon from '../../../public/images/numberIcon.png'
 import PhoneIcon from '../../../public/images/phone.png'
 import PlusIcon from '../../../public/images/plusIcon.png'
 import '../../styles/form.css'
-import { editTableForm, getTableForm, postTableForm } from '../../utils/api'
 
+const schema = yup
+  .object()
+  .shape({
+    sector: yup.object().required(),
+    TableNumber: yup.number().required(),
+    TotalPerson: yup.number().required(),
+    MobileNumber: yup.number().when('reserved', {
+      is: false,
+      then: () => yup.number().required('Mobile Number is required'),
+      otherwise: () => yup.string(),
+    }),
+    personName: yup.string().when('reserved', {
+      is: false,
+      then: () => yup.string().required('Person Name is required'),
+      otherwise: () => yup.string(),
+    }),
+    date: yup.string().when('reserved', {
+      is: false,
+      then: () => yup.string().required('Date is required'),
+      otherwise: () => yup.string(),
+    }),
+    image: yup.object().when('reserved', {
+      is: false,
+      then: () => yup.object().required('Image is required'),
+      otherwise: () => yup.string(),
+    }),
+    reserved: yup.boolean().required(),
+    occupied: yup.boolean().required(),
+    vip: yup.boolean().required(),
+  })
+  .required()
 const ToogleButton = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -85,7 +113,7 @@ const StyledImage = styled(Image)({
 })
 
 const StyledErrorMessage = styled(Typography)({
-  fontSize: '0.7rem',
+  fontSize: '0.8rem',
   color: 'red',
   paddingLeft: '0.5rem',
   position: 'fix',
@@ -96,19 +124,19 @@ function Form({ title }) {
   const fileInputRef = useRef(null)
   const route = useRouter()
   const testingDaa = [
-    { id: 1, name: 'sector 1' },
-    { id: 2, name: 'sector 2' },
-    { id: 3, name: 'sector 3' },
+    { id: 1, name: 'inside' },
+    { id: 2, name: 'outside' },
   ]
   const {
     control,
     register,
     handleSubmit,
-    errors,
-    formState,
+    formState: { errors },
+    watch,
     setValue,
     getValues,
   } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       vip: true,
       reserved: false,
@@ -116,8 +144,8 @@ function Form({ title }) {
     },
   })
 
-  const error = formState.errors
-
+  // const error = formState.errors
+  // watch(['reserved', 'occupied', 'vip'])
   //API get form
 
   // useEffect(() => {
@@ -212,9 +240,7 @@ function Form({ title }) {
                 />
               )}
             />
-            {error?.sector?.type === 'required' ? (
-              <StyledErrorMessage>{error?.sector?.message}</StyledErrorMessage>
-            ) : null}
+            <StyledErrorMessage>{errors.sector?.message}</StyledErrorMessage>
           </Grid>
           <Grid xs={12} item>
             <Controller
@@ -238,11 +264,9 @@ function Form({ title }) {
                 />
               )}
             />
-            {error?.TableNumber?.type === 'required' ? (
-              <StyledErrorMessage>
-                {error?.TableNumber?.message}
-              </StyledErrorMessage>
-            ) : null}
+            <StyledErrorMessage>
+              {errors.TableNumber?.message}
+            </StyledErrorMessage>
           </Grid>
           <Grid xs={12} item>
             <Box display="flex">
@@ -269,11 +293,9 @@ function Form({ title }) {
               />
               <StyledImage src={PlusIcon} alt="add" onClick={handleIncrement} />
             </Box>
-            {error?.TotalPerson?.type === 'required' ? (
-              <StyledErrorMessage>
-                {error?.TotalPerson?.message}
-              </StyledErrorMessage>
-            ) : null}
+            <StyledErrorMessage>
+              {errors.TotalPerson?.message}
+            </StyledErrorMessage>
           </Grid>
           <Grid
             xs={12}
@@ -320,8 +342,6 @@ function Form({ title }) {
                 />
               )}
             />
-
-            {/* </Box> */}
           </Grid>
           <Grid xs={12} item>
             <Controller
@@ -342,11 +362,9 @@ function Form({ title }) {
                 />
               )}
             />
-            {error?.personName?.type === 'required' ? (
-              <StyledErrorMessage>
-                {error?.personName?.message}
-              </StyledErrorMessage>
-            ) : null}
+            <StyledErrorMessage>
+              {errors.personName?.message}
+            </StyledErrorMessage>
           </Grid>
           <Grid item container sx={12} spacing={6}>
             <Grid xs={6} item>
@@ -380,10 +398,7 @@ function Form({ title }) {
                   </LocalizationProvider>
                 )}
               />
-
-              {error?.date?.type === 'required' ? (
-                <StyledErrorMessage>{error?.date?.message}</StyledErrorMessage>
-              ) : null}
+              <StyledErrorMessage>{errors.date?.message}</StyledErrorMessage>
             </Grid>
             <Grid xs={6} item>
               <Controller
@@ -404,11 +419,9 @@ function Form({ title }) {
                   />
                 )}
               />
-              {error?.MobileNumber?.type === 'required' ? (
-                <StyledErrorMessage>
-                  {error?.MobileNumber?.message}
-                </StyledErrorMessage>
-              ) : null}
+              <StyledErrorMessage>
+                {errors.MobileNumber?.message}
+              </StyledErrorMessage>
             </Grid>
           </Grid>
         </Grid>
@@ -483,9 +496,7 @@ function Form({ title }) {
               )}
             />
           </Box>
-          {error?.image?.type === 'required' ? (
-            <StyledErrorMessage>{error?.image?.message}</StyledErrorMessage>
-          ) : null}
+          <StyledErrorMessage>{errors.image?.message}</StyledErrorMessage>
         </Grid>
       </Grid>
       {title === 'Edit Table' ? (
