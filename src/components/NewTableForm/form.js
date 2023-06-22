@@ -182,6 +182,7 @@ function Form({ title }) {
       //   .catch((err) => console.log(err))
     }
     console.log(data, '============')
+    route.push('/table-management')
   }
   const handleCancel = () => {
     route.push('/table-management')

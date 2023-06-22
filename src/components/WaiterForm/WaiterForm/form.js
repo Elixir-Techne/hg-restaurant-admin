@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 import { Title } from 'chart.js'
+import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -71,7 +72,7 @@ function Form({ title }) {
   ]
   const fileInputRef = useRef(null)
   const [selectedFile, setSelectedFile] = useState(null)
-
+  const route = useRouter()
   const { control, register, handleSubmit, formState } = useForm()
   const error = formState.errors
 
@@ -91,6 +92,10 @@ function Form({ title }) {
     //   .then((res) => res)
     //   .catch((err) => console.log(err))
     console.log(data, '============')
+    route.push('/waiter')
+  }
+  const handleCancel = () => {
+    route.push('/waiter')
   }
 
   return (
@@ -235,25 +240,72 @@ function Form({ title }) {
           ) : null}
         </Grid>
       </Grid>
-      <Box display="flex" justifyContent="center">
-        <Button
-          variant="contained"
-          sx={{
-            marginTop: '2rem',
-            fontSize: '1.6rem',
-            borderRadius: '20px',
-            alignSelf: 'flex-end',
-            padding: '0 2rem',
-            textTransform: 'inherit',
-            '@media (max-width: 899px)': {
-              fontSize: '1.5rem',
-            },
-          }}
-          onClick={handleSubmit(onSubmit)}
-        >
-          {title === 'Edit Waiter' ? 'Update' : 'Submit'}
-        </Button>
-      </Box>
+      {title === 'Edit Waiter' ? (
+        <Box display="flex" justifyContent="center">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              marginRight: '0.5rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Update
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              backgroundColor: '#A7A7AA',
+              '@media (max-width: 1024px)': {
+                fontSize: '1.3rem',
+              },
+              '@media (max-width: 899px)': {
+                fontSize: '1.2rem',
+              },
+            }}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+        </Box>
+      ) : (
+        <Box display="flex" justifyContent="center">
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '1rem',
+              fontSize: '1.6rem',
+              borderRadius: '20px',
+              alignSelf: 'flex-end',
+              padding: '0 2rem',
+              textTransform: 'inherit',
+              '@media (max-width: 899px)': {
+                fontSize: '1.5rem',
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Save
+          </Button>
+        </Box>
+      )}
     </Box>
   )
 }

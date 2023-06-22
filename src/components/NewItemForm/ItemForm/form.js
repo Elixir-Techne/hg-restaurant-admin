@@ -90,6 +90,7 @@ function ItemForm({ title }) {
       //   .then((res) => res)
       //   .catch((err) => console.log(err))
     }
+    route.push('/menu')
   }
 
   const handleCancel = () => {
