@@ -106,13 +106,13 @@ const StyledServedTitle = styled(Typography)({
   },
 })
 
-function orderCard({
+const OrderCard = ({
   ordersDetail,
   setOrderCancelled,
   orderCancelled,
   setOrderData,
   orderData,
-}) {
+}) => {
   const [cancelledId, setCancelledId] = useState(' ')
   const OrderCardData = [
     {
@@ -373,4 +373,4 @@ function orderCard({
     )
 }
 
-export default orderCard
+export default OrderCard
