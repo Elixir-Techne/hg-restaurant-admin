@@ -1,3 +1,5 @@
+import React from 'react'
+
 const DeleteSvg = ({ selected }) => {
   return (
     <svg

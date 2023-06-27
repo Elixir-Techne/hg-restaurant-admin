@@ -1,15 +1,17 @@
 'use client'
 
-import { Typography } from '@mui/material'
-import { useContext, useMemo, useState } from 'react'
+import { Box, Typography } from '@mui/material'
+import { useMemo, useState } from 'react'
+import React from 'react'
 
 import OrderCard from '@/components/OrderCard'
 import TabFilter from '@/components/TabFilter'
 import { OrdersDetailContext } from '@/context/orderDetailContext'
 import { ordersDetail } from '@/context/orderDetailContext'
 
+import { UseStyle } from './styles'
+
 export default function Order() {
-  // const { ordersDetail } = useContext(OrdersDetailContext)
   const tabs = [
     { id: 'pending', name: 'Pending' },
     { id: 'served', name: 'Served' },
@@ -20,27 +22,18 @@ export default function Order() {
   const [orderCancelled, setOrderCancelled] = useState(false)
   const [orderData, setOrderData] = useState(ordersDetail)
   const [selectedTab, setSelectedTab] = useState('pending')
-
-  // console.log('🚀 ~ file: page.js:22 ~ Order ~ orderData:', orderData)
+  const classes = UseStyle()
   const served = []
   const onTabSelect = (newValue) => {
     const status = tabs.find((el) => el.id === newValue)
     setOrderStatus(status.name)
     setSelectedTab(newValue)
-    // const filterOrderData = tabs?.find((el) => el?.id === newValue)
-    // setOrderStatus(filterOrderData.name)
-    // if (filterOrderData.name === 'Pending') {
-    //   setOrderData(ordersDetail)
-    // } else if (filterOrderData.name === 'Served') {
-    //   setOrderData(served)
-    // }
   }
   const filteredData = useMemo(
     () =>
       orderData?.filter((el) => el.status === selectedTab?.toLocaleLowerCase()),
     [selectedTab, orderData],
   )
-  // console.log('🚀 ~ file: page.js:42 ~ Order ~ filteredData:', filteredData)
   const sortedData = filteredData.sort((a, b) => {
     if (
       a.cooking_status === 'in_progress' &&
@@ -56,26 +49,14 @@ export default function Order() {
     return 0
   })
   return (
-    <div
-      style={{
-        marginLeft: 'auto',
-        marginBottom: '1.5rem',
-      }}
-    >
+    <Box className={classes.mainContainer}>
       <TabFilter
         tabs={tabs}
         onTabSelect={onTabSelect}
         selectedTab={tabs?.[0]}
       />
       {!orderCancelled ? (
-        <Typography
-          sx={{
-            fontSize: '27px',
-            color: '#3C49FF',
-            fontWeight: 'bold',
-            marginLeft: '3.5rem',
-          }}
-        >
+        <Typography className={classes.orderStatus}>
           {orderStatus} Orders
         </Typography>
       ) : null}
@@ -87,6 +68,6 @@ export default function Order() {
         served={served}
         setOrderData={setOrderData}
       />
-    </div>
+    </Box>
   )
 }

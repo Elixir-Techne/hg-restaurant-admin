@@ -1,3 +1,5 @@
+import React from 'react'
+
 const ContactSvg = ({ selected }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="37.605" height="28.204">

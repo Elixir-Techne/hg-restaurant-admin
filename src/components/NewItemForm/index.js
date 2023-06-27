@@ -1,37 +1,16 @@
 import { Box, Divider, Typography } from '@mui/material'
-import styled from 'styled-components'
+import React from 'react'
 
 import Form from './ItemForm/form'
-
-const StyledForm = styled(Box)({
-  margin: '2rem 1.5rem',
-  background: '#FDFDFD',
-  filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-  borderRadius: '21px',
-  paddingBottom: '3px',
-  height: '90%',
-  '@media (max-height:725px)': {
-    height: '85%',
-  },
-})
+import { StyledForm, UseStyleFormBox } from './styles'
 
 function ItemForm({ title }) {
+  const classes = UseStyleFormBox()
   return (
-    <Box
-      sx={{
-        padding: '1rem',
-        width: '100%',
-        height: '100%',
-        '@media (max-width:768px)': { padding: '0.5rem' },
-      }}
-    >
+    <Box className={classes.mainContainer}>
       <Box>
-        <Typography
-          sx={{ fontSize: '24px', color: '#3C49FF', fontWeight: 'bold' }}
-        >
-          {title}
-        </Typography>
-        <Divider sx={{ width: '100%', height: '5px' }} />
+        <Typography className={classes.title}>{title}</Typography>
+        <Divider className={classes.divider} />
       </Box>
       <StyledForm>
         <Form title={title} />

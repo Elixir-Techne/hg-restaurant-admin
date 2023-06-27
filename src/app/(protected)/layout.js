@@ -2,45 +2,28 @@
 
 import { Box, useMediaQuery } from '@mui/material'
 import { usePathname } from 'next/navigation'
+import React from 'react'
 
 import Sidebar from '@/components/Sidebar'
+
+import { UseStyle } from './styles'
 
 export default function ProtectedLayout({ children }) {
   const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width:768px)')
+  const classes = UseStyle()
   return (
     <Box
-      display="flex"
+      className={classes.mainContainer}
       flexDirection={isMobile ? 'column' : 'row'}
-      sx={{
-        '& ::-webkit-scrollbar': {
-          width: '2px',
-        },
-        '& ::-webkit-scrollbar-track': {
-          background: '#f1f1f1',
-        },
-        '& ::-webkit-scrollbar-thumb': {
-          background: '#D8E3EB',
-        },
-      }}
     >
       {pathname.includes('sign-up') || pathname.includes('sign-in') ? null : (
         <Sidebar />
       )}
-      <div
-        style={{
-          width: '100%',
-          height: '100vh',
-          overflowY: 'auto',
-          backgroundImage: `url(images/lightBgImage.png)`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'right',
-        }}
-      >
+      <Box className={classes.subContainer}>
         {isMobile && <div style={{ height: '50px' }}></div>}
         {children}
-      </div>
+      </Box>
     </Box>
   )
 }

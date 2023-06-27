@@ -6,31 +6,19 @@ import {
   FormControlLabel,
   Grid,
   TextField,
-  Typography,
 } from '@mui/material'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
+import React from 'react'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import styled from 'styled-components'
 
 import AddItemIcon from '../../../../public/images/addItemIcon.png'
-import DropDown from '../../../../public/images/dropdown.png'
-import MinusIcon from '../../../../public/images/minusIcon.png'
 import PlusIcon from '../../../../public/images/plusIcon.png'
 import { rows } from '../../../app/(protected)/menu/page'
 import { OrdersDetailContext } from '../../../context/orderDetailContext'
+import { StyledErrorMessage, StyledImage, UseStyleForm } from '../styles'
 
-const StyledImage = styled(Image)({
-  margin: '0 0.5rem',
-  cursor: 'pointer',
-})
-const StyledErrorMessage = styled(Typography)({
-  fontSize: '0.7rem',
-  color: 'red',
-  paddingLeft: '0.5rem',
-  position: 'fix',
-})
 function ItemForm({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [editMenuItem, setEditMenuItem] = useState(null)
@@ -46,6 +34,7 @@ function ItemForm({ title }) {
   const route = useRouter()
   const pathname = usePathname()
   const error = formState?.errors
+  const classes = UseStyleForm()
   const testingCategory = [
     { id: 1, name: 'veg' },
     { id: 2, name: 'non-veg' },
@@ -110,26 +99,8 @@ function ItemForm({ title }) {
 
   console.log(editMenuItem)
   return (
-    <Box
-      sx={{
-        height: '100%',
-        padding: '1rem',
-        overflowY: 'auto',
-      }}
-    >
-      <Grid
-        container
-        spacing={4}
-        display="flex"
-        sx={{
-          '@media (max-width: 899px)': {
-            flexDirection: 'column-reverse',
-          },
-          '@media (max-width: 768px)': {
-            flexDirection: 'column-reverse',
-          },
-        }}
-      >
+    <Box className={classes.mainContainer}>
+      <Grid container spacing={4} display="flex" className={classes.grid}>
         <Grid
           item
           container
@@ -139,8 +110,8 @@ function ItemForm({ title }) {
           gap={9}
           sx={{
             gap: {
-              xs: 2, // Gap value for xs breakpoint
-              md: 8, // Gap value for md breakpoint
+              xs: 2,
+              md: 8,
             },
           }}
         >
@@ -155,10 +126,7 @@ function ItemForm({ title }) {
                   options={testingCategory}
                   getOptionLabel={(option) => option.name}
                   onChange={(event, newValue) => field.onChange(newValue)}
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.background}
                   renderInput={(params) => (
                     <TextField {...params} placeholder="choose Category" />
                   )}
@@ -182,10 +150,7 @@ function ItemForm({ title }) {
                   options={testingCategory}
                   getOptionLabel={(option) => option.name}
                   onChange={(event, newValue) => field.onChange(newValue)}
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.background}
                   renderInput={(params) => (
                     <TextField {...params} placeholder="choose Sub Category" />
                   )}
@@ -209,10 +174,7 @@ function ItemForm({ title }) {
                   options={testingCategory}
                   getOptionLabel={(option) => option.name}
                   onChange={(event, newValue) => field.onChange(newValue)}
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.background}
                   renderInput={(params) => (
                     <TextField {...params} placeholder="choose Food Type" />
                   )}
@@ -233,12 +195,9 @@ function ItemForm({ title }) {
               render={({ field }) => (
                 <TextField
                   {...field}
+                  fullWidth
                   placeholder="Item Name"
-                  sx={{
-                    width: '100%',
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.background}
                 />
               )}
             />
@@ -257,14 +216,7 @@ function ItemForm({ title }) {
                 <TextField
                   {...field}
                   fullWidth
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                    height: '165px',
-                    '@media (max-width:899px)': {
-                      height: '125px',
-                    },
-                  }}
+                  className={classes.textArea}
                   placeholder="Description and Add ons"
                 />
               )}
@@ -316,57 +268,14 @@ function ItemForm({ title }) {
           flexDirection="column"
         >
           <Grid xs={12}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '90%',
-                width: '100%',
-                filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-                background: '#ffffff',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                '@media (max-width: 899px)': {
-                  height: '188px',
-                  width: '350px',
-                  margin: '0 auto',
-                },
-                '@media (max-width: 524px)': {
-                  height: '164px',
-                  width: '265px',
-                  margin: '0 auto',
-                },
-                '@media (max-width: 475px)': {
-                  height: '144px',
-                  width: '195px',
-                  margin: '0 auto',
-                },
-                '@media (max-width: 375px)': {
-                  height: '164px',
-                  width: '210px',
-                  margin: '0 auto',
-                },
-              }}
-              onClick={handleImageClick}
-            >
+            <Box className={classes.imageBox} onClick={handleImageClick}>
               {!selectedImage && <Image src={AddItemIcon} alt="addIcon" />}
               {selectedImage && (
-                <Box
-                  sx={{
-                    margin: '0 auto',
-                    width: '90%',
-                    height: '90%',
-                  }}
-                >
+                <Box className={classes.imageField}>
                   <img
                     src={selectedImage}
                     alt="Selected"
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'contain',
-                    }}
+                    className={classes.image}
                   />
                 </Box>
               )}
@@ -385,7 +294,7 @@ function ItemForm({ title }) {
                       onChange(event.target.files[0])
                       handleImageUpload(event)
                     }}
-                    style={{ display: 'none' }}
+                    className={classes.inputField}
                   />
                 )}
               />
@@ -395,18 +304,7 @@ function ItemForm({ title }) {
             ) : null}
           </Grid>
           <Grid xs={12} justifyContent="center">
-            <Box
-              display="flex"
-              margin="0 auto"
-              sx={{
-                '@media (max-width: 899px)': {
-                  width: '70%',
-                },
-                '@media (max-width: 768px)': {
-                  width: '60%',
-                },
-              }}
-            >
+            <Box className={classes.totalPeopleContainer}>
               <StyledImage
                 src={MinusIcon}
                 alt="minus"
@@ -416,17 +314,13 @@ function ItemForm({ title }) {
                 name="price"
                 control={control}
                 rules={{ required: 'Price is required' }}
-                // defaultValue={0}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     fullWidth
                     placeholder="Total Price"
                     size="small"
-                    sx={{
-                      background: '#F5F6FA',
-                      borderRadius: '17px',
-                    }}
+                    className={classes.background}
                   />
                 )}
               />
@@ -442,42 +336,14 @@ function ItemForm({ title }) {
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              marginRight: '0.5rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              '@media (max-width: 1024px)': {
-                fontSize: '1.3rem',
-              },
-              '@media (max-width: 899px)': {
-                fontSize: '1.2rem',
-              },
-            }}
+            className={classes.updateButton}
             onClick={handleSubmit(onSubmit)}
           >
             Update
           </Button>
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              backgroundColor: '#A7A7AA',
-              '@media (max-width: 1024px)': {
-                fontSize: '1.3rem',
-              },
-              '@media (max-width: 899px)': {
-                fontSize: '1.2rem',
-              },
-            }}
+            className={classes.cancelButton}
             onClick={handleCancel}
           >
             Cancel
@@ -487,17 +353,7 @@ function ItemForm({ title }) {
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              '@media (max-width: 899px)': {
-                fontSize: '1.5rem',
-              },
-            }}
+            className={classes.saveButton}
             onClick={handleSubmit(onSubmit)}
           >
             Save

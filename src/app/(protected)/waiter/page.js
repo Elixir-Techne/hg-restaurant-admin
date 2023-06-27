@@ -11,14 +11,14 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Table from '@/components/Table'
 import ToggleButtons from '@/components/ToogleButton'
-import { theme } from '@/theme'
 
 import { deleteWaiter, getWaiter } from '../../../utils/api'
+import { UseStylewaiterTable } from './styles'
 
 const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
   color: '#3C49FF',
@@ -41,6 +41,7 @@ export const rows = [
 export default function Waiter() {
   const isMobile = useMediaQuery('(max-width:768px)')
   const route = useRouter()
+  const classes = UseStylewaiterTable()
   const columns = [
     {
       field: 'id',
@@ -124,17 +125,9 @@ export default function Waiter() {
   // }, [deleteWaiter])
   return (
     <Card
+      className={classes.mainContainer}
       sx={{
-        overflowY: 'auto',
-        height: '90%',
         maxWidth: isMobile ? `calc( 100vw - 10vw)` : `calc( 100vw - 31vw)`,
-        borderRadius: '20px',
-        filter: 'drop-shadow(0px 5px 12.5px rgba(82,87,93,0.1 ))',
-        boxShadow: 'none',
-        background: '#ffffff',
-        margin: `${theme.spacing(10)} auto`,
-        // paddingX: theme.spacing(9),
-        paddingTop: theme.spacing(3.5),
       }}
     >
       <StyledCardHeader title="Waiters" />
@@ -144,7 +137,7 @@ export default function Waiter() {
           <Button
             variant="contained"
             onClick={handleWaiter}
-            sx={{ borderRadius: '25px', margin: (theme) => theme.spacing(2) }}
+            className={classes.addButton}
           >
             + Add new
           </Button>

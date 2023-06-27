@@ -1,3 +1,4 @@
+import { ClassNames } from '@emotion/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Autocomplete,
@@ -14,11 +15,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import dayjs from 'dayjs'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 import { useRef, useState } from 'react'
 import { Controller, set, useForm } from 'react-hook-form'
-import styled from 'styled-components'
 import * as yup from 'yup'
 
 import MinusIcon from '../../../public/images/minusIcon.png'
@@ -26,6 +26,12 @@ import NumberIcon from '../../../public/images/numberIcon.png'
 import PhoneIcon from '../../../public/images/phone.png'
 import PlusIcon from '../../../public/images/plusIcon.png'
 import '../../styles/form.css'
+import {
+  StyledErrorMessage,
+  StyledImage,
+  ToogleButton,
+  UseStyleTableForm,
+} from './styles'
 
 const schema = yup
   .object()
@@ -58,66 +64,6 @@ const schema = yup
     vip: yup.boolean().required(),
   })
   .required()
-const ToogleButton = styled((props) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-  fontSize: '1.5rem',
-  width: 42,
-  height: 26,
-  padding: 0,
-  '@media (max-width:768px)': {
-    width: 34,
-    height: 20,
-  },
-  '& .MuiSwitch-switchBase': {
-    padding: 0,
-    margin: 2,
-    transitionDuration: '300ms',
-    '&.Mui-checked': {
-      transform: 'translateX(1rem)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        opacity: 1,
-        border: 0,
-      },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: 0.5,
-      },
-    },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
-    },
-    '&.Mui-disabled .MuiSwitch-thumb': {
-      color: 'red',
-    },
-  },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
-    width: 22,
-    height: 22,
-    '@media (max-width:768px)': {
-      width: 16,
-      height: 16,
-    },
-  },
-  '& .MuiSwitch-track': {
-    borderRadius: 26 / 2,
-    opacity: 1,
-  },
-}))
-
-const StyledImage = styled(Image)({
-  margin: '0.5rem',
-  cursor: 'pointer',
-})
-
-const StyledErrorMessage = styled(Typography)({
-  fontSize: '0.8rem',
-  color: 'red',
-  paddingLeft: '0.5rem',
-  position: 'fix',
-})
 
 function Form({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -143,6 +89,7 @@ function Form({ title }) {
       occupied: false,
     },
   })
+  const classes = UseStyleTableForm()
 
   // const error = formState.errors
   // watch(['reserved', 'occupied', 'vip'])
@@ -199,25 +146,12 @@ function Form({ title }) {
   }
 
   return (
-    <Box
-      sx={{
-        height: '100%',
-        padding: '1rem',
-        overflowY: 'auto',
-      }}
-    >
+    <Box className={classes.mainContainer}>
       <Grid
         container
         spacing={4}
         display="flex"
-        sx={{
-          '@media (max-width: 899px)': {
-            flexDirection: 'column-reverse',
-          },
-          '@media (max-width: 768px)': {
-            flexDirection: 'column-reverse',
-          },
-        }}
+        className={classes.gridContainer}
       >
         <Grid item container md={7} xs={12} sm={12} gap={8}>
           <Grid xs={12} item>
@@ -231,10 +165,7 @@ function Form({ title }) {
                   options={testingDaa}
                   getOptionLabel={(option) => option.name}
                   onChange={(event, newValue) => field.onChange(newValue)}
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.fieldBackground}
                   renderInput={(params) => (
                     <TextField {...params} placeholder="choose sector" />
                   )}
@@ -252,10 +183,7 @@ function Form({ title }) {
                 <TextField
                   {...field}
                   fullWidth
-                  sx={{
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.fieldBackground}
                   placeholder="Enter Table Number"
                   InputProps={{
                     endAdornment: (
@@ -285,10 +213,7 @@ function Form({ title }) {
                     {...field}
                     fullWidth
                     placeholder="Enter No. of Persons"
-                    sx={{
-                      background: '#F5F6FA',
-                      borderRadius: '17px',
-                    }}
+                    className={classes.fieldBackground}
                   />
                 )}
               />
@@ -303,11 +228,7 @@ function Form({ title }) {
             item
             display="flex"
             justifyContent="space-around"
-            sx={{
-              '@media (max-width:899px)': {
-                flexWrap: 'wrap',
-              },
-            }}
+            className={classes.totalPeopleContainer}
           >
             <Controller
               name="vip"
@@ -315,7 +236,12 @@ function Form({ title }) {
               render={({ field }) => (
                 <FormControlLabel
                   {...field}
-                  control={<ToogleButton sx={{ m: 1 }} defaultChecked />}
+                  control={
+                    <ToogleButton
+                      className={classes.toogleButton}
+                      defaultChecked
+                    />
+                  }
                   label="VIP?"
                 />
               )}
@@ -326,7 +252,7 @@ function Form({ title }) {
               render={({ field }) => (
                 <FormControlLabel
                   {...field}
-                  control={<ToogleButton sx={{ m: 1 }} />}
+                  control={<ToogleButton className={classes.toogleButton} />}
                   label="Occupied"
                   onChange={(event, newvalue) => field.onChange(newvalue)}
                 />
@@ -338,7 +264,7 @@ function Form({ title }) {
               render={({ field }) => (
                 <FormControlLabel
                   {...field}
-                  control={<ToogleButton sx={{ m: 1 }} />}
+                  control={<ToogleButton className={classes.toogleButton} />}
                   label="Reserved?"
                 />
               )}
@@ -353,13 +279,7 @@ function Form({ title }) {
                 <TextField
                   {...field}
                   placeholder="Enter Person Name"
-                  sx={{
-                    margin: '0.5rem 0',
-                    padding: '0 1rem',
-                    width: '100%',
-                    background: '#F5F6FA',
-                    borderRadius: '17px',
-                  }}
+                  className={classes.textField}
                 />
               )}
             />
@@ -377,7 +297,7 @@ function Form({ title }) {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer
                       components={['DatePicker']}
-                      sx={{ paddingTop: '0' }}
+                      className={classes.datefield}
                     >
                       <DatePicker
                         {...field}
@@ -388,12 +308,9 @@ function Form({ title }) {
                         slotProps={{
                           textField: {
                             fullWidth: true,
-                            sx: {
-                              background: '#F5F6FA',
-                              borderRadius: '17px',
-                            },
                           },
                         }}
+                        className={classes.fieldBackground}
                       />
                     </DemoContainer>
                   </LocalizationProvider>
@@ -416,7 +333,7 @@ function Form({ title }) {
                         <StyledImage src={PhoneIcon} alt="phone icon" />
                       ),
                     }}
-                    sx={{ background: '#F5F6FA', borderRadius: '17px' }}
+                    className={classes.fieldBackground}
                   />
                 )}
               />
@@ -428,52 +345,16 @@ function Form({ title }) {
         </Grid>
         <Grid item md={5} sm={12} xs={12}>
           <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '50%',
-              width: '90%',
-              margin: '0 auto',
-              filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-              background: '#ffffff',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              '@media (max-width: 899px)': {
-                height: '188px',
-                width: '350px',
-                margin: '0 auto',
-              },
-              '@media (max-width: 524px)': {
-                height: '164px',
-                width: '265px',
-                margin: '0 auto',
-              },
-              '@media (max-width: 375px)': {
-                height: '164px',
-                width: '210px',
-                margin: '0 auto',
-              },
-            }}
+            className={classes.uploadImageContainer}
             onClick={handleImageClick}
           >
             {!selectedImage && <Typography>Click to Upload</Typography>}
             {selectedImage && (
-              <Box
-                sx={{
-                  margin: '0 auto',
-                  width: '90%',
-                  height: '90%',
-                }}
-              >
+              <Box className={classes.imageBox}>
                 <img
                   src={selectedImage}
                   alt="Selected"
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'contain',
-                  }}
+                  className={classes.image}
                 />
               </Box>
             )}
@@ -492,7 +373,7 @@ function Form({ title }) {
                     onChange(event.target.files[0])
                     handleImageUpload(event)
                   }}
-                  style={{ display: 'none' }}
+                  className={classes.inputImage}
                 />
               )}
             />
@@ -504,42 +385,14 @@ function Form({ title }) {
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              marginRight: '0.5rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              '@media (max-width: 1024px)': {
-                fontSize: '1.3rem',
-              },
-              '@media (max-width: 899px)': {
-                fontSize: '1.2rem',
-              },
-            }}
+            className={classes.updateButton}
             onClick={handleSubmit(onSubmit)}
           >
             Update
           </Button>
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              backgroundColor: '#A7A7AA',
-              '@media (max-width: 1024px)': {
-                fontSize: '1.3rem',
-              },
-              '@media (max-width: 899px)': {
-                fontSize: '1.2rem',
-              },
-            }}
+            className={classes.cancelButton}
             onClick={handleCancel}
           >
             Cancel
@@ -549,17 +402,7 @@ function Form({ title }) {
         <Box display="flex" justifyContent="end">
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              fontSize: '1.6rem',
-              borderRadius: '20px',
-              alignSelf: 'flex-end',
-              padding: '0 2rem',
-              textTransform: 'inherit',
-              '@media (max-width: 899px)': {
-                fontSize: '1.5rem',
-              },
-            }}
+            className={classes.saveButton}
             onClick={handleSubmit(onSubmit)}
           >
             Save

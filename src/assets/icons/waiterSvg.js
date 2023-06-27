@@ -1,3 +1,5 @@
+import React from 'react'
+
 const WaiterSvg = ({ selected }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="31.695" height="31.695">

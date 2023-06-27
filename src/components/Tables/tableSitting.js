@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import { deleteTable } from '@/utils/api'
@@ -10,45 +11,18 @@ import { deleteTable } from '@/utils/api'
 import Crawn from '../../../public/images/crawn.png'
 import Delete from '../../../public/images/delete.png'
 import Edit from '../../../public/images/edit.png'
+import {
+  StyledTableBox,
+  SyledImage,
+  SyledImageCrawn,
+  SyledImageIcon,
+  UseStyleSittingTable,
+} from './styles'
 
-const StyledTableBox = styled(Box)({
-  flexDirection: 'column',
-  background: ' #ffffff',
-  borderRadius: '20px',
-  filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-  padding: '1rem 0.5rem',
-  '@media (max-width:1024px)': {
-    padding: '0.1rem 0.3rem',
-  },
-})
-const SyledImage = styled(Image)({
-  margin: '0.5rem',
-  cursor: 'pointer',
-  '@media (max-width:1024px)': {
-    margin: '0',
-    height: '3rem',
-    width: '3.5rem',
-  },
-})
-const SyledImageIcon = styled(Image)({
-  margin: '0.5rem',
-  cursor: 'pointer',
-  '@media (max-width:1024px)': {
-    margin: '0.2rem',
-    height: '1rem',
-    width: '1rem',
-  },
-})
-const SyledImageCrawn = styled(Image)({
-  cursor: 'pointer',
-  '@media (max-width:1024px)': {
-    height: '0.7rem',
-    width: '0.8rem',
-  },
-})
 function TableSitting({ TableDetails }) {
   const [tables, setTables] = useState(TableDetails)
   const route = useRouter()
+  const classes = UseStyleSittingTable()
   const TableStatusIndicator = {
     reserved: '#DE0D65',
     occupied: '#49BF91',
@@ -100,19 +74,7 @@ function TableSitting({ TableDetails }) {
       display="flex"
       gap="2.5vw"
       flexWrap="wrap"
-      sx={{
-        width: '100%',
-        marginTop: '3.5rem',
-        padding: '0.5rem',
-        '@media (max-width:1024px)': {
-          gap: '1vw',
-        },
-        '@media (max-width:525px)': {
-          justifyContent: 'center',
-          gap: '1vh',
-          marginTop: '1.5rem',
-        },
-      }}
+      className={classes.mainContainer}
     >
       {tables &&
         tables
@@ -122,13 +84,10 @@ function TableSitting({ TableDetails }) {
               <StyledTableBox
                 display="flex"
                 key={item.id}
+                className={classes.tableBox}
                 sx={{
-                  flexGrow: 1,
                   height: item.table_sitting <= 10 ? '216px' : '475px',
-                  // width: item.table_sitting <= 10 ? '204px' : '268px',
-                  width: 'auto',
                   '@media (max-width:1024px)': {
-                    width: '116px',
                     height: item.table_sitting <= 10 ? '114px' : '238px',
                   },
                 }}
@@ -145,29 +104,10 @@ function TableSitting({ TableDetails }) {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Typography
-                      sx={{
-                        marginRight: '0.5rem',
-                        fontSize: '1rem',
-                        color: '#077254',
-                        fontWeight: 'bold',
-                        '@media (max-width:1024px)': {
-                          fontSize: '0.7rem',
-                        },
-                      }}
-                    >
+                    <Typography className={classes.tableTypography}>
                       Table {item.table_name}
                     </Typography>
-                    <SyledImageCrawn
-                      src={Crawn}
-                      alt="CrawnIcon"
-                      // style={{
-                      //   '@media (max-width:1024px)': {
-                      //     height: '0.4rem',
-                      //     width: '0.6rem',
-                      //   },
-                      // }}
-                    />
+                    <SyledImageCrawn src={Crawn} alt="CrawnIcon" />
                   </Box>
                   <FiberManualRecordIcon
                     sx={{ color: TableStatusIndicator[item.status] }}
@@ -178,11 +118,7 @@ function TableSitting({ TableDetails }) {
                   justifyContent="center"
                   alignItems="center"
                   mt="1.5rem"
-                  sx={{
-                    '@media (max-width:1024px)': {
-                      marginTop: '0.3rem',
-                    },
-                  }}
+                  className={classes.tableImageBox}
                 >
                   <SyledImage
                     src={item?.table_image}
@@ -194,8 +130,8 @@ function TableSitting({ TableDetails }) {
                 <Box
                   display="flex"
                   flexDirection="row"
+                  justifyContent="space-between"
                   sx={{
-                    justifyContent: 'space-between',
                     marginTop: item.table_sitting <= 10 ? '0' : 'auto',
                   }}
                 >
@@ -207,25 +143,14 @@ function TableSitting({ TableDetails }) {
                     mr="0.5rem"
                   >
                     <Typography
-                      sx={{
-                        fontSize: '0.8rem',
-                        fontWeight: 'bold',
-                        color: TableWaiterStatus[item.status],
-                        '@media (max-width:1024px)': {
-                          fontSize: '0.6rem',
-                        },
-                      }}
+                      className={classes.waiter}
+                      sx={{ color: TableWaiterStatus[item.status] }}
                     >
                       Saba Javed
                     </Typography>
                     <Typography
-                      sx={{
-                        fontSize: '0.7rem',
-                        color: TableTimeStatus[item.status],
-                        '@media (max-width:1024px)': {
-                          fontSize: '0.5rem',
-                        },
-                      }}
+                      className={classes.time}
+                      sx={{ color: TableTimeStatus[item.status] }}
                     >
                       5:00 - 6:00 PM
                     </Typography>

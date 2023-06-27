@@ -1,6 +1,5 @@
 import {
   Box,
-  Card,
   CardContent,
   CardHeader,
   Divider,
@@ -8,45 +7,16 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { useState } from 'react'
-import styled from 'styled-components'
+import React from 'react'
 
 import OrderImage from '../../../public/images/burger.png'
 import ToggleButtons from '../ToogleButton'
-
-const Container = styled(Box)({
-  display: 'flex',
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  flexDirection: 'column ',
-  height: '380px',
-  '&::-webkit-scrollbar': {
-    width: '2px',
-  },
-
-  /* Track */
-  '&::-webkit-scrollbar-track': {
-    background: '#f1f1f1',
-  },
-  /* Handle */
-  '&::-webkit-scrollbar-thumb': {
-    background: '#D8E3EB',
-  },
-})
-
-const StyledCard = styled(Card)({
-  height: '400px',
-  borderRadius: '20px',
-  filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-  background: '#ffffff}',
-  maxHeight: '413px',
-  boxShadow: 'none',
-})
-
-const StyledTitle = styled(Typography)({
-  color: '#52575D',
-  margin: ' 0 auto',
-  fontSize: '18px',
-})
+import {
+  Container,
+  StyledOrderCountCard,
+  StyledTitle,
+  useStyleOrderCountCard,
+} from './styles'
 
 const OrderCardData = [
   {
@@ -93,15 +63,13 @@ const OrderCardData = [
 
 function OrderCountCard() {
   const [selected, setselected] = useState('')
+  const classes = useStyleOrderCountCard()
   return (
-    <StyledCard>
+    <StyledOrderCountCard>
       <CardHeader
         title={
           <Box display="flex" justifyContent="space-between">
-            <Typography
-              sx={{ color: '#3C49FF', fontWeight: 'bold' }}
-              variant="h5"
-            >
+            <Typography className={classes.typographyTitle} variant="h5">
               Orders
             </Typography>
             <ToggleButtons
@@ -127,9 +95,8 @@ function OrderCountCard() {
                 display="flex"
                 alignItems="center"
                 gap="1vw"
-                sx={{ padding: '0.5rem 1rem' }}
+                className={classes.containerBox}
               >
-                {/* <Avatar>{OrderImage}</Avatar> */}
                 <Image src={OrderImage} width="46px" height="46px" alt="" />
                 <StyledTitle>{item.name}</StyledTitle>
               </Box>
@@ -138,7 +105,7 @@ function OrderCountCard() {
           ))}
         </Container>
       </CardContent>
-    </StyledCard>
+    </StyledOrderCountCard>
   )
 }
 

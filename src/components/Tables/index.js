@@ -1,36 +1,17 @@
 import AddIcon from '@mui/icons-material/Add'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import { useState } from 'react'
+import React from 'react'
 
 import { deleteTable, tableManagement } from '../../utils/api'
+import { StyledTableFilter, UseStyle } from './styles'
 import TableSitting from './tableSitting'
-
-const StyledTableFilter = styled(Button)({
-  borderRadius: '20px',
-  fontSize: '1.3rem',
-  width: '156px',
-  padding: '0.5rem 1.5rem',
-  filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.16 ))',
-  '@media (max-width:1024px)': {
-    width: '140px',
-    fontSize: '1rem',
-  },
-  '@media (max-width:525px)': {
-    width: '125px',
-    fontSize: '0.9rem',
-  },
-  '@media (max-width:320px)': {
-    width: '100px',
-    fontSize: '0.9rem',
-  },
-})
 
 const Tables = ({ TableDetails }) => {
   const [insideSittingArea, setInsideSittingArea] = useState(true)
   const route = useRouter()
-
+  const classes = UseStyle()
   const tableLargeSitting = []
   const tableMediumSitting = []
   TableDetails.forEach((el) => {
@@ -66,31 +47,16 @@ const Tables = ({ TableDetails }) => {
   // }, [deleteTable])
 
   return (
-    <Box
-      sx={{
-        padding: '2rem',
-        paddingTop: '0',
-        width: '100%',
-        '@media (max-width:1024px)': {
-          padding: '0.5rem',
-        },
-      }}
-    >
-      <Box display="flex" flexDirection="column" sx={{ position: 'relative' }}>
+    <Box className={classes.mainContainer}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        className={classes.subContainer}
+      >
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          sx={{
-            fontSize: '1.1rem',
-            borderRadius: '15px',
-            alignSelf: 'flex-end',
-            '@media (max-width:1024px)': {
-              fontSize: '0.9rem',
-            },
-            '@media (max-width:425px)': {
-              fontSize: '0.7rem',
-            },
-          }}
+          className={classes.button}
           onClick={handleNewTable}
         >
           Add New
@@ -98,19 +64,7 @@ const Tables = ({ TableDetails }) => {
         <Box
           display="flex"
           justifyContent="space-between"
-          sx={{
-            width: '327px',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, 0)',
-            '@media (max-width:768px)': {
-              position: 'inherit',
-              justifyContent: 'center',
-              gap: '1vw',
-              marginTop: '0.5rem',
-            },
-          }}
+          className={classes.tableAreaBox}
         >
           <StyledTableFilter
             variant="contained"
@@ -138,36 +92,12 @@ const Tables = ({ TableDetails }) => {
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
-        sx={{
-          overflowY: 'auto',
-          padding: '0 1rem',
-          '@media (max-width:1024px)': {
-            padding: '0',
-          },
-          '@media (max-width:525px)': {
-            flexDirection: 'column',
-          },
-        }}
+        className={classes.sittingTableMainContainer}
       >
-        <Box
-          sx={{
-            width: '80%',
-            '@media (max-width:525px)': {
-              width: '100%',
-            },
-          }}
-        >
+        <Box className={classes.sittingTableSubContainer}>
           <TableSitting TableDetails={tableMediumSitting} />
         </Box>
-        <Box
-          sx={{
-            width: '20%',
-            flex: 1,
-            '@media (max-width:525px)': {
-              width: '100%',
-            },
-          }}
-        >
+        <Box className={classes.allTables}>
           <TableSitting TableDetails={tableLargeSitting} />
         </Box>
       </Box>

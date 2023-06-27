@@ -1,5 +1,8 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
+import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import { UseStyle } from './styles'
 
 export default function PopUp({
   setOrderCancelled,
@@ -7,7 +10,7 @@ export default function PopUp({
   cancelledId,
 }) {
   const { control, register, handleSubmit, formState } = useForm()
-
+  const classes = UseStyle()
   const onSubmit = (data) => {
     setOrderData((prev) =>
       prev.map((o) =>
@@ -27,55 +30,20 @@ export default function PopUp({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      sx={{ width: '100%', height: '100%' }}
+      className={classes.mainContainer}
     >
-      <Box
-        display="flex"
-        sx={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '810px',
-          width: '90%',
-          borderRadius: '20px',
-          background: '#FFFFFF',
-          filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-          '@media (max-width:475px)': {
-            height: '680px',
-          },
-        }}
-      >
+      <Box display="flex" className={classes.subContainer}>
         <Box
           display="flex"
           flexDirection="column"
-          sx={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '80%',
-            height: '435px',
-            borderRadius: '39px',
-            filter: 'drop-shadow(0px 8px 5px #f7ebe0)',
-            background: '#f2eeee',
-            padding: '1rem 1.5rem',
-            '@media (max-width:475px)': {
-              height: '340px',
-            },
-          }}
+          className={classes.textContainer}
         >
           <Box
             display="flex"
             flexDirection="column"
-            sx={{ width: '90%', gap: '2vh' }}
+            className={classes.inputContainer}
           >
-            <Typography
-              sx={{
-                alignSelf: 'start',
-                fontSize: '2.5rem',
-                color: '#03528B',
-                fontWeight: 'bold',
-              }}
-            >
-              Reason
-            </Typography>
+            <Typography className={classes.title}>Reason</Typography>
             <Controller
               name="description"
               control={control}
@@ -84,12 +52,7 @@ export default function PopUp({
                 <TextField
                   {...field}
                   fullWidth
-                  sx={{
-                    color: '#888888',
-                    background: '#FCFCFC',
-                    borderRadius: '17px',
-                    height: '165px',
-                  }}
+                  className={classes.texField}
                   placeholder="Description and Add ons"
                 />
               )}
@@ -97,17 +60,7 @@ export default function PopUp({
             <Box display="flex" justifyContent="center">
               <Button
                 variant="contained"
-                sx={{
-                  marginTop: '1rem',
-                  fontSize: '1.6rem',
-                  borderRadius: '20px',
-                  alignSelf: 'flex-end',
-                  padding: '0 2rem',
-                  textTransform: 'inherit',
-                  '@media (max-width: 899px)': {
-                    fontSize: '1.5rem',
-                  },
-                }}
+                className={classes.submitButton}
                 onClick={handleSubmit(onSubmit)}
               >
                 Submit

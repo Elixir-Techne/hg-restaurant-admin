@@ -23,6 +23,7 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -31,33 +32,12 @@ import emailPng from '../../../public/images/email.svg'
 import phonePng from '../../../public/images/phoneSupport.png'
 import companyPng from '../../../public/images/supportContact.png'
 import '../../styles/support.css'
-
-const StyledTextField = styled(TextField)({
-  padding: '0 1rem',
-  background: '#ffffff',
-  border: '1px solid #AACDE8',
-  width: '650px',
-  borderRadius: '5.5px',
-  '@media (max-width:768px)': {
-    width: '450px',
-  },
-  '@media (max-width:475px)': {
-    width: '300px',
-  },
-})
-
-const StyledFormField = styled(TextField)({
-  background: '#FFFFFF',
-  borderRadius: '10px',
-  margin: '0.5rem',
-})
-
-const StyledErrorMessage = styled(Typography)({
-  fontSize: '0.7rem',
-  color: 'red',
-  paddingLeft: '0.5rem',
-  position: 'fix',
-})
+import {
+  StyledErrorMessage,
+  StyledFormField,
+  StyledTextField,
+  UseStyle,
+} from './styles'
 
 const data = [
   { id: 1, name: 'Home', url: '/' },
@@ -159,6 +139,7 @@ const askedQuestions = [
 ]
 export default function Support() {
   const route = useRouter()
+  const classes = UseStyle()
   const { control, register, handleSubmit, errors, formState } = useForm()
   const error = formState?.errors
   const onSubmit = (data) => {
@@ -174,40 +155,20 @@ export default function Support() {
   }
 
   return (
-    <div style={{ backgroundColor: '#F3F2F5', overflow: 'hidden' }}>
-      <Box
-        sx={{
-          width: '100%',
-          backgroundImage: `url(images/support.png)`,
-          backgroundColor: '#80DAF1',
-        }}
-      >
-        <Box
-          display="flex"
-          justifyContent="space-around"
-          sx={{
-            '@media (max-width:575px)': {
-              flexDirection: 'column-reverse',
-              justifyContent: 'center',
-            },
-          }}
-        >
+    <Box className={classes.mainContainer}>
+      <Box className={classes.subContainer}>
+        <Box className={classes.logoContainer}>
           <Image src={companyPng} alt="" className="company-logo" />
 
           <Box
             display="flex"
             gap="40px"
             alignItems="center"
-            sx={{
-              '@media (max-width:575px)': {
-                justifyContent: 'center',
-                overflowX: 'auto',
-              },
-            }}
+            className={classes.navContainer}
           >
             {data.map((item) => (
               <Typography
-                sx={{ color: '#077254', cursor: 'pointer' }}
+                className={classes.navTypography}
                 key={item.id}
                 onClick={() => handleUrl(item.id)}
               >
@@ -222,39 +183,13 @@ export default function Support() {
           justifyContent="center"
           alignItems="center"
           p={16}
-          sx={{
-            width: '45%',
-            margin: '0 auto',
-            '@media (max-width:1440px)': {
-              width: '60%',
-            },
-            '@media (max-width:1024px)': {
-              width: '80%',
-            },
-            '@media (max-width:575px)': {
-              width: '100%',
-              paddingTop: '0.5rem',
-            },
-          }}
+          className={classes.searchTitleBox}
         >
-          <Typography
-            sx={{
-              color: '#077254',
-              textAlign: 'center',
-              '@media (max-width:768px)': {
-                fontSize: '1.4rem',
-              },
-              '@media (max-width:475px)': {
-                fontSize: '1.2rem',
-              },
-            }}
-            variant="h4"
-            m="auto"
-          >
+          <Typography className={classes.searchTitle} variant="h4" m="auto">
             Cloud Dleunkder provides you the best food Services
           </Typography>
           <Typography
-            sx={{ color: '#077254', mt: 5, mb: '24px' }}
+            className={classes.questionTypography}
             m="auto"
             gutterBottom
           >
@@ -267,34 +202,12 @@ export default function Support() {
           />
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-          margin: '-48px',
-          '@media (max-width:768px)': {
-            flexDirection: 'column',
-          },
-        }}
-      >
+      <Box className={classes.cardContainer}>
         {cardData.map((data) => (
           <Card
-            sx={{
-              minWidth: '370px',
-              mimHeight: '121px',
-              borderRadius: '20px',
-              backgroundColor: data.bgcolor,
-              boxShadow: 'none',
-              '@media (max-width:1024px)': {
-                minWidth: '290px',
-              },
-              '@media (max-width:768px)': {
-                maxWidth: '190px',
-                margin: '0 auto',
-              },
-            }}
+            className={classes.cardSubContainer}
             key={data.id}
+            sx={{ backgroundColor: data.bgcolor }}
           >
             <CardContent>
               <Box display="flex" alignItems="center">
@@ -312,60 +225,21 @@ export default function Support() {
           </Card>
         ))}
       </Box>
-      <Box
-        sx={{
-          // border: '1px solid red',
-          width: '60%',
-          margin: '0 auto',
-          marginTop: '8rem',
-          '@media (max-width:1024px)': {
-            width: '90%',
-          },
-          '@media (max-width:768px)': {
-            width: '80%',
-          },
-          '@media (max-width:475px)': {
-            width: '90%',
-          },
-        }}
-      >
+      <Box className={classes.contactContainer}>
         <Grid container display="flex" justifyContent="space-between">
           <Grid item container lg={3} xs={12} md={4} m gap={3}>
             <Grid item xs={12}>
-              <Typography sx={{ color: '#042C71', fontSize: '1rem' }}>
+              <Typography className={classes.contactTypography}>
                 GET IN TOUCH
               </Typography>
             </Grid>
             <Grid item lg={12} xs={6}>
-              <Typography
-                sx={{
-                  color: '#3C49FF',
-                  fontSize: '2.5rem',
-                  fontWeight: 'bold',
-                  '@media (max-width:1024px)': {
-                    fontSize: '2.1rem',
-                  },
-                }}
-              >
+              <Typography className={classes.subTitleTypography}>
                 Write us a Message
               </Typography>
             </Grid>
-            {/* <Grid item lg={12} xs={6}>
-              <Typography
-                sx={{
-                  color: '#3C49FF',
-                  fontSize: '2.5rem',
-                  fontWeight: 'bold',
-                  '@media (max-width:768px)': {
-                    fontSize: '2rem',
-                  },
-                }}
-              >
-                Message
-              </Typography>
-            </Grid> */}
             <Grid item xs={12}>
-              <Typography sx={{ color: '#565872' }}>
+              <Typography className={classes.contentTypography}>
                 Lorem ipsum dolor sit consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore mangna aliqua
                 veniam.
@@ -464,7 +338,7 @@ export default function Support() {
                     {...field}
                     fullWidth
                     placeholder=" "
-                    sx={{ height: '165px' }}
+                    className={classes.descriptionTextField}
                   />
                 )}
               />
@@ -479,146 +353,54 @@ export default function Support() {
         <Box display="flex" justifyContent="center">
           <Button
             variant="contained"
-            sx={{
-              marginTop: '1rem',
-              fontSize: '1.6rem',
-              borderRadius: '10px',
-              alignSelf: 'flex-end',
-              padding: '0.5rem 2rem',
-              textTransform: 'inherit',
-              background: '#077254',
-              '@media (max-width: 899px)': {
-                fontSize: '1.5rem',
-              },
-            }}
+            className={classes.sendButton}
             onClick={handleSubmit(onSubmit)}
           >
             Send Message
           </Button>
         </Box>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        sx={{
-          width: '75%',
-          margin: '0 auto',
-          marginTop: '1.5rem',
-          marginBottom: '0',
-          '@media (max-width:1024px)': {
-            width: '%',
-          },
-          '@media (max-width:575px)': {
-            flexDirection: 'column',
-            width: '100%',
-          },
-        }}
-      >
-        <Box
-          sx={{
-            width: '25%',
-            '@media (max-width:575px)': {
-              width: '100%',
-              textAlign: 'center',
-            },
-          }}
-        >
-          <Typography
-            sx={{
-              color: '#FF4E4E',
-              fontSize: '3rem',
-              fontWeight: 'bold',
-              '@media (max-width:1024px)': {
-                fontSize: '2.5rem',
-              },
-              '@media (max-width:768px)': {
-                fontSize: '2rem',
-              },
-            }}
-          >
+      <Box className={classes.questionsMainContainer}>
+        <Box className={classes.questionsSubContainer}>
+          <Typography className={classes.questionTitle}>
             Frequently asked questions
           </Typography>
         </Box>
-        <Box
-          sx={{
-            width: '65%',
-            '@media (max-width:575px)': {
-              width: '100%',
-            },
-          }}
-        >
+        <Box className={classes.questionContainer}>
           {askedQuestions?.map((item) => {
             return (
               <>
-                <Accordion
-                  sx={{
-                    background: 'transparent !important',
-                    boxShadow: 'none important',
-                  }}
-                >
+                <Accordion className={classes.accordion}>
                   <AccordionSummary
                     expandIcon={<AddIcon fontSize="large" />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    sx={{
-                      '& .MuiAccordionSummary-expandIconWrapper': {
-                        '&.Mui-expanded': {
-                          transform: 'rotate(45deg)',
-                        },
-                      },
-                    }}
+                    className={classes.accordionSummary}
                   >
                     <Box display="flex">
-                      <Typography
-                        sx={{
-                          color: '#3C49FF',
-                          fontSize: '1.7rem',
-                          fontWeight: 'bold',
-                          marginRight: '3rem',
-                        }}
-                      >
+                      <Typography className={classes.questionId}>
                         {item.id}
                       </Typography>
-                      <Typography
-                        sx={{
-                          color: '#282938',
-                          fontSize: '1.7rem',
-                          fontWeight: 'bold',
-                        }}
-                      >
+                      <Typography className={classes.questionAsk}>
                         {item.question}
                       </Typography>
                     </Box>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography
-                      sx={{
-                        color: '#282938',
-                        fontSize: '1.5rem',
-                        marginLeft: '4.5rem',
-                      }}
-                    >
+                    <Typography className={classes.questionAnswer}>
                       {item.answer}
                     </Typography>
                   </AccordionDetails>
-                  <Typography
-                    sx={{
-                      color: '#077254',
-                      fontSize: '1.1rem',
-                      fontWeight: 'bold',
-                    }}
-                  >
+                  <Typography className={classes.contactUstypography}>
                     Contact us for more Info
                   </Typography>
                 </Accordion>
-                <Divider
-                  sx={{ width: '100%', height: '5px', color: '#3C49FF' }}
-                />
+                <Divider className={classes.divider} />
               </>
             )
           })}
         </Box>
       </Box>
-    </div>
+    </Box>
   )
 }

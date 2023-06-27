@@ -1,29 +1,23 @@
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import {
   Box,
-  Card,
   CardContent,
   CardHeader,
   Divider,
   Typography,
 } from '@mui/material'
 import { Chart, registerables } from 'chart.js'
+import React from 'react'
 import { useEffect } from 'react'
-import styled from 'styled-components'
 
 import FilledCircleSvg from '@/assets/icons/filledCircleSvg'
 
+import { StyleRevenueCard, UseStylesRevenueCard } from './styles'
+
 Chart.register(...registerables)
 
-const StyledCard = styled(Card)({
-  height: '400px',
-  borderRadius: '20px',
-  filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-  background: '#ffffff}',
-  boxShadow: 'none',
-})
-
 function RevenueCard({ orderStatus }) {
+  const classes = UseStylesRevenueCard()
   useEffect(() => {
     var ctx = document.getElementById('myChart').getContext('2d')
     var myChart = new Chart(ctx, {
@@ -91,50 +85,20 @@ function RevenueCard({ orderStatus }) {
     })
   }, [])
   return (
-    <StyledCard>
+    <StyleRevenueCard>
       <CardHeader
         title={
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="center" gap="5px">
-              <Typography
-                sx={{
-                  color: '#3C49FF',
-                  fontWeight: 'bold',
-                  '@media (max-width:475px)': {
-                    fontSize: '1.1rem',
-                  },
-                  '@media (max-width:360px)': {
-                    fontSize: '0.8rem',
-                  },
-                }}
-                variant="h5"
-              >
+              <Typography className={classes.typographyTitle} variant="h5">
                 Revenue
               </Typography>
-              <InfoOutlinedIcon
-                sx={{
-                  color: '#B3B8BD',
-                  '@media (max-width:475px)': {
-                    fontSize: 'medium',
-                  },
-                }}
-              />
+              <InfoOutlinedIcon className={classes.infoOutlinedIcon} />
             </Box>
             <Box display="flex" gap="10px">
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg />
-                <Typography
-                  sx={{
-                    color: '#3C49FF',
-                    '@media (max-width:475px)': {
-                      fontSize: '1.1rem',
-                    },
-                    '@media (max-width:360px)': {
-                      fontSize: '0.8rem',
-                    },
-                  }}
-                  variant="h5"
-                >
+                <Typography className={classes.typographyStatus} variant="h5">
                   {orderStatus === 'Today'
                     ? 'Yesterday'
                     : orderStatus === 'This week'
@@ -146,18 +110,7 @@ function RevenueCard({ orderStatus }) {
               </Box>
               <Box display="flex" alignItems="center" gap="5px">
                 <FilledCircleSvg selected />
-                <Typography
-                  sx={{
-                    color: '#8CA6FB',
-                    '@media (max-width:475px)': {
-                      fontSize: '1.1rem',
-                    },
-                    '@media (max-width:360px)': {
-                      fontSize: '0.8rem',
-                    },
-                  }}
-                  variant="h5"
-                >
+                <Typography className={classes.typographyStatus} variant="h5">
                   {orderStatus === 'Today'
                     ? 'Today'
                     : orderStatus === 'This week'
@@ -170,13 +123,13 @@ function RevenueCard({ orderStatus }) {
             </Box>
           </Box>
         }
-        sx={{ color: '#3C49FF' }}
+        className={classes.cardHeader}
       />
       <Divider variant="middle" />
-      <CardContent sx={{ height: '350px' }}>
+      <CardContent className={classes.cardContent}>
         <canvas id="myChart"></canvas>
       </CardContent>
-    </StyledCard>
+    </StyleRevenueCard>
   )
 }
 

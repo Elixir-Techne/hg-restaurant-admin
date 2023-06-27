@@ -6,25 +6,17 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Divider,
   useMediaQuery,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import styled from 'styled-components'
+import React from 'react'
 
 import Table from '@/components/Table'
-import { theme } from '@/theme'
 
 import { deleteMenu, getMenu } from '../../../utils/api'
+import { StyledCardHeader, UseStyleMenu } from './styles'
 
-const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
-  color: '#3C49FF',
-  '& .MuiCardHeader-title': {
-    fontWeight: 'bold',
-  },
-}))
 export const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
@@ -108,7 +100,7 @@ export default function Menu() {
     e.preventDefault()
     router.push('/menu/add')
   }
-
+  const classes = UseStyleMenu()
   //API get menu
 
   // useEffect(() => {
@@ -127,17 +119,9 @@ export default function Menu() {
 
   return (
     <Card
+      className={classes.mainContainer}
       sx={{
-        overflowY: 'auto',
-        height: '90%',
         maxWidth: isMobile ? `calc( 100vw - 10vw)` : `calc( 100vw - 31vw)`,
-        borderRadius: '20px',
-        filter: 'drop-shadow(0px 5px 12.5px rgba(82,87,93,0.1 ))',
-        boxShadow: 'none',
-        background: '#ffffff',
-        // paddingX: theme.spacing(9),
-        paddingTop: theme.spacing(3.5),
-        margin: `${theme.spacing(10)} auto`,
       }}
     >
       <StyledCardHeader title="Menu" />
@@ -147,7 +131,7 @@ export default function Menu() {
           <Button
             variant="contained"
             onClick={handleNewItem}
-            sx={{ borderRadius: '25px', margin: (theme) => theme.spacing(2) }}
+            className={classes.addButton}
           >
             + Add new
           </Button>

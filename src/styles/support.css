@@ -1,6 +1,5 @@
 .MuiPaper-elevation{
     box-shadow: none !important;
-    margin-bottom: 0 !important;
 }
 .company-logo{
     @media only screen and (max-width: 575px){

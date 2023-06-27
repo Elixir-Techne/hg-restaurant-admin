@@ -1,11 +1,11 @@
 'use client'
 
 import { Box } from '@mui/system'
-
-import { theme } from '@/theme'
+import React from 'react'
 
 import Tables from '../../../components/Tables/index'
 import TablesStatus from '../../../components/TablesStatus/index'
+import { UseStyleTableManagement } from './styles'
 
 export default function TableManagement() {
   const TableDetails = [
@@ -82,25 +82,11 @@ export default function TableManagement() {
       table_clear: 'no',
     },
   ]
+  const classes = UseStyleTableManagement()
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      sx={{ margin: theme.spacing(10) }}
-    >
-      <Box
-        display="flex"
-        flexDirection="column"
-        sx={{
-          width: '95%',
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          borderRadius: '20px',
-          background: '#FFFFFF',
-          filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-        }}
-      >
+    <Box className={classes.mainContainer}>
+      <Box className={classes.subContainer}>
         <TablesStatus />
         <Tables TableDetails={TableDetails} />
       </Box>

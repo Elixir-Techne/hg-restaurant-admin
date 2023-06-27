@@ -4,11 +4,19 @@
 .fileName {
   display: none;
 }
-@media (max-width: 768px){
-.cancel-image{
-  left:88% !important;
-  top: 1%;
-  height:32px ;
-  width:32px ;
+.cancel-image {
+  position: absolute;
+  left: 92%;
+  top: -5%;
+  z-index: 1;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
 }
+@media (max-width: 768px) {
+  .cancel-image {
+    left: 88% !important;
+    height: 32px;
+    width: 32px;
+  }
 }

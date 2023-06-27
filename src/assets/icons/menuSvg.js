@@ -1,3 +1,5 @@
+import React from 'react'
+
 const MenuSvg = ({ selected }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="41.015" height="35.72">

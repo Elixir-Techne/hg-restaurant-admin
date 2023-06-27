@@ -1,6 +1,5 @@
 import {
   Box,
-  Card,
   CardContent,
   CardHeader,
   Divider,
@@ -8,26 +7,17 @@ import {
 } from '@mui/material'
 import Image from 'next/image'
 import { useState } from 'react'
-import styled from 'styled-components'
-
-import { theme } from '@/theme'
+import React from 'react'
 
 import downIcon from '../../assets/icons/down.svg'
 import upIcon from '../../assets/icons/upArrow.svg'
 import ToggleButtons from '../ToogleButton'
-
-const StyledCard = styled(Card)({
-  borderRadius: '20px',
-  filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
-  background: '#ffffff}',
-  height: '189px',
-  boxShadow: 'none',
-  marginBottom: `${theme.spacing(5)} !important`,
-})
+import { StyledStatusCard, UseStylesStatusCard } from './styles'
 
 function StatusCard() {
   const [toggle1, settoggle1] = useState('Cancelled')
   const [toggle2, settoggle2] = useState('Inside')
+  const classes = UseStylesStatusCard()
   const data = [
     {
       id: 1,
@@ -49,14 +39,11 @@ function StatusCard() {
     },
   ]
   return data.map((item) => (
-    <StyledCard key={item.id}>
+    <StyledStatusCard key={item.id} className="elevation">
       <CardHeader
         title={
           <Box display="flex" justifyContent="space-between">
-            <Typography
-              sx={{ color: '#3C49FF', fontWeight: 'bold' }}
-              variant="h5"
-            >
+            <Typography className={classes.typographyTitle} variant="h5">
               {item.cardTitle}
             </Typography>
             <ToggleButtons
@@ -70,7 +57,7 @@ function StatusCard() {
       <Divider variant="middle" />
       <CardContent>
         <Box display="flex" justifyContent="space-between">
-          <Typography sx={{ color: '#FF3C3C', fontWeight: 600 }} variant="h2">
+          <Typography className={classes.typographyCount} variant="h2">
             {item.count}
           </Typography>
           <Box display="flex" alignItems="center">
@@ -80,13 +67,13 @@ function StatusCard() {
               <Image src={downIcon} alt="" />
             )}
 
-            <Typography sx={{ color: '#005290', ml: '5px' }} variant="h6">
+            <Typography className={classes.typographyPrecent} variant="h6">
               {item.precent}
             </Typography>
           </Box>
         </Box>
       </CardContent>
-    </StyledCard>
+    </StyledStatusCard>
   ))
 }
 

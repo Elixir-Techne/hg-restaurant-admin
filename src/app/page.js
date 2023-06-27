@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-
+import React from 'react'
 
 import Sidebar from '@/components/Sidebar'
 
