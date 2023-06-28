@@ -247,9 +247,9 @@ export default function Support() {
             </Grid>
             <Grid item xs={12}>
               <Box display="flex" justifyContent="space-around">
-                {socialProfile?.map((item) => {
+                {socialProfile?.map((item, i) => {
                   return (
-                    <Box onClick={() => handleSocialProfile(item.id)}>
+                    <Box onClick={() => handleSocialProfile(item.id)} key={i}>
                       {item.icon}
                     </Box>
                   )
