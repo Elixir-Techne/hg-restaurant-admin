@@ -227,7 +227,7 @@ export default function Support() {
       </Box>
       <Box className={classes.contactContainer}>
         <Grid container display="flex" justifyContent="space-between">
-          <Grid item container lg={3} xs={12} md={4} m gap={3}>
+          <Grid item container lg={3} xs={12} sm={12} md={12} m gap={3}>
             <Grid item xs={12}>
               <Typography className={classes.contactTypography}>
                 GET IN TOUCH
@@ -260,7 +260,7 @@ export default function Support() {
               </Box>
             </Grid>
           </Grid>
-          <Grid container item lg={8} xs={12} md={8} spacing={4}>
+          <Grid container item lg={8} xs={12} sm={12} md={12} spacing={4}>
             <Grid item xs={6}>
               <Controller
                 name="fullname"
