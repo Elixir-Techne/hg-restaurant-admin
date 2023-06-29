@@ -46,7 +46,7 @@ function CustomPagination(props) {
 export default function Table({ rows, columns, data, title }) {
   const [rowData, setRowData] = useState(rows)
   const router = useRouter()
-  const isMobile = useMediaQuery('(max-width:768px)')
+  const isMobile = useMediaQuery('(max-width:865px)')
 
   const [rowSelectionModel, setRowSelectionModel] = React.useState([])
   const apiRef = useGridApiRef()
@@ -75,13 +75,13 @@ export default function Table({ rows, columns, data, title }) {
 
           ...columns,
           ...(isMobile
-            ? title === 'menu'
+            ? title === 'menu' || title === 'waiter'
               ? [
                   {
                     field: 'action',
                     headerName: 'Action',
                     sortable: false,
-                    width: 160,
+                    width: isMobile ? 180 : 160,
                     renderCell: ({ api, row }) => (
                       <ColumnActionButton
                         selected={api.isRowSelected(row.id)}

@@ -14,6 +14,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import AddItemIcon from '../../../../public/images/addItemIcon.png'
+import MinusIcon from '../../../../public/images/minusIcon.png'
 import PlusIcon from '../../../../public/images/plusIcon.png'
 import { rows } from '../../../app/(protected)/menu/page'
 import { OrdersDetailContext } from '../../../context/orderDetailContext'

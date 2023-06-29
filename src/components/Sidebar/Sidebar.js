@@ -58,7 +58,7 @@ const data = [
 ]
 function Sidebar() {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const isMobile = useMediaQuery('(max-width:768px)')
+  const isMobile = useMediaQuery('(max-width:865px)')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [totalPendingOrders, setTotalPendingOrders] = useState(0)
   const pathname = usePathname()

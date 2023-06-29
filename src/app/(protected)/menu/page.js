@@ -37,25 +37,25 @@ export const rows = [
 
 export default function Menu() {
   const router = useRouter()
-  const isMobile = useMediaQuery('(max-width:768px)')
+  const isMobile = useMediaQuery('(max-width:865px)')
   const columns = [
     {
       field: 'firstName',
       headerName: 'Category',
-      width: 150,
+      width: isMobile ? 170 : 150,
       editable: true,
     },
     {
       field: 'lastName',
       headerName: 'Sub-Category',
-      width: 150,
+      width: isMobile ? 170 : 150,
       editable: true,
     },
     {
       field: 'age',
       headerName: 'Food-Type',
       type: 'number',
-      width: 110,
+      width: isMobile ? 130 : 110,
       editable: true,
     },
     ...(isMobile

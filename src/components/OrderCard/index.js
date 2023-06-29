@@ -167,7 +167,7 @@ function orderCard({
                   height:
                     item.cooking_status === 'completed' ? '165px' : '225px',
 
-                  '@media (max-width:768px)': {
+                  '@media (max-width:1024px)': {
                     height:
                       item.cooking_status === 'completed' ? '118px' : '176px',
                   },

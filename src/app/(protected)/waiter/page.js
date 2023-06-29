@@ -39,14 +39,14 @@ export const rows = [
   { id: 9, waiterId: 'Roxie', name: 'Harvey', cnicID: 65 },
 ]
 export default function Waiter() {
-  const isMobile = useMediaQuery('(max-width:768px)')
+  const isMobile = useMediaQuery('(max-width:865px)')
   const route = useRouter()
   const classes = UseStylewaiterTable()
   const columns = [
     {
       field: 'id',
       headerName: 'Pic',
-      width: 90,
+      width: isMobile ? 110 : 90,
       renderCell: ({ row }) => {
         return <Avatar />
       },
@@ -54,12 +54,12 @@ export default function Waiter() {
     {
       field: 'name',
       headerName: 'Name',
-      width: 150,
+      width: isMobile ? 140 : 120,
     },
     {
       field: 'waiterId',
       headerName: 'Waiter ID',
-      width: 150,
+      width: isMobile ? 145 : 125,
     },
 
     ...(isMobile
@@ -68,22 +68,22 @@ export default function Waiter() {
           {
             field: 'cnicID',
             headerName: 'ID Card',
-            type: 'number',
-            flex: 1,
+            // type: 'number',
+            width: 100,
             hide: isMobile,
           },
           {
             field: 'loc',
             headerName: 'Location',
             sortable: false,
-            flex: 1,
+            width: 100,
             hide: isMobile,
           },
           {
             field: 'type',
             headerName: 'Type',
             sortable: false,
-            flex: 1,
+            width: 100,
           },
           {
             field: 'status',
