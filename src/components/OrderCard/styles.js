@@ -30,7 +30,7 @@ export const UseStyle = makeStyles((theme) => ({
   },
   timeContainer: {
     margin: ' 0 auto',
-    '@media (max-width:768px)': {
+    '@media (max-width:1024px)': {
       justifyContent: 'space-between',
     },
   },
@@ -38,7 +38,7 @@ export const UseStyle = makeStyles((theme) => ({
     width: '209px',
     height: '2px',
     margin: '0 auto',
-    '@media (max-width:768px)': { width: '155px' },
+    '@media (max-width:1024px)': { width: '155px' },
   },
   orderMainContainer: {
     flex: 1,
@@ -46,7 +46,7 @@ export const UseStyle = makeStyles((theme) => ({
     overflowX: 'hidden',
     width: '239px',
     flexDirection: 'column ',
-    '@media (max-width:768px)': {
+    '@media (max-width:1024px)': {
       width: '168px',
     },
   },
@@ -55,7 +55,7 @@ export const UseStyle = makeStyles((theme) => ({
   },
   billingBox: {
     marginTop: '1.5rem',
-    '@media (max-width:768px)': { marginTop: '1rem' },
+    '@media (max-width:1024px)': { marginTop: '1rem' },
   },
 }))
 
@@ -64,16 +64,14 @@ export const StyledMainContainer = styled(Box)({
   '@media (max-width:1440px)': {
     gap: '1vw',
   },
+
   '@media (max-width:1024px)': {
-    margin: theme.spacing(4),
-  },
-  '@media (max-width:768px)': {
     margin: theme.spacing(3),
   },
   '@media (max-width:425px)': {
     justifyContent: 'center',
     margin: theme.spacing(3),
-    gap: '3vw',
+    gap: '1vw',
   },
   '@media (max-width:375px)': {
     margin: theme.spacing(1.5),
@@ -99,10 +97,10 @@ export const StyledSubContainer = styled(Box)({
   filter: 'drop-shadow(0px 10px 10px rgba(196,200,208,0.4 ))',
   borderRadius: '15px',
   backgroundColor: '#FFFFFF',
+  // '@media (max-width:1024px)': {
+  //   margin: `${theme.spacing(1.5)} ${theme.spacing(0.55)}`,
+  // },
   '@media (max-width:1024px)': {
-    margin: `${theme.spacing(1.5)} ${theme.spacing(0.55)}`,
-  },
-  '@media (max-width:768px)': {
     width: '172px',
     height: '286px',
   },
@@ -122,7 +120,7 @@ export const StyledTitle = styled(Typography)({
   color: '#52575D',
   margin: ' 0 auto',
   fontSize: '18px',
-  '@media (max-width:768px)': {
+  '@media (max-width:1024px)': {
     margin: '0 0.5rem',
   },
 })
@@ -131,7 +129,7 @@ export const StyledBoldTitle = styled(Typography)({
   margin: ' 0 auto',
   fontSize: '18px',
   fontWeight: 'bold',
-  '@media (max-width:768px)': {
+  '@media (max-width:1024px)': {
     margin: '0 0.5rem',
   },
 })
@@ -145,7 +143,7 @@ export const StyledServedTitle = styled(Typography)({
   padding: '2px 25px',
   margin: '0 1rem',
   cursor: 'pointer',
-  '@media (max-width:768px)': {
+  '@media (max-width:1024px)': {
     padding: '2px 25px',
     fontSize: '0.9rem',
     margin: '0',

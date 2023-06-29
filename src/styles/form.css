@@ -13,7 +13,7 @@
   background: white;
   border-radius: 50%;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .cancel-image {
     left: 88% !important;
     height: 32px;

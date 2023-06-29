@@ -94,10 +94,10 @@ const Tables = ({ TableDetails }) => {
         flexWrap="wrap"
         className={classes.sittingTableMainContainer}
       >
-        <Box className={classes.sittingTableSubContainer}>
+        <Box className={classes.smallSittingTables}>
           <TableSitting TableDetails={tableMediumSitting} />
         </Box>
-        <Box className={classes.allTables}>
+        <Box className={classes.largeSittingTables}>
           <TableSitting TableDetails={tableLargeSitting} />
         </Box>
       </Box>

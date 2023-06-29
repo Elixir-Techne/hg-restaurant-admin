@@ -49,13 +49,13 @@ export const UseStyle = makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
-  sittingTableSubContainer: {
+  smallSittingTables: {
     width: '80%',
     '@media (max-width:525px)': {
       width: '100%',
     },
   },
-  allTables: {
+  largeSittingTables: {
     width: '20%',
     flex: 1,
     '@media (max-width:525px)': {

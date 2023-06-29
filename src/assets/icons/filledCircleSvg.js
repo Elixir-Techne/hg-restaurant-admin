@@ -11,7 +11,7 @@ const FilledCircleSvg = ({ selected }) => {
       <path
         d="M.203 14.155a9 9 0 1 1 0 .1z"
         fill={selected ? '#8CA6FB' : '#3c49ff'}
-        fill-rule="evenodd"
+        fillRule="evenodd"
         data-name="Ellipse 57"
       />
     </svg>

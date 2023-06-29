@@ -54,11 +54,11 @@ const schema = yup
       then: () => yup.string().required('Date is required'),
       otherwise: () => yup.string(),
     }),
-    image: yup.object().when('reserved', {
-      is: false,
-      then: () => yup.object().required('Image is required'),
-      otherwise: () => yup.string(),
-    }),
+    // image: yup.object().when('reserved', {
+    //   is: false,
+    //   then: () => yup.object().required('Image is required'),
+    //   otherwise: () => yup.string(),
+    // }),
     reserved: yup.boolean().required(),
     occupied: yup.boolean().required(),
     vip: yup.boolean().required(),
@@ -67,6 +67,7 @@ const schema = yup
 
 function Form({ title }) {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [imageError, setImageError] = useState(false)
   const fileInputRef = useRef(null)
   const route = useRouter()
   const testingDaa = [
@@ -81,6 +82,7 @@ function Form({ title }) {
     watch,
     setValue,
     getValues,
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -116,7 +118,6 @@ function Form({ title }) {
   }
 
   const onSubmit = (data) => {
-    console.log(selectedImage)
     if (title === 'Edit Table') {
       //API put for menu item form
       // editTableForm(data)
@@ -145,6 +146,17 @@ function Form({ title }) {
     }
   }
 
+  const handleSaveClick = () => {
+    const reserved = getValues('reserved')
+    const image = getValues('image')
+    if (!reserved && !image) {
+      setImageError(true)
+      return
+    } else {
+      handleSubmit(onSubmit)()
+    }
+  }
+  console.log(errors)
   return (
     <Box className={classes.mainContainer}>
       <Grid
@@ -372,13 +384,16 @@ function Form({ title }) {
                   onChange={(event) => {
                     onChange(event.target.files[0])
                     handleImageUpload(event)
+                    setImageError(false)
                   }}
                   className={classes.inputImage}
                 />
               )}
             />
           </Box>
-          <StyledErrorMessage>{errors.image?.message}</StyledErrorMessage>
+          <StyledErrorMessage>
+            {errors.image?.message || imageError ? 'Image is required' : ''}
+          </StyledErrorMessage>
         </Grid>
       </Grid>
       {title === 'Edit Table' ? (
@@ -386,7 +401,7 @@ function Form({ title }) {
           <Button
             variant="contained"
             className={classes.updateButton}
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSaveClick}
           >
             Update
           </Button>
@@ -403,7 +418,7 @@ function Form({ title }) {
           <Button
             variant="contained"
             className={classes.saveButton}
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSaveClick}
           >
             Save
           </Button>

@@ -249,7 +249,10 @@ export default function Support() {
               <Box display="flex" justifyContent="space-around">
                 {socialProfile?.map((item, i) => {
                   return (
-                    <Box onClick={() => handleSocialProfile(item.id)} key={i}>
+                    <Box
+                      key={item.id}
+                      onClick={() => handleSocialProfile(item.id)}
+                    >
                       {item.icon}
                     </Box>
                   )
@@ -257,7 +260,7 @@ export default function Support() {
               </Box>
             </Grid>
           </Grid>
-          <Grid container lg={8} xs={12} md={8} spacing={4}>
+          <Grid container item lg={8} xs={12} md={8} spacing={4}>
             <Grid item xs={6}>
               <Controller
                 name="fullname"
@@ -370,7 +373,7 @@ export default function Support() {
           {askedQuestions?.map((item) => {
             return (
               <>
-                <Accordion className={classes.accordion}>
+                <Accordion className={classes.accordion} key={item.id}>
                   <AccordionSummary
                     expandIcon={<AddIcon fontSize="large" />}
                     aria-controls="panel1a-content"

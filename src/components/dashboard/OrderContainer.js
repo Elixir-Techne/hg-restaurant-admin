@@ -1,7 +1,7 @@
 import { Box, CardContent, Divider, Typography } from '@mui/material'
 import moment from 'moment'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import OrderImage from '../../../public/images/burger.png'
 import {
@@ -52,7 +52,7 @@ function OrderContainer({ ordersDetail, orderStatus }) {
         <Box display="flex" gap="1vw" className={classes.cardContentBox}>
           {ordersDetail?.map((item, index) => {
             return (
-              <StyledMainContainer key={index}>
+              <StyledMainContainer key={item.id}>
                 <StyledSubContainer>
                   <Box
                     display="flex"
