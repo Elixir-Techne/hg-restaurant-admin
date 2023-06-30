@@ -156,7 +156,7 @@ function Form({ title }) {
       handleSubmit(onSubmit)()
     }
   }
-  console.log(errors)
+
   return (
     <Box className={classes.mainContainer}>
       <Grid
@@ -206,7 +206,9 @@ function Form({ title }) {
               )}
             />
             <StyledErrorMessage>
-              {errors.TableNumber?.message}
+              {errors.TableNumber?.type === 'typeError'
+                ? 'Please enter valid table number'
+                : errors.TableNumber?.message}
             </StyledErrorMessage>
           </Grid>
           <Grid xs={12} item>
@@ -232,7 +234,9 @@ function Form({ title }) {
               <StyledImage src={PlusIcon} alt="add" onClick={handleIncrement} />
             </Box>
             <StyledErrorMessage>
-              {errors.TotalPerson?.message}
+              {errors.TotalPerson?.type === 'typeError'
+                ? 'Please enter valid total person count'
+                : errors.TotalPerson?.message}
             </StyledErrorMessage>
           </Grid>
           <Grid
@@ -350,7 +354,9 @@ function Form({ title }) {
                 )}
               />
               <StyledErrorMessage>
-                {errors.MobileNumber?.message}
+                {errors.MobileNumber?.type === 'typeError'
+                  ? 'Please enter valid phone number'
+                  : errors.MobileNumber?.message}
               </StyledErrorMessage>
             </Grid>
           </Grid>

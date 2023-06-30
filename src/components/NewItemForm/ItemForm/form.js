@@ -97,8 +97,6 @@ function ItemForm({ title }) {
       setValue('price', Number(price) - 1)
     }
   }
-
-  console.log(editMenuItem)
   return (
     <Box className={classes.mainContainer}>
       <Grid container spacing={4} display="flex" className={classes.grid}>
@@ -283,7 +281,7 @@ function ItemForm({ title }) {
               <Controller
                 name="image"
                 control={control}
-                rules={{ required: 'image image is required' }}
+                rules={{ required: 'image is required' }}
                 render={({ field: { value, onChange, ...field } }) => (
                   <input
                     {...field}
